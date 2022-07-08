@@ -4,14 +4,15 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const methodOverride = require('method-override');
 
+const { resolve } = require('path');
+
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
-
 const webpackConfig = require('./webpack_conf/webpack.dev.js');
 
 // import models
-const db = require('./models/index.js');
+// const db = require('./models/index.js');
 
 // import controllers
 // const ModelController = require('./controllers/modelController.js');
@@ -56,7 +57,9 @@ if (env === 'development') {
 
 // express routing through routers
 // app.use('/model', modelRouter);
-app.get('/', (request, response) => response.redirect('/user/login'));
+app.get('/', (request, response) => {
+  response.sendFile(resolve('dist', 'main.html'));
+});
 
 // checking if user is logged in.
 // send to login page if not logged in.
