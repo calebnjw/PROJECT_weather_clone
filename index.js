@@ -11,6 +11,9 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackConfig = require('./webpack_conf/webpack.dev.js');
 
+// import custom middleware
+const checkUserLogin = require('./middleware/checkUserLogin.js');
+
 // import models
 // const db = require('./models/index.js');
 
@@ -61,16 +64,10 @@ app.get('/', (request, response) => {
   response.sendFile(resolve('dist', 'main.html'));
 });
 
-// checking if user is logged in.
-// send to login page if not logged in.
-// !update cookie names in here!
-app.use((request, response, next) => {
-  request.userLoggedIn = false;
-  if (request.cookies.loggedIn && request.cookies.userID) {
-    request.userLoggedIn = true;
-  }
-  next();
-});
+app.use(checkUserLogin());
+
+// express routing through routers
+// app.use('/model', modelRouter);
 
 const PORT = process.env.PORT || 3004;
 app.listen(PORT);
