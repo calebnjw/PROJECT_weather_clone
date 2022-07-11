@@ -3,15 +3,47 @@ import { Button, Checkbox, Form, Step } from "semantic-ui-react";
 
 const SignUpForm = (props) => {
   const { setStep } = props;
+//   const {signUp, setSignUp } = props; 
 
   const handleSubmit = () => {
     setStep(1);
   };
 
+//     // initialise useState for item, price, person input
+//     const [firstName, setFirstName] = useState('');
+//     const [lastName, setLastName] = useState('');
+//     const [username, setUsername] = useState('');
+//     const [email, setEmail] = useState('');
+//     const [password, setPassword] = useState('');
+
+//   const handleSignUpSubmit = (event) => {
+//     console.log("Running handleSignUpSubmit")
+//     // condition: text box have value
+//     if (firstName && lastName && username && email && password) {
+//         console.log(`FN: ${firstName}, LN: ${lastName}, username: ${username}, email: ${email}, pw: ${password}`)
+//       // store items value in an Obj
+//       const signUpObj = { firstName, lastName, username, email, password }
+//       console.log(`signUpObj: ${signUpObj}`)
+//       // store all the input in an array
+//     setSignUp(event.target.value);
+//   };
+
+//   const handleSignUpInput = (event) => {
+//     console.log("running handleSignUpInput")
+//     setFirstName(event.target.value);
+//     console.log(firstName)
+//     setLastName(event.target.value);
+//     console.log(lastName);
+//     setUsername(event.target.value);
+//     console.log(username);
+//     setEmail(event.target.value);
+//     console.log(email)
+//     setPassword(event.target.value);
+//     console.log(password)
+//   };
+
   return (
     <> 
-    {/* Button to switch to login page */}
-    <Button inverted color="teal" type="submit" onClick={handleSubmit}>Click Here</Button>
     {/* signup form */}
     <Form inverted>
       <Form.Group widths="equal">
@@ -20,31 +52,30 @@ const SignUpForm = (props) => {
           id="form-subcomponent-shorthand-input-first-name"
           label="First name"
           placeholder="First name"
+          type="text"
         />
         <Form.Input
           fluid
           id="form-subcomponent-shorthand-input-last-name"
           label="Last name"
           placeholder="Last name"
+          type="text"
         />
       </Form.Group>
       <Form.Field>
         <label>Username</label>
-        <input placeholder="Username" />
+        <input placeholder="Username" type="text"/>
       </Form.Field>
       <Form.Field>
         <label>Email</label>
-        <input placeholder="Email" />
+        <input placeholder="Email" type="email"/>
       </Form.Field>
       <Form.Field>
         <label>Password</label>
-        <input placeholder="Password" />
+        <input placeholder="Password" type="password"/>
       </Form.Field>
-      <Form.Field>
-        <Checkbox label="I agree to the Terms and Conditions" />
-      </Form.Field>
-      <Button inverted color='teal' type="submit">Submit</Button>
-    </Form>
+      <Button inverted color="teal" type="submit" onClick={handleSignUpInput}>Submit</Button>    
+      </Form>
   </>
   );
 

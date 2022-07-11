@@ -7,12 +7,14 @@ import axios from 'axios';
 // import component from './components/component.jsx';
 
 export default function App() {
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(1);
+  // const [signUp, setSignUp] = useState("");
+
 
   return (
     <div>
       {step === 1 && <LoginForm setStep={setStep}/>}
-      {step === 2 && <SignUpForm setStep={setStep}/>}
+      {step === 2 && <SignUpForm setStep={setStep} setSignUp={setSignUp}/>}
     </div>
   );
 }

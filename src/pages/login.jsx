@@ -11,7 +11,10 @@ const LoginForm = (props) => {
   return(
     <>
       {/* Button to switch to register page */}
+      <div className="to-register">
+        <h2>Click here to register</h2>
       <Button inverted color="teal" type="submit" onClick={handleSubmit}>Click Here</Button>
+      </div>
     {/* login form */}
   <Form inverted>
     <Form.Field>
@@ -21,9 +24,6 @@ const LoginForm = (props) => {
     <Form.Field>
       <label>Password</label>
       <input placeholder="Last Name" />
-    </Form.Field>
-    <Form.Field>
-      <Checkbox label="I agree to the Terms and Conditions" />
     </Form.Field>
     <Button inverted color='teal' type="submit">Submit</Button>
   </Form>
