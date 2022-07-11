@@ -1,4 +1,40 @@
 body {
-    background-color: black;
-    color: white;
+    background-color: #DFF6FF;
+    color: black;
 }
+
+//===========================LOGIN DESIGN============================//
+.to-login {
+    width: 700px;
+    height: 700px;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.front-page-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+//===========================SIGN UP DESIGN============================//
+.to-sign-up {
+    width: 700px;
+    height: 500px;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-image: linear-gradient(to right, rgba(197, 239, 247), rgb(255, 255, 255));
+}
+
+.sign-up-form {
+    padding: 10px;
+}
+

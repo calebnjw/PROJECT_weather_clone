@@ -44,8 +44,11 @@ const SignUpForm = (props) => {
 
   return (
     <> 
+    <div className="to-sign-up">
     {/* signup form */}
-    <Form inverted>
+
+    <div className="sign-up-form">
+    <Form>
       <Form.Group widths="equal">
         <Form.Input
           fluid
@@ -74,8 +77,12 @@ const SignUpForm = (props) => {
         <label>Password</label>
         <input placeholder="Password" type="password"/>
       </Form.Field>
-      <Button inverted color="teal" type="submit" onClick={handleSignUpInput}>Submit</Button>    
+      <div className="front-page-button">
+      <Button color="teal" type="submit" onClick={handleSubmit}>Submit</Button>    
+      </div>
       </Form>
+      </div>
+      </div>
   </>
   );
 

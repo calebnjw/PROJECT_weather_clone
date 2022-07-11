@@ -1,22 +1,29 @@
 import React, { useState, useEffect } from "react";
-import { Button, Checkbox, Form } from "semantic-ui-react";
+import { Button, Checkbox, Form, Grid, Segment, Divider } from "semantic-ui-react";
+
 
 const LoginForm = (props) => {
     const { setStep } = props;
+    
+    const handleLoginSubmit = () => {
+        setStep(3);
+    }
 
-    const handleSubmit = () => {
+    const handleSignUpSubmit = () => {
         setStep(2);
       };
 
   return(
     <>
+    {/* <img src={weather} alt="weather-gif" /> */}
       {/* Button to switch to register page */}
-      <div className="to-register">
-        <h2>Click here to register</h2>
-      <Button inverted color="teal" type="submit" onClick={handleSubmit}>Click Here</Button>
-      </div>
+      <div className="to-login">
+      
     {/* login form */}
-  <Form inverted>
+    <Segment placeholder>
+    <Grid columns={2} relaxed='very' stackable>
+      <Grid.Column>
+  <Form>
     <Form.Field>
       <label>Email</label>
       <input placeholder="First Name" />
@@ -25,8 +32,23 @@ const LoginForm = (props) => {
       <label>Password</label>
       <input placeholder="Last Name" />
     </Form.Field>
-    <Button inverted color='teal' type="submit">Submit</Button>
+    <div className="front-page-button">
+    <Button color='teal' type="submit" onClick={handleLoginSubmit}>Submit</Button>
+    </div>
   </Form>
+  
+  </Grid.Column>
+  <Grid.Column verticalAlign='middle'>
+  <h2>Click here to register</h2>
+    <div className="front-page-button">
+    <Button color="teal" type="submit" onClick={handleSignUpSubmit}>Click Here</Button>
+    </div>
+    </Grid.Column>
+    </Grid>
+
+<Divider vertical>Or</Divider>
+</Segment>
+  </div>
   </>
   );
 };
