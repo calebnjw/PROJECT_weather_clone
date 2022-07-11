@@ -64,7 +64,7 @@ app.get('/', (request, response) => {
   response.sendFile(resolve('dist', 'main.html'));
 });
 
-app.use(checkUserLogin());
+// app.use(checkUserLogin());
 
 // express routing through routers
 // app.use('/model', modelRouter);
