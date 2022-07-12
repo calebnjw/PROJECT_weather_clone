@@ -19,17 +19,10 @@ const SignUpForm = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // const handleSubmit = () => {
-  //   setStep(1);
-  // };
-
   const handleInputSubmit = (event) => {
     setStep(1);
-
-    console.log("Running handle input submit");
-    // condition: text box have value
+    // condition: text box have values
     if ((firstName, lastName, username, email, password)) {
-      console.log("first name: ", firstName, "last name: ", lastName);
       // store items value in an Obj
       const signUpObj = {
         firstName,
@@ -39,25 +32,19 @@ const SignUpForm = (props) => {
         password,
       };
       console.log("This is signUpObj: ", signUpObj);
-      // the current item is added to itemList, note use of spread operator here
-      // const inputSignup = [...signUp, signUpObj];
-      // console.log("this is input signup: ", inputSignup);
       setSignUp(signUpObj);
-      // input fields are reset
+      // reset input fields after button clicked
       setFirstName("");
       setLastName("");
       setUsername("");
       setEmail("");
       setPassword("");
-      console.log("no more errors");
-
       event.preventDefault();
     } else {
       // eslint-disable-next-line no-alert
       alert("Input fields are incorrect. Please check");
     }
   };
-
   // get input values
   const firstNameInput = (event) => {
     setFirstName(event.target.value);
