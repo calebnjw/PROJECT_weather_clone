@@ -1,50 +1,81 @@
 body {
-    background-color: #DFF6FF;
-    color: black;
+  background-color: #dff6ff;
+  color: black;
 }
 
 //===========================LOGIN DESIGN============================//
 .main-login-container {
-    padding-top: 100px;
-    padding-bottom: 100px;
-    margin-bottom: 50px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  padding-top: 100px;
+  padding-bottom: 100px;
+  margin-bottom: 50px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .to-signup-div {
-    padding-top: 80px;
-    display: inline-block;
+  padding-top: 80px;
+  display: inline-block;
 }
 
 .login-form-div {
-    margin-bottom: 30px;
-    padding-bottom: 60px;
+  margin-bottom: 30px;
+  padding-bottom: 60px;
 }
 
 .front-page-button {
-    padding-top: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  padding-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 //===========================SIGN UP DESIGN============================//
 .to-sign-up {
-    width: 700px;
-    height: 500px;
-    position: absolute;
-    top:0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    background-image: linear-gradient(to right, rgba(197, 239, 247), rgb(255, 255, 255));
+  width: 700px;
+  height: 500px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background-image: linear-gradient(to right, rgba(197, 239, 247), rgb(255, 255, 255));
 }
 
 .sign-up-form {
-    padding: 10px;
+  padding: 10px;
 }
 
+//===========================MESSAGE DESIGN============================//
+.chat-box {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.message {
+  max-width: 80%;
+  background-color: #ffffff;
+  color: black;
+  border-radius: 0.5rem;
+  box-shadow: 1px 1px 1px 1px #b3e0f3;
+  padding: 0.5rem;
+  padding-left: 1rem;
+  margin-bottom: 0.5rem;
+  word-break: normal;
+}
+
+.message-self {
+  max-width: 80%;
+  background-color: #ffffff;
+  color: black;
+  align-self: flex-end;
+  border-radius: 0.5rem;
+  box-shadow: 1px 1px 1px 1px #b3e0f3;
+  padding: 0.5rem;
+  padding-left: 1rem;
+  margin-bottom: 0.5rem;
+  word-break: normal;
+}
