@@ -22,10 +22,6 @@ module.exports = {
         location_id: {
           allowNull: false,
           type: Sequelize.INTEGER,
-          references: {
-            model: 'locations',
-            key: 'id',
-          },
         },
         message: {
           allowNull: false,
