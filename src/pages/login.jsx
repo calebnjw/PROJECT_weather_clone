@@ -1,36 +1,74 @@
-import React, { useState, useEffect } from "react";
-import { Button, Checkbox, Form } from "semantic-ui-react";
+import React, { useState, useEffect } from 'react';
+import {
+  Button, Form, Segment, Grid, GridColumn,
+} from 'semantic-ui-react';
+import Snowflake from '../SnowFlake.gif';
 
 const LoginForm = (props) => {
   const { setStep } = props;
 
-  const handleSubmit = () => {
+  const handleLoginSubmit = () => {
+    setStep(3);
+  };
+
+  const handleSignUpSubmit = () => {
     setStep(2);
   };
 
   return (
     <>
-      {/* Button to switch to register page */}
-      <div className="to-register">
-        <h2>Click here to register</h2>
-        <Button inverted color="teal" type="submit" onClick={handleSubmit}>
-          Click Here
-        </Button>
+      <div className="main-login-container">
+        {/* login form */}
+        <Grid stackable columns={2} divided>
+          <Grid.Row>
+            <Grid.Column>
+              <Segment>
+                <div className="to-signup-div">
+                  <img
+                    className="weather-logo"
+                    src={Snowflake}
+                    alt="weather-gif"
+                  />
+                </div>
+                <div className="front-page-button">
+                  <Button
+                    color="teal"
+                    type="submit"
+                    onClick={handleSignUpSubmit}
+                  >
+                    Sign Up
+                  </Button>
+                </div>
+              </Segment>
+            </Grid.Column>
+            <Grid.Column>
+              <Segment>
+                <div className="login-form-div">
+                  <Form>
+                    <Form.Field>
+                      <label>Email</label>
+                      <input placeholder="First Name" />
+                    </Form.Field>
+                    <Form.Field>
+                      <label>Password</label>
+                      <input placeholder="Last Name" />
+                    </Form.Field>
+                    <div className="front-page-button">
+                      <Button
+                        color="teal"
+                        type="submit"
+                        onClick={handleLoginSubmit}
+                      >
+                        Login
+                      </Button>
+                    </div>
+                  </Form>
+                </div>
+              </Segment>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       </div>
-      {/* login form */}
-      <Form inverted>
-        <Form.Field>
-          <label>Email</label>
-          <input placeholder="First Name" />
-        </Form.Field>
-        <Form.Field>
-          <label>Password</label>
-          <input placeholder="Last Name" />
-        </Form.Field>
-        <Button inverted color="teal" type="submit">
-          Submit
-        </Button>
-      </Form>
     </>
   );
 };
