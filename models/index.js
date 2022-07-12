@@ -2,7 +2,10 @@ const { Sequelize } = require('sequelize');
 const allConfig = require('../config/config.js');
 
 // import models
-// const model = require(./model.js);
+// const initModel = require(./model.js);
+const initUserModel = require('./user.js');
+const initLocationMessageModel = require('./locationMessage.js');
+const initUserLocationModel = require('./userLocation.js');
 
 const env = process.env.NODE_ENV || 'development';
 
@@ -19,6 +22,9 @@ const sequelize = new Sequelize(
 
 // add model definitions to db
 // db.Model = initModel(sequelize, Sequelize.DataTypes);
+db.User = initUserModel(sequelize, Sequelize.DataTypes);
+db.Message = initLocationMessageModel(sequelize, Sequelize.DataTypes);
+db.Location = initUserLocationModel(sequelize, Sequelize.DataTypes);
 
 // associations between models
 // one to many:
