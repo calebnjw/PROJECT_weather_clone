@@ -1,14 +1,13 @@
 const bcrypt = require('bcrypt');
 
-const BaseController = require('./baseController');
+const BaseController = require('./baseController.js');
 
 const saltRounds = 10;
 
 class UserController extends BaseController {
   constructor(model, db) {
     super(model);
-    this.Avatar = db.Avatar;
-    this.AvatarLikes = db.AvatarLikes;
+    this.Location = db.Location;
   }
 
   async userSignup(request, response) {
@@ -55,14 +54,30 @@ class UserController extends BaseController {
     }
   }
 
-  async getUser(request, response) {
-    const { username } = request.params;
-    const user = await this.model.findOne({ where: { username } });
+  async getFavourites(request, response) {
+    const { userId } = request.body;
 
-    if (user) {
-      response.status(200).send({ userId: user.id });
-    } else {
-      response.status(400).send({ message: 'No user found.' });
+    try {
+      const locations = await this.Location.findAll({ where: { userId } });
+
+      response.status(200).send(locations);
+    } catch (error) {
+      console.log(error);
+      response.status(400).send({ error });
+    }
+  }
+
+  async newFavourite(request, response) {
+    const { userId, locationId } = request.body;
+
+    try {
+      await this.Location.create({ userId, locationId });
+      const locations = await this.Location.findAll({ where: { userId } });
+
+      response.status(200).send(locations);
+    } catch (error) {
+      console.log(error);
+      response.status(400).send({ error });
     }
   }
 

@@ -15,21 +15,30 @@ const webpackConfig = require('./webpack_conf/webpack.dev.js');
 const checkUserLogin = require('./middleware/checkUserLogin.js');
 
 // import models
-// const db = require('./models/index.js');
+const db = require('./models/index.js');
 
 // import controllers
 // const ModelController = require('./controllers/modelController.js');
+const UserController = require('./controllers/userController.js');
+const MessageController = require('./controllers/messageController.js');
+
 // initialise controllers
 // const modelController = new ModelController(db.Model, db);
+const userController = new UserController(db.User, db);
+const messageController = new MessageController(db.Message, db);
 
 // import routers
 // const ModelRouter = require('./routers/modelRouter.js');
+const UserRouter = require('./routers/userRouter.js');
+const MessageRouter = require('./routers/messageRouter.js');
+
 // initialise routers
 // const modelRouter = new ModelRouter(modelController).router();
+const userRouter = new UserRouter(userController).router();
+const messageRouter = new MessageRouter(messageController).router();
 
 // express app
 const app = express();
-
 app.set('view engine', 'ejs');
 
 // express middleware
@@ -43,7 +52,7 @@ app.use(express.static('dist'));
 
 // this section asks webpack to package our files
 // whenever we run nodemon index.js
-const env = process.env.NODE_ENV || 'development';
+const { NODE_ENV: env } = process.env.NODE_ENV;
 if (env === 'development') {
   const compiler = webpack(webpackConfig);
   app.use(webpackDevMiddleware(compiler, {
@@ -68,6 +77,8 @@ app.get('/', (request, response) => {
 
 // express routing through routers
 // app.use('/model', modelRouter);
+app.use('/user', userRouter);
+app.use('/message', messageRouter);
 
-const PORT = process.env.PORT || 3004;
+const { PORT } = process.env;
 app.listen(PORT);

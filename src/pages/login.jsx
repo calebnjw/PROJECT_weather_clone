@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Button, Form, Segment, Grid, GridColumn } from "semantic-ui-react";
-import Snowflake from "../SnowFlake.gif";
+import React, { useState, useEffect } from 'react';
+import {
+  Button, Form, Segment, Grid, GridColumn,
+} from 'semantic-ui-react';
+import Snowflake from '../SnowFlake.gif';
 
 const LoginForm = (props) => {
   const { setStep } = props;
