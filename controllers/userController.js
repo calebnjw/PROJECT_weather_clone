@@ -1,8 +1,9 @@
 const bcrypt = require('bcrypt');
+require('dotenv').config();
 
 const BaseController = require('./baseController.js');
 
-const saltRounds = 10;
+const SALT_ROUNDS = Number(process.env.SALT_ROUNDS);
 
 class UserController extends BaseController {
   constructor(model, db) {
@@ -15,17 +16,16 @@ class UserController extends BaseController {
 
     try {
       // use bcrypt to hash passwords
-      bcrypt.hash(password, saltRounds, async (error, hash) => {
-        const user = await this.model.create({
-          username,
-          password: hash,
-        });
-
-        if (user) {
-          // tell frontend that signup was successful
-          response.status(200).send({ signedUp: true });
-        }
+      const hash = await bcrypt.hash(password, SALT_ROUNDS);
+      const user = await this.model.create({
+        username,
+        password: hash,
       });
+
+      if (user) {
+        // tell frontend that signup was successful
+        response.status(200).send({ signedUp: true });
+      }
     } catch (error) {
       console.log(error);
       response.status(400).send({ error });
@@ -81,7 +81,7 @@ class UserController extends BaseController {
     }
   }
 
-  static userLogout(request, response) {
+  userLogout(request, response) {
     // delete login cookies on logout
     if (request.loggedIn) {
       response.clearCookie('loggedIn');
@@ -89,7 +89,7 @@ class UserController extends BaseController {
     }
 
     // redirect to login page
-    response.redirect('/user/login');
+    response.redirect('/');
   }
 }
 

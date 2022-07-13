@@ -15,7 +15,7 @@ function Chat() {
   ];
 
   const messageList = messages.map((message, index) => (
-    <MessageBubble key={index} message={message} className='message' />
+    <MessageBubble key={index} message={message} classes='' />
   ));
 
   console.log(messageList);
@@ -24,7 +24,7 @@ function Chat() {
     <div>
       <div className='chat-box'>
         { messageList }
-        <MessageBubble className='message-self' key='10' message="I'm sending this out into the world." />
+        <MessageBubble classes='self' key='10' message="I'm sending this out into the world." />
       </div>
       <MessageInput />
     </div>

@@ -2,10 +2,10 @@ import React from 'react';
 
 // sign up form component
 function MessageBubble(props) {
-  const { message, className } = props;
+  const { message, classes } = props;
 
   return (
-    <p className={className} >
+    <p className={`message-bubble ${classes}`} >
       { message }
     </p>
   );

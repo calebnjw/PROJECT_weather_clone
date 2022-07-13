@@ -53,29 +53,21 @@ body {
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
+  padding: 2rem;
 }
 
-.message {
+.message-bubble {
   max-width: 80%;
   background-color: #ffffff;
   color: black;
   border-radius: 0.5rem;
   box-shadow: 1px 1px 1px 1px #b3e0f3;
   padding: 0.5rem;
-  padding-left: 1rem;
+  padding-left: 0.7rem;
   margin-bottom: 0.5rem;
   word-break: normal;
 }
 
-.message-self {
-  max-width: 80%;
-  background-color: #ffffff;
-  color: black;
+.self {
   align-self: flex-end;
-  border-radius: 0.5rem;
-  box-shadow: 1px 1px 1px 1px #b3e0f3;
-  padding: 0.5rem;
-  padding-left: 1rem;
-  margin-bottom: 0.5rem;
-  word-break: normal;
 }
