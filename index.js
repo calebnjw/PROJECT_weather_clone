@@ -12,7 +12,7 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackConfig = require('./webpack_conf/webpack.dev.js');
 
 // import custom middleware
-const checkUserLogin = require('./middleware/checkUserLogin.js');
+// const checkUserLogin = require('./middleware/checkUserLogin.js');
 
 // import models
 const db = require('./models/index.js');
@@ -52,7 +52,7 @@ app.use(express.static('dist'));
 
 // this section asks webpack to package our files
 // whenever we run nodemon index.js
-const { NODE_ENV: env } = process.env.NODE_ENV;
+const { NODE_ENV: env } = process.env;
 if (env === 'development') {
   const compiler = webpack(webpackConfig);
   app.use(webpackDevMiddleware(compiler, {
