@@ -10,9 +10,9 @@ class MessageRouter {
   router() {
     // insert routes here
     // have to .bind(this.controller) at the end of each route
-    router.get('/all', this.controller.renderLogin.bind(this.controller));
+    router.get('/all', this.controller.getMessages.bind(this.controller));
 
-    router.post('/new', this.controller.userLogin.bind(this.controller));
+    router.post('/new', this.controller.sendMessage.bind(this.controller));
 
     return router;
   }
