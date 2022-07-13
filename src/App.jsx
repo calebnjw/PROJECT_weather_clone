@@ -18,7 +18,7 @@ export default function App() {
       {step === 1 && <LoginForm setStep={setStep}/>}
       {step === 2 && <SignUpForm setStep={setStep} setSignUp={setSignUp}/>}
       {step === 3 && <FavouritePage setStep={setStep}/>}
-      <WeatherPage />
+      {/* <WeatherPage /> */}
     </div>
   );
 }

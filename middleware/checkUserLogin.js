@@ -2,7 +2,7 @@
 // send to login page if not logged in.
 // !update cookie names in here!
 
-// function checkUserLogin(request, response, next) {
+// const checkUserLogin = () => (request, response, next) => {
 //   request.userLoggedIn = false;
 
 //   if (request.cookies.loggedIn && request.cookies.userID) {
@@ -12,4 +12,4 @@
 //   next();
 // }
 
-// module.export = checkUserLogin();
+// module.exports = checkUserLogin();
