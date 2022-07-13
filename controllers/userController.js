@@ -39,15 +39,14 @@ class UserController extends BaseController {
       const user = await this.model.findOne({ where: { username } });
 
       // use bcrypt to compare hashed passwords
-      bcrypt.compare(password, user.password, (error, result) => {
-        if (result) {
-          response.cookie('loggedIn', true);
-          response.cookie('userID', user.id);
-          response.status(200).send({ loggedIn: true });
-        } else {
-          response.status(401).send({ loggedIn: false });
-        }
-      });
+      const result = await bcrypt.compare(password, user.password);
+      if (result) {
+        response.cookie('loggedIn', true);
+        response.cookie('userID', user.id);
+        response.status(200).send({ loggedIn: true });
+      } else {
+        response.status(401).send({ loggedIn: false });
+      }
     } catch (error) {
       console.log(error);
       response.status(400).send({ error });
