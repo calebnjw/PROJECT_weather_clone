@@ -47,14 +47,15 @@ const LoginForm = (props) => {
                   <Form>
                     <Form.Field>
                       <label>Email</label>
-                      <input placeholder="First Name" />
+                      <input id="login-email" placeholder="First Name" />
                     </Form.Field>
                     <Form.Field>
                       <label>Password</label>
-                      <input placeholder="Last Name" />
+                      <input id="login-password" placeholder="Last Name" />
                     </Form.Field>
                     <div className="front-page-button">
                       <Button
+                        id="signUpBtn"
                         color="teal"
                         type="submit"
                         onClick={handleLoginSubmit}
