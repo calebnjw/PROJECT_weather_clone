@@ -1,8 +1,26 @@
 import React, { useState, useEffect } from 'react';
+import axios from "axios";
 import {
   Button, Form, Segment, Grid, GridColumn,
 } from 'semantic-ui-react';
 import Snowflake from '../SnowFlake.gif';
+
+//jwt
+// const email = document.getElementById("login-email").value;
+// const password = document.getElementById("login-password").value;
+
+// if (!email || !password) {
+//   alert("Fill in the form!");
+//   return;
+// }
+
+// const body = { email, password };
+
+// const userToken = await axios.post("/user/signup", body);
+// console.log(userToken);
+
+// localStorage.setItem("token", userToken.data.token);
+
 
 const LoginForm = (props) => {
   const { setStep } = props;
