@@ -19,21 +19,19 @@ function MessageInput(props) {
   };
 
   return (
-    <GridColumn>
-      <Form>
-        <Input
-          type= 'text'
-          placeholder='Type your message here'
-          value={message}
-          onChange={handleInput}
-          action >
-          <input></input>
-          <Button type='submit' icon onClick={sendMessage}>
-            <i className="fa-solid fa-paper-plane"></i>
-          </Button>
-        </Input>
-      </Form>
-    </GridColumn>
+    <Form>
+      <Input
+        type= 'text'
+        placeholder='Type your message here'
+        value={message}
+        onChange={handleInput}
+        action >
+        <input></input>
+        <Button type='submit' icon onClick={sendMessage}>
+          <i className="fa-solid fa-paper-plane"></i>
+        </Button>
+      </Input>
+    </Form>
   );
 }
 

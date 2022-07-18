@@ -1,5 +1,4 @@
 const bcrypt = require('bcrypt');
-require('dotenv').config();
 
 const BaseController = require('./baseController.js');
 

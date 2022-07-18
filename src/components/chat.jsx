@@ -18,15 +18,15 @@ function Chat() {
     <MessageBubble key={index} message={message} classes='' />
   ));
 
-  console.log(messageList);
+  // console.log(messageList);
 
   return (
     <div>
       <div className='chat-box'>
         { messageList }
         <MessageBubble classes='self' key='10' message="I'm sending this out into the world." />
+        <MessageInput />
       </div>
-      <MessageInput />
     </div>
   );
 }
