@@ -41,11 +41,7 @@ body {
   left: 0;
   right: 0;
   margin: auto;
-  background-image: linear-gradient(
-    to right,
-    rgba(197, 239, 247),
-    rgb(255, 255, 255)
-  );
+  background-image: linear-gradient(to right, rgba(197, 239, 247), rgb(255, 255, 255));
 }
 
 .sign-up-form {
@@ -83,7 +79,7 @@ body {
   display: flex;
   flex-direction: column;
 
-  height: calc((100vh - 12rem) / 2);
+  height: calc((100vh - 10rem) / 2);
   width: 100vw;
 
   margin-bottom: 1vh;

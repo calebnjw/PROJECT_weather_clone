@@ -3,7 +3,7 @@ import {
   Search, Grid, Step,
 } from 'semantic-ui-react';
 import Fuse from 'fuse.js';
-import cities from 'cities.json';
+import cities from '../cities.json';
 
 const FavouritePage = (props) => {
   const {

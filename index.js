@@ -1,6 +1,9 @@
 require('dotenv').config();
 
 const express = require('express');
+const http = require('http');
+const { Server } = require('socket.io');
+
 const cookieParser = require('cookie-parser');
 const methodOverride = require('method-override');
 
@@ -37,8 +40,11 @@ const MessageRouter = require('./routers/messageRouter.js');
 const userRouter = new UserRouter(userController).router();
 const messageRouter = new MessageRouter(messageController).router();
 
-// express app
+// express app with socket
 const app = express();
+const server = http.createServer(app);
+const io = new Server(server);
+
 app.set('view engine', 'ejs');
 
 // express middleware
@@ -80,5 +86,11 @@ app.get('/', (request, response) => {
 app.use('/user', userRouter);
 app.use('/message', messageRouter);
 
+io.on('connection', (socket) => {
+  console.log('a user has connected');
+});
+
 const { PORT } = process.env;
-app.listen(PORT);
+server.listen(PORT, () => {
+  console.log(`app is listening on port ${PORT} using HTTP`);
+});
