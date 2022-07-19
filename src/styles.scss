@@ -41,12 +41,31 @@ body {
   left: 0;
   right: 0;
   margin: auto;
-  background-image: linear-gradient(to right, rgba(197, 239, 247), rgb(255, 255, 255));
+  background-image: linear-gradient(
+    to right,
+    rgba(197, 239, 247),
+    rgb(255, 255, 255)
+  );
 }
 
 .sign-up-form {
   padding: 10px;
 }
+
+.search-bar-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+// .search-bar-input {
+//   display: flex;
+//   margin-top: 5rem;
+// }
+// .location-list {
+//   display: flex;
+//   margin-top: 10rem;
+// }
 
 //===========================MESSAGE DESIGN============================//
 .navbar {
