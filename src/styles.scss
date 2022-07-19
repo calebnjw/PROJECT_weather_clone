@@ -91,3 +91,13 @@ body {
 
   margin-right: 2rem;
 }
+
+.weather-app {
+  display: flex;
+  flex-direction: column;
+}
+
+.weekly-weather {
+  display: flex;
+  flex-direction: row;
+}
