@@ -8,14 +8,15 @@ function Chat() {
   const [chatMessages, setChatMessages] = useState([]);
   const [output, setOutput] = useState([]);
 
+  // to receive connection message
+  // when someone joins or leaves
   socket.on('connection message', (message) => {
-    console.log('connection message', message.message);
     const connectionMessage = <div>— {message.message} —</div>;
     setChatMessages([...chatMessages, connectionMessage]);
   });
 
+  // to receive message from input box
   socket.on('chat message', (message) => {
-    console.log(message);
     const newMessage = <MessageBubble username={message.username} message={message.content} />;
     setChatMessages([...chatMessages, newMessage]);
   });

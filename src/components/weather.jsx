@@ -44,8 +44,8 @@ function Weather(props) {
 
   return (
     <div className='weather-app'>
-      { weatherData && <CurrentWeather data={weatherData.current_weather} /> }
-      { weatherData && <WeeklyWeather data={weatherData.daily} /> }
+      { weatherData && <CurrentWeather data={weatherData.current_weather} u={u} /> }
+      { weatherData && <WeeklyWeather data={weatherData.daily} u={u} /> }
     </div>
   );
 }

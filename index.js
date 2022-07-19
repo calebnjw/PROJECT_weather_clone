@@ -90,16 +90,19 @@ const username = 'calebnjw';
 
 io.on('connection', (socket) => {
   console.log('a user has connected');
+  // sends out a connect message
   io.emit('connection message', { message: `${username} has connected` });
 
   socket.on('disconnect', () => {
     console.log('a user has disconnected');
+    // sends out a disconnect message
     io.emit('connection message', { message: `${username} has disconnected` });
   });
 
   // this is to receive chat message from emitter
   socket.on('chat message', (message) => {
     console.log('message:', message);
+    // distributes chat messages to all connected users
     io.emit('chat message', message);
   });
 });

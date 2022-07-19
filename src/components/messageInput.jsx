@@ -12,8 +12,8 @@ function MessageInput(props) {
   };
 
   const sendMessage = () => {
-    console.log(messageContent);
-    // username to be replaced with username from JWT
+    // ! username to be replaced with username from JWT
+    // to send out chat message from input box
     socket.emit('chat message', { username: 'calebnjw', content: messageContent });
     setMessageContent('');
   };
