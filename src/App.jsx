@@ -12,7 +12,7 @@ import WeatherPage from './pages/weatherPage.jsx';
 // import component from './components/component.jsx';
 
 export default function App() {
-  const [step, setStep] = useState(3);
+  const [step, setStep] = useState(4);
   const [signUp, setSignUp] = useState('');
   const [query, setQuery] = useState('');
   const [citiesList, setCitiesList] = useState([]);

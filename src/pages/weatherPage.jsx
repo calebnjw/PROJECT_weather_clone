@@ -12,7 +12,7 @@ function WeatherPage(props) {
   } = props;
 
   return (
-    <div className='ui grid'>
+    <div className='ui padded grid'>
       <Navbar setStep={setStep} city={city} />
       <div className="ui divider"></div>
       <Weather lat={lat} long={long} />
