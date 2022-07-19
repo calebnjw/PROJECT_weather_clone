@@ -53,7 +53,7 @@ app.use(express.static('dist'));
 
 // this section asks webpack to package our files
 // whenever we run nodemon index.js
-const { NODE_ENV: env } = process.env.NODE_ENV;
+const { NODE_ENV: env } = process.env;
 if (env === 'development') {
   const compiler = webpack(webpackConfig);
   app.use(webpackDevMiddleware(compiler, {

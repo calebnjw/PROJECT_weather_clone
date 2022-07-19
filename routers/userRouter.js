@@ -20,8 +20,6 @@ class UserRouter {
     router.get('/signup', this.controller.renderSignup.bind(this.controller));
     router.get('/favourites', this.controller.getFavourites.bind(this.controller));
     router.get('/logout', this.controller.logout.bind(this.controller));
-
-
     return router;
   }
 }

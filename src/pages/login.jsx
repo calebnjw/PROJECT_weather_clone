@@ -21,13 +21,44 @@ import Snowflake from '../SnowFlake.gif';
 
 // localStorage.setItem("token", userToken.data.token);
 
-
 const LoginForm = (props) => {
-  const { setStep } = props;
+  const { step, setStep, login, setLogin } = props;
 
-  const handleLoginSubmit = () => {
+  //initialize useState for login input 
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const handleLoginSubmit = (event) => {
+    //change this to 3 later on for favourite page
     setStep(3);
+
+    if ((email, password)){
+      console.log('email: ', email, 'password: ', [password])
+
+      const loginObj = {
+        email,
+        password,
+      }
+      console.log('This is login object: ', loginObj);
+      setLogin(loginObj);
+      //input fields are reset
+      setEmail('');
+      setPassword('');
+      event.preventDefault()
+    } else {
+      alert('Email/Password entered incorrectly');
+    } 
   };
+
+  //get login input values
+  const emailInput = (event) => {
+    setEmail(event.target.value);
+  }
+
+  const passwordInput = (event) => {
+    setPassword(event.target.value);
+  }
+
 
   const handleSignUpSubmit = () => {
     setStep(2);
@@ -37,10 +68,8 @@ const LoginForm = (props) => {
     <>
       <div className="main-login-container">
         {/* login form */}
-        <Grid stackable columns={2} divided>
-          <Grid.Row>
-            <Grid.Column>
-              <Segment>
+        <Grid stackable>
+            <Grid.Column mobile={16} tablet={8} computer={4} largeScreen={2} widescreen={1}>
                 <div className="to-signup-div">
                   <img
                     className="weather-logo"
@@ -57,23 +86,20 @@ const LoginForm = (props) => {
                     Sign Up
                   </Button>
                 </div>
-              </Segment>
             </Grid.Column>
-            <Grid.Column>
-              <Segment>
+            <Grid.Column mobile={16} tablet={8} computer={4} largeScreen={2} widescreen={1}>
                 <div className="login-form-div">
                   <Form>
                     <Form.Field>
                       <label>Email</label>
-                      <input id="login-email" placeholder="First Name" />
+                      <input placeholder="Email" onChange={emailInput}/>
                     </Form.Field>
                     <Form.Field>
                       <label>Password</label>
-                      <input id="login-password" placeholder="Last Name" />
+                      <input placeholder="Password" onChange={passwordInput}/>
                     </Form.Field>
                     <div className="front-page-button">
                       <Button
-                        id="signUpBtn"
                         color="teal"
                         type="submit"
                         onClick={handleLoginSubmit}
@@ -83,9 +109,7 @@ const LoginForm = (props) => {
                     </div>
                   </Form>
                 </div>
-              </Segment>
             </Grid.Column>
-          </Grid.Row>
         </Grid>
       </div>
     </>

@@ -59,6 +59,14 @@ class UserController extends BaseController {
     }
   }
 
+  async renderLogin(request, response){
+    console.log("I am render login")
+  }
+
+  async renderSignup(request, response){
+    console.log("I am render Signup")
+  }
+
   async newFavourite(request, response) {
     const { userId, locationId } = request.body;
 
@@ -73,7 +81,7 @@ class UserController extends BaseController {
     }
   }
 
-  static userLogout(request, response) {
+  logout(request, response) {
     // delete login cookies on logout
     if (request.loggedIn) {
       response.clearCookie('loggedIn');
@@ -81,7 +89,7 @@ class UserController extends BaseController {
     }
 
     // redirect to login page
-    response.redirect('/user/login');
+    response.redirect('/');
   }
 }
 
