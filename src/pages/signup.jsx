@@ -112,11 +112,14 @@ const SignUpForm = (props) => {
                 onChange={passwordInput}
               />
             </Form.Field>
-            <div className="front-page-button">
-              <Button color="teal" type="button" onClick={handleInputSubmit}>
-                Submit
-              </Button>
-            </div>
+            <div
+                  className="ui teal big submit button centered"
+                  onClick={handleInputSubmit}
+                  style={{display: 'table', margin: 'auto'}}
+                >
+                  <i className="sign-in icon"></i>
+                  Submit
+                </div>
           </Form>
         </div>
       </div>
