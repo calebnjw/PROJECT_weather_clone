@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Search, Grid, Step,
+  Search, Grid, Step, Label,
 } from 'semantic-ui-react';
 import Fuse from 'fuse.js';
-import cities from 'cities.json';
+import cities from '../cities.json';
 
 const FavouritePage = (props) => {
   const {
@@ -14,6 +14,7 @@ const FavouritePage = (props) => {
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
+  const [searchResults, setSearchResult] = useState([]);
 
   const citiesAPI = cities;
   const options = {
@@ -38,12 +39,54 @@ const FavouritePage = (props) => {
     console.log('input:', query);
   };
 
+  const showLocation = (city, lat, long) => {
+    setStep(4);
+    setCity(city);
+    setLat(lat);
+    setLong(long);
+  };
+
+  const resultRenderer = ({ item }) => {
+    console.log(item);
+
+    return (
+      <p>
+        {item.name}
+        {'\t'}
+        <Label content={<small>{item.lat.toFixed(2)}, {item.lng.toFixed(2)}</small>} />
+
+      </p>
+    );
+  };
+
   useEffect(() => {
+    let temp;
     if (citiesList.length > 0) {
       console.log('full list', citiesList);
       console.log(Object.keys(citiesList[0]));
       console.log(citiesList[0].item);
+      temp = citiesList.map((city) => {
+        console.log('city:', city.item.name);
+        const {
+          country, name, lat, lng,
+        } = city.item;
+        return (
+          <li key={name} className='location-list'>
+            <h2>
+              Name: {name}
+            </h2>
+            <br></br>
+            Country: {country}
+            <br></br>
+            Latitude: {lat}
+            <br></br>
+            Langitude: {lng}
+          </li>
+        );
+      });
     }
+    setSearchResult(temp);
+    console.log('SEARCH RESULTS', temp);
   }, [citiesList]);
 
   // const handleResultSelect = () => {
@@ -56,7 +99,7 @@ const FavouritePage = (props) => {
   return (
   // <div className='search-bar-container'>
       <>
-        <Grid.Row width={6}>
+        <Grid.Row>
           <div className='search-bar-input'>
             <Search
             type='text'
@@ -65,44 +108,21 @@ const FavouritePage = (props) => {
             placeholder='Search location here'
             fluid
             loading={isLoading}
-            // onResultSelect={this.handleResultSelect}
+            onResultSelect={(e, data) => {
+              const { name, lat, lng } = data.result.item;
+              showLocation(name, lat, lng);
+            }}
             // onSearchChange={_.debounce(this.handleSearchChange, 500, {
-              // leading: true,
+            //   leading: true,
             // })}
+            resultRenderer={resultRenderer}
             results={citiesList}
-            // value={value}
             />
           </div>
         </Grid.Row>
-        <Grid.Row width={6} className='location-list'>
-          <h4>List of Location</h4>
-          <ol>
-          {citiesList ? citiesList.map((city) => {
-            console.log('city:', city.item.name);
-            const {
-              country, name, lat, lng,
-            } = city.item;
-            return (
-                <li key={name} className='location-list'>
-                  Country: {country}
-                  <br></br>
-                  Name: {name}
-                  <br></br>
-                  Latitude: {lat}
-                  <br></br>
-                  Langitude: {lng}
-                </li>
-            );
-          }) : null};
-          </ol>
-
-            {/* <pre style={{ overflowX: 'auto' }}>
-              {JSON.stringify(this.state, null, 2)}
-            </pre> */}
-            {/* <Header>Options</Header> */}
-            {/* <pre style={{ overflowX: 'auto' }}>
-              {JSON.stringify(source, null, 2)}
-            </pre> */}
+        <Grid.Row className='location-list'>
+          <h4>Favourites</h4>
+          {/* {favouriteCities} */}
         </Grid.Row>
       </>
   // </div>

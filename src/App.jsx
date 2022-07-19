@@ -22,7 +22,7 @@ export default function App() {
 
   return (
     <Container>
-      <Grid centered={true} >
+      <Grid padded={true} centered={true} >
         {step === 1 && <LoginForm setStep={setStep}/>}
         {step === 2 && <SignUpForm setStep={setStep} setSignUp={setSignUp}/>}
         {step === 3 && <FavouritePage setStep={setStep} setQuery={setQuery} query={query} citiesList={citiesList} setCitiesList={setCitiesList} setCity={setCity} setLat={setLat} setLong={setLong} />}
