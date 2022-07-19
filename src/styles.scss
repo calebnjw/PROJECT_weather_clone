@@ -66,3 +66,57 @@ body {
 //   display: flex;
 //   margin-top: 10rem;
 // }
+
+//===========================MESSAGE DESIGN============================//
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  height: 5vh;
+  width: 100vw;
+
+  margin-bottom: 3vh;
+}
+
+.chat-box {
+  display: flex;
+  flex-direction: column;
+
+  height: calc((100vh - 12rem) / 2);
+  width: 100vw;
+
+  margin-bottom: 1vh;
+}
+
+.message-bubble {
+  align-self: flex-start;
+
+  background-color: #ffffff;
+  color: black;
+
+  border-radius: 0.5rem;
+  box-shadow: 1px 1px 1px 1px #b3e0f3;
+
+  padding: 0.5rem;
+  padding-left: 0.7rem;
+  margin-bottom: 0.5rem;
+
+  word-break: normal;
+}
+
+.self {
+  align-self: flex-end;
+
+  margin-right: 2rem;
+}
+
+.weather-app {
+  display: flex;
+  flex-direction: column;
+}
+
+.weekly-weather {
+  display: flex;
+  flex-direction: row;
+}
