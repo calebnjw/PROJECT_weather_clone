@@ -78,15 +78,22 @@ body {
 .chat-box {
   display: flex;
   flex-direction: column;
+  overflow: scroll;
 
   height: calc((100vh - 10rem) / 2);
   width: 100vw;
 
   margin-bottom: 1vh;
+  margin-top: auto;
 }
 
 .message-bubble {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
   align-self: flex-start;
+  text-align: left;
 
   background-color: #ffffff;
   color: black;
@@ -96,15 +103,14 @@ body {
 
   padding: 0.5rem;
   padding-left: 0.7rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.2rem;
 
   word-break: normal;
 }
 
-.self {
-  align-self: flex-end;
-
-  margin-right: 2rem;
+.message-bubble > .label {
+  align-self: start;
+  margin-right: 0.5rem;
 }
 
 .weather-app {

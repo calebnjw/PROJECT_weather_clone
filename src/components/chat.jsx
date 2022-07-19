@@ -1,32 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import MessageBubble from './messageBubble.jsx';
 import MessageInput from './messageInput.jsx';
 
-// sign up form component
+// chat component
 function Chat() {
-  const messages = [
-    'hello!',
-    'the weather looks really good!',
-    'I know! I love it.',
-    'I\'m just checking out the weather here.',
-    'Is it too hot?',
-    'no it\'s quite cool here.',
-  ];
+  const [chatMessages, setChatMessages] = useState([]);
+  const [output, setOutput] = useState([]);
 
-  const messageList = messages.map((message, index) => (
-    <MessageBubble key={index} message={message} classes='' />
-  ));
+  socket.on('connection message', (message) => {
+    console.log('connection message', message.message);
+    const connectionMessage = <div>— {message.message} —</div>;
+    setChatMessages([...chatMessages, connectionMessage]);
+  });
 
-  // console.log(messageList);
+  socket.on('chat message', (message) => {
+    console.log(message);
+    const newMessage = <MessageBubble username={message.username} message={message.content} />;
+    setChatMessages([...chatMessages, newMessage]);
+  });
 
   return (
     <div>
       <div className='chat-box'>
-        { messageList }
-        <MessageBubble classes='self' key='10' message="I'm sending this out into the world." />
-        <MessageInput />
+        { chatMessages }
       </div>
+      <MessageInput />
     </div>
   );
 }

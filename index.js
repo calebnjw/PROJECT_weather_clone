@@ -86,8 +86,22 @@ app.get('/', (request, response) => {
 app.use('/user', userRouter);
 app.use('/message', messageRouter);
 
+const username = 'calebnjw';
+
 io.on('connection', (socket) => {
   console.log('a user has connected');
+  io.emit('connection message', { message: `${username} has connected` });
+
+  socket.on('disconnect', () => {
+    console.log('a user has disconnected');
+    io.emit('connection message', { message: `${username} has disconnected` });
+  });
+
+  // this is to receive chat message from emitter
+  socket.on('chat message', (message) => {
+    console.log('message:', message);
+    io.emit('chat message', message);
+  });
 });
 
 const { PORT } = process.env;
