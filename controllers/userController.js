@@ -1,6 +1,8 @@
+const { default: axios } = require('axios');
 const bcrypt = require('bcrypt');
 const { startFailed } = require('init');
 const BaseController = require('./baseController.js');
+const jwt =require("jsonwebtoken");
 
 class UserController extends BaseController {
   constructor(model, db) {
@@ -14,7 +16,7 @@ class UserController extends BaseController {
       const checkEmail = await this.model.findOne({where: { email }})
       console.log('Email:', checkEmail)
       if(checkEmail){
-        return res.status(400).json({success: false, message: 'Email in use'})
+        return res.json({success: false, message: 'Email in use, try again or login'})
       }
       const hashedPassword = await bcrypt.hash(password, Number(process.env.SALT_ROUND))
       const newUser = await this.model.create({firstName, lastName, username, email, password: hashedPassword})
@@ -82,14 +84,11 @@ class UserController extends BaseController {
   }
 
   logout(request, response) {
-    // delete login cookies on logout
-    if (request.loggedIn) {
-      response.clearCookie('loggedIn');
-      response.clearCookie('userID');
+    try {
+      console.log("I have logged out")
+    } catch(err) {
+      console.log(err)
     }
-
-    // redirect to login page
-    response.redirect('/');
   }
 }
 
