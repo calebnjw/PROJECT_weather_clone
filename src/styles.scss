@@ -68,6 +68,9 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+
+  box-sizing: border-box;
 
   height: 5vh;
   width: 100vw;
@@ -91,12 +94,13 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
-
   align-self: flex-start;
-  text-align: left;
 
   background-color: #ffffff;
   color: black;
+
+  word-break: normal;
+  text-align: left;
 
   border-radius: 0.5rem;
   box-shadow: 1px 1px 1px 1px #b3e0f3;
@@ -104,8 +108,6 @@ body {
   padding: 0.5rem;
   padding-left: 0.7rem;
   margin-bottom: 0.2rem;
-
-  word-break: normal;
 }
 
 .message-bubble > .label {

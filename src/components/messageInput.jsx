@@ -21,6 +21,7 @@ function MessageInput(props) {
   return (
     <Form>
       <Input
+        fluid
         type= 'text'
         placeholder='Type your message here'
         value={messageContent}
