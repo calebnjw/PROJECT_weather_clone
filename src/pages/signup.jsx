@@ -54,6 +54,7 @@ const SignUpForm = (props) => {
       }
     } else {
       alert("Inputs not filled");
+      setStep(2)
       return false;
     }
   };
