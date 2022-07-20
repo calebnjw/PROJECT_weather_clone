@@ -16,28 +16,32 @@ const LoginForm = (props) => {
   const [password, setPassword] = useState("");
 
   const handleLoginSubmit = async (event) => {
-    //change this to 3 later on for favourite page
-    setStep(3);
-
+    
     if ((username, password)) {
-      console.log("username ", username, "password: ", [password]);
-
+      console.log("username: ", username, "password: ", [password]);
+      
       const loginObj = {
         username,
         password,
       };
-
+      
       console.log("This is login object: ", loginObj);
       //check with backend
       const verifyLogin = await axios.post("user/login", loginObj);
       localStorage.setItem("token", verifyLogin.data.token)
-
+      //change this to 3 later on for favourite page
+      setStep(3);
       setLogin(loginObj);
 
       //input fields are reset
       setUsername("");
       setPassword("");
       event.preventDefault();
+
+      if(!verifyLogin.data.token){
+        alert("Wrong username/password, try again!")
+        setStep(1);
+      }
     } else {
       alert("Username/Password entered incorrectly");
     }

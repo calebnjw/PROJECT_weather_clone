@@ -47,10 +47,17 @@ const SignUpForm = (props) => {
       setEmail("");
       setPassword("");
       event.preventDefault();
+
+      if (!userToken.data.token) {
+        alert(userToken.data.message);
+        return true;
+      }
     } else {
-      alert("Input fields were not filled. Please check");
+      alert("Inputs not filled");
+      return false;
     }
   };
+
   // get input values
   const firstNameInput = (event) => {
     setFirstName(event.target.value);
