@@ -1,14 +1,23 @@
 import React, { useEffect, useState } from 'react';
+import jwt from 'jwt-decode';
 
 import MessageBubble from './messageBubble.jsx';
 import MessageInput from './messageInput.jsx';
 
 // chat component
 function Chat(props) {
-  const { city } = props;
+  const { city, userToken } = props;
 
   const [chatMessages, setChatMessages] = useState([]);
+  const [username, setUsername] = useState('');
   const [output, setOutput] = useState([]);
+
+  useEffect(() => {
+    if (Object.keys(userToken).length > 0) {
+      setUsername(jwt(userToken).username);
+      console.log(username);
+    }
+  }, [userToken]);
 
   // to receive connection message
   // when someone joins or leaves
@@ -28,7 +37,7 @@ function Chat(props) {
       <div className='chat-box'>
         { chatMessages }
       </div>
-      <MessageInput />
+      <MessageInput username={username} />
     </div>
   );
 }

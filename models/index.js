@@ -24,7 +24,7 @@ const sequelize = new Sequelize(
 // db.Model = initModel(sequelize, Sequelize.DataTypes);
 db.User = initUserModel(sequelize, Sequelize.DataTypes);
 db.Message = initLocationMessageModel(sequelize, Sequelize.DataTypes);
-db.Location = initUserLocationModel(sequelize, Sequelize.DataTypes);
+db.UserLocation = initUserLocationModel(sequelize, Sequelize.DataTypes);
 
 // associations between models
 // one to many:
