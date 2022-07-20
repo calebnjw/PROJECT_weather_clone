@@ -16,9 +16,17 @@ function initUserLocationModel(sequelize, DataTypes) {
           key: 'id',
         },
       },
-      locationId: {
+      city: {
         allowNull: false,
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
+      },
+      lat: {
+        allowNull: false,
+        type: DataTypes.STRING,
+      },
+      long: {
+        allowNull: false,
+        type: DataTypes.STRING,
       },
       createdAt: {
         allowNull: false,

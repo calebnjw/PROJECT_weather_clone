@@ -1,29 +1,30 @@
 import React, { useState, useEffect } from 'react';
-
 import {
   Button, Input, Form, GridColumn,
 } from 'semantic-ui-react';
 
-// sign up form component
+// input + send component
 function MessageInput(props) {
-  const [message, setMessage] = useState('');
+  const [messageContent, setMessageContent] = useState('');
 
   const handleInput = (event) => {
-    setMessage(event.target.value);
+    setMessageContent(event.target.value);
   };
 
   const sendMessage = () => {
-    // this will be axios.post('/message/new', message)
-    console.log(message);
-    setMessage('');
+    // ! username to be replaced with username from JWT
+    // to send out chat message from input box
+    socket.emit('chat message', { username: 'calebnjw', content: messageContent });
+    setMessageContent('');
   };
 
   return (
     <Form>
       <Input
+        fluid
         type= 'text'
         placeholder='Type your message here'
-        value={message}
+        value={messageContent}
         onChange={handleInput}
         action >
         <input></input>

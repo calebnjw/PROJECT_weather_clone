@@ -6,7 +6,7 @@ import { DateTime } from 'luxon';
 
 // sign up form component
 function WeeklyWeather(props) {
-  const { data } = props;
+  const { data, u } = props;
 
   const dailyTemp = data.time.map((date, i) => {
     const dt = DateTime.fromISO(date);
@@ -14,9 +14,9 @@ function WeeklyWeather(props) {
       <div key={date}>
         {dt.toFormat('cccc')}
         <br />
-        Max: {data.temperature_2m_max[i]}
+        Max: {data.temperature_2m_max[i]}{u}
         <br />
-        Min: {data.temperature_2m_min[i]}
+        Min: {data.temperature_2m_min[i]}{u}
       </div>
     );
   });

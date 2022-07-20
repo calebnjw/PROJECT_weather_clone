@@ -12,7 +12,7 @@ import WeatherPage from './pages/weatherPage.jsx';
 // import component from './components/component.jsx';
 
 export default function App() {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(4);
   const [signUp, setSignUp] = useState('');
   const [login, setLogin] = useState('');
   const [query, setQuery] = useState('');
@@ -24,10 +24,26 @@ export default function App() {
   return (
     <Container>
       <Grid padded={true} centered={true} >
-        {step === 1 && <LoginForm setStep={setStep} setLogin={setLogin}/>}
-        {step === 2 && <SignUpForm setStep={setStep} setSignUp={setSignUp}/>}
-        {step === 3 && <FavouritePage setStep={setStep} setQuery={setQuery} query={query} citiesList={citiesList} setCitiesList={setCitiesList} setCity={setCity} setLat={setLat} setLong={setLong} />}
-        {step === 4 && <WeatherPage setStep={setStep} city={city} lat={lat} long={long} />}
+        {step === 1 && <LoginForm
+          setStep={setStep}
+          setLogin={setLogin} />}
+        {step === 2 && <SignUpForm
+          setStep={setStep}
+          setSignUp={setSignUp} />}
+        {step === 3 && <FavouritePage
+          setStep={setStep}
+          setQuery={setQuery}
+          query={query}
+          citiesList={citiesList}
+          setCitiesList={setCitiesList}
+          setCity={setCity}
+          setLat={setLat}
+          setLong={setLong} />}
+        {step === 4 && <WeatherPage
+          setStep={setStep}
+          city={city}
+          lat={lat}
+          long={long} />}
       </Grid>
     </Container>
   );

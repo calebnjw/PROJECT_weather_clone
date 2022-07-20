@@ -30,11 +30,7 @@ body {
   left: 0;
   right: 0;
   margin: auto;
-  background-image: linear-gradient(
-    to right,
-    rgba(197, 239, 247),
-    rgb(255, 255, 255)
-  );
+  background-image: linear-gradient(to right, rgba(197, 239, 247), rgb(255, 255, 255));
 }
 
 .sign-up-form {
@@ -56,6 +52,9 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+
+  box-sizing: border-box;
 
   height: 5vh;
   width: 100vw;
@@ -66,33 +65,38 @@ body {
 .chat-box {
   display: flex;
   flex-direction: column;
+  overflow: scroll;
 
-  height: calc((100vh - 12rem) / 2);
+  height: calc((100vh - 10rem) / 2);
   width: 100vw;
 
   margin-bottom: 1vh;
+  margin-top: auto;
 }
 
 .message-bubble {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   align-self: flex-start;
 
   background-color: #ffffff;
   color: black;
+
+  word-break: normal;
+  text-align: left;
 
   border-radius: 0.5rem;
   box-shadow: 1px 1px 1px 1px #b3e0f3;
 
   padding: 0.5rem;
   padding-left: 0.7rem;
-  margin-bottom: 0.5rem;
-
-  word-break: normal;
+  margin-bottom: 0.2rem;
 }
 
-.self {
-  align-self: flex-end;
-
-  margin-right: 2rem;
+.message-bubble > .label {
+  align-self: start;
+  margin-right: 0.5rem;
 }
 
 .weather-app {
