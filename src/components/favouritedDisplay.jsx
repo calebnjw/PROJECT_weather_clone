@@ -12,7 +12,4 @@ const DisplayFavourites = (props) => {
   } = props;
 
   // axios get user's jwt token
-const result = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&current_weather=true&timezone=Asia%2FSingapore`);
-};
-
-
+const result = await axios.get('/favourites')

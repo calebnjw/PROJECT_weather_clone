@@ -3,7 +3,8 @@ import axios from 'axios';
 import {
   Button, Form, Segment, Grid, GridColumn,
 } from 'semantic-ui-react';
-import Snowflake from '../SnowFlake.gif';
+import swal from 'sweetalert';
+import Transparent from '../transparentBackground.gif';
 
 // if (!email || !password) {
 //   alert("Fill in the form!");
@@ -20,11 +21,8 @@ const LoginForm = (props) => {
   const [password, setPassword] = useState('');
 
   const handleLoginSubmit = async (event) => {
-    // change this to 3 later on for favourite page
-    setStep(3);
-
     if ((username, password)) {
-      console.log('username ', username, 'password: ', [password]);
+      console.log('username: ', username, 'password: ', [password]);
 
       const loginObj = {
         username,
@@ -34,17 +32,25 @@ const LoginForm = (props) => {
       console.log('This is login object: ', loginObj);
       // check with backend
       const verifyLogin = await axios.post('user/login', loginObj);
-      console.log('verify token:', verifyLogin);
+      console.log('Verify token:', verifyLogin);
       localStorage.setItem('token', verifyLogin.data.token);
-
+      // change this to 3 later on for favourite page
+      setStep(3);
       setLogin(loginObj);
 
       // input fields are reset
       setUsername('');
       setPassword('');
       event.preventDefault();
+
+      swal('Welcome!', 'Login successful');
+
+      if (!verifyLogin.data.token) {
+        swal('Wrong username/password, try again!');
+        setStep(1);
+      }
     } else {
-      alert('Username/Password entered incorrectly');
+      swal('Inputs not filled');
     }
   };
 
@@ -63,9 +69,9 @@ const LoginForm = (props) => {
 
   return (
     <>
-      <div className="ui container main-container">
-        <div className="ui placeholder segment">
-          <div className="ui two column very relaxed stackable padded grid">
+      <div className="main-container">
+        <div className="ui stackable grid">
+          <div className="two column row">
             <div className="column">
               <div
                 className="ui form"
@@ -102,11 +108,11 @@ const LoginForm = (props) => {
                 </div>
               </div>
             </div>
-            <div className="middle aligned column">
+            <div className="column">
               <div className="to-signup-div">
                 <img
                   className="weather-logo"
-                  src={Snowflake}
+                  src={Transparent}
                   alt="weather-gif"
                 />
               </div>
@@ -116,25 +122,28 @@ const LoginForm = (props) => {
               </div>
             </div>
           </div>
-        </div>
-
-        <div className="ui three steps">
-          <div className="step">
-            <i className="sign-in icon"></i>
-            <div className="content">
-              <div className="title">Login</div>
-            </div>
-          </div>
-          <div className="active step">
-            <i className="star icon"></i>
-            <div className="content">
-              <div className="title">'Favourite' Your Location</div>
-            </div>
-          </div>
-          <div className="active step">
-            <i className="comment alternate icon"></i>
-            <div className="content">
-              <div className="title">Start Chatting</div>
+          <div className="row steps-container">
+            <div className="column">
+              <div className="ui three steps">
+                <div className="step">
+                  <i className="sign-in icon"></i>
+                  <div className="content">
+                    <div className="title">Login</div>
+                  </div>
+                </div>
+                <div className="active step">
+                  <i className="star icon"></i>
+                  <div className="content">
+                    <div className="title">'Favourite' Your Location</div>
+                  </div>
+                </div>
+                <div className="active step">
+                  <i className="comment alternate icon"></i>
+                  <div className="content">
+                    <div className="title">Start Chatting</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

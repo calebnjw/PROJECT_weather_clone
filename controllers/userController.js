@@ -1,6 +1,5 @@
 const { default: axios } = require('axios');
 const bcrypt = require('bcrypt');
-// const { startFailed } = require('init');
 const jwt = require('jsonwebtoken');
 const BaseController = require('./baseController.js');
 
@@ -18,7 +17,7 @@ class UserController extends BaseController {
       const checkEmail = await this.model.findOne({ where: { email } });
       console.log('Email:', checkEmail);
       if (checkEmail) {
-        return res.json({ success: false, message: 'Email in use, try again or login' });
+        return res.json({ message: 'Email in use, try another email or login!' });
         // return res.status(400).json({success: false, message: 'Email in use, try again or login'})
       }
       const hashedPassword = await bcrypt.hash(password, Number(process.env.SALT_ROUND));
@@ -31,27 +30,29 @@ class UserController extends BaseController {
       console.log('This is backend token', token);
       return res.json({ newUser, token });
     } catch (err) {
-      console.log(err);
+      res.json({ err: err.message });
     }
-    console.log('This is our userSignup route');
   }
 
   async userLogin(req, res) {
+    console.log('I am userLogin route');
     const { username, password } = req.body;
     try {
       const user = await this.model.findOne({ where: { username } });
+      console.log('This is the user', user);
       if (!user) {
-        return res.json({ success: false, message: 'User does not exist' });
+        return res.json({ message: 'User does not exist' });
       }
       const compare = await bcrypt.compare(password, user.password);
+      console.log('This is the password', password);
       if (!compare) {
-        return res.json({ success: false, message: 'Wrong password, try again!' });
+        return res.json({ message: 'Wrong password, try again!' });
       }
       const payload = { id: user.id, username: user.username };
       const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXP });
       return res.json({ user, token });
     } catch (err) {
-      console.log(err);
+      res.send({ message: 'No user found. Sign up!' });
     }
   }
 
@@ -66,14 +67,6 @@ class UserController extends BaseController {
       console.log(error);
       response.status(400).send({ error });
     }
-  }
-
-  async renderLogin(request, response) {
-    console.log('I am render login');
-  }
-
-  async renderSignup(request, response) {
-    console.log('I am render Signup');
   }
 
   async newFavourite(request, response) {

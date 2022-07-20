@@ -3,7 +3,9 @@ import {
   Search, Grid, Step, Label,
 } from 'semantic-ui-react';
 import Fuse from 'fuse.js';
+import swal from 'sweetalert';
 import cities from '../cities.json';
+import Cloud from '../sun_cloud_icon.png';
 
 const FavouritePage = (props) => {
   const {
@@ -67,7 +69,12 @@ const FavouritePage = (props) => {
 
   const handleLogoutSubmit = () => {
     localStorage.removeItem('token');
+    swal('You are logged out!');
     setStep(1);
+  };
+
+  const handleHomePage = () => {
+    setStep(3);
   };
 
   useEffect(() => {
@@ -100,6 +107,23 @@ const FavouritePage = (props) => {
 
   return (
     <>
+      {/* Menu bar */}
+      <div className="ui huge top fixed text menu">
+        <div className="item">
+          <img src={Cloud} alt="cloud-logo" />
+        </div>
+        <a className="item" onClick={handleHomePage}>Home</a>
+        <div className="right menu">
+          <div className="item">
+            <div className="ui teal button" onClick={handleLogoutSubmit}>
+            <i className="sign-out icon"></i>
+              Logout
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Search bar */}
       <Grid.Row>
         <div className="search-bar-input">
           <Search
@@ -125,13 +149,6 @@ const FavouritePage = (props) => {
         <h4>Favourites</h4>
         {/* {favouriteCities} */}
       </Grid.Row>
-      <div
-        className="ui teal big submit button front-page-button"
-        onClick={handleLogoutSubmit}
-      >
-        <i className="sign-out icon"></i>
-        Logout
-      </div>
     </>
   );
 };
