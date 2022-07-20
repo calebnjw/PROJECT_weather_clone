@@ -12,47 +12,40 @@ const LoginForm = (props) => {
   const { step, setStep, login, setLogin } = props;
 
   //initialize useState for login input
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLoginSubmit = async (event) => {
     //change this to 3 later on for favourite page
     setStep(3);
 
-    if ((email, password)) {
-      console.log("email: ", email, "password: ", [password]);
+    if ((username, password)) {
+      console.log("username ", username, "password: ", [password]);
 
       const loginObj = {
-        email,
+        username,
         password,
       };
+
       console.log("This is login object: ", loginObj);
       //check with backend
-      console.log(verifyLogin);
-      const token = localStorage.getItem("token");
-      const config = {
-        headers: { Authorization: `Bearer ${token}` },
-      };
-      const verifyLogin = await axios.post("user/login", loginObj, config);
+      const verifyLogin = await axios.post("user/login", loginObj);
+      localStorage.setItem("token", verifyLogin.data.token)
 
       setLogin(loginObj);
 
-      if (!token) {
-        return alert("You do not have a token");
-      }
-
       //input fields are reset
-      setEmail("");
+      setUsername("");
       setPassword("");
       event.preventDefault();
     } else {
-      alert("Email/Password entered incorrectly");
+      alert("Username/Password entered incorrectly");
     }
   };
 
   //get login input values
-  const emailInput = (event) => {
-    setEmail(event.target.value);
+  const usernameInput = (event) => {
+    setUsername(event.target.value);
   };
 
   const passwordInput = (event) => {
@@ -74,12 +67,12 @@ const LoginForm = (props) => {
                 style={{ marginTop: "130px", width: "100%" }}
               >
                 <div className="field">
-                  <label>Email</label>
+                  <label>Username</label>
                   <div className="ui left icon input">
                     <input
                       type="text"
-                      placeholder="Email"
-                      onChange={emailInput}
+                      placeholder="Username"
+                      onChange={usernameInput}
                     />
                     <i className="user icon"></i>
                   </div>
@@ -128,7 +121,7 @@ const LoginForm = (props) => {
             </div>
           </div>
           <div className="active step">
-            <i className="heart icon"></i>
+            <i className="star icon"></i>
             <div className="content">
               <div className="title">'Favourite' Your Location</div>
             </div>

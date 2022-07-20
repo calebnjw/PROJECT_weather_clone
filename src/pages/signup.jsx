@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Button, Form } from "semantic-ui-react";
+// import authenticateJWT from "../../middleware/checkUserLogin";
 
 // initialise regex
 // const FIRSTNAME_REGEX = "/^[a-zA-Z-]+$/";
@@ -34,8 +35,8 @@ const SignUpForm = (props) => {
       console.log("This is signUpObj: ", signUpObj);
       //post user data to backend
       const userToken = await axios.post("/user/signup", signUpObj);
-      console.log(userToken);
-      //set token (first value key, second is)
+      console.log(`userToken`, userToken);
+      //set token
       localStorage.setItem("token", userToken.data.token);
 
       setSignUp(signUpObj);
@@ -113,13 +114,13 @@ const SignUpForm = (props) => {
               />
             </Form.Field>
             <div
-                  className="ui teal big submit button centered"
-                  onClick={handleInputSubmit}
-                  style={{display: 'table', margin: 'auto'}}
-                >
-                  <i className="sign-in icon"></i>
-                  Submit
-                </div>
+              className="ui teal big submit button centered"
+              onClick={handleInputSubmit}
+              style={{ display: "table", margin: "auto" }}
+            >
+              <i className="sign-in icon"></i>
+              Submit
+            </div>
           </Form>
         </div>
       </div>

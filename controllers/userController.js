@@ -17,11 +17,14 @@ class UserController extends BaseController {
       console.log('Email:', checkEmail)
       if(checkEmail){
         return res.json({success: false, message: 'Email in use, try again or login'})
+        // return res.status(400).json({success: false, message: 'Email in use, try again or login'})
       }
       const hashedPassword = await bcrypt.hash(password, Number(process.env.SALT_ROUND))
       const newUser = await this.model.create({firstName, lastName, username, email, password: hashedPassword})
-      const payload = { id: newUser.id, firstName: newUser.firstName, lastName: newUser.lastName, username: newUser.username, email: newUser.email, password: hashedPassword}
+      const payload = { id: newUser.id, username: newUser.username}
+      console.log('This is my payload', payload)
       const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXP})
+      console.log('This is backend token', token)
       return res.json({newUser, token})
     } catch(err){
       console.log(err)
@@ -30,9 +33,9 @@ class UserController extends BaseController {
   }
 
   async userLogin(req, res) {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
     try {
-      const user = await this.model.findOne({where: { email }})
+      const user = await this.model.findOne({where: { username }})
       if(!user){
         return res.json({success: startFailed, message:'User does not exist'})
       }
@@ -40,7 +43,7 @@ class UserController extends BaseController {
       if(!compare){
         return res.json({success: startFailed, message:'Wrong password, try again!'})
       }
-      const payload = {id: user.id, email: user.email}
+      const payload = {id: user.id, username: user.username}
       const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXP})
       return res.json({user, token})
     } catch(err){

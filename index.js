@@ -13,7 +13,7 @@ const webpackConfig = require('./webpack_conf/webpack.dev.js');
 
 // import custom middleware
 const authMiddleware = require('./middleware/checkUserLogin.js');
-
+console.log(authMiddleware);
 
 // import models
 const db = require('./models/index.js');
