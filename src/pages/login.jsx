@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button, Form, Segment, Grid, GridColumn } from "semantic-ui-react";
-import Snowflake from "../SnowFlake.gif";
-import swal from 'sweetalert';
-
+import Transparent from "../transparentBackground.gif"
+import swal from "sweetalert";
 
 // if (!email || !password) {
 //   alert("Fill in the form!");
@@ -18,19 +17,18 @@ const LoginForm = (props) => {
   const [password, setPassword] = useState("");
 
   const handleLoginSubmit = async (event) => {
-    
     if ((username, password)) {
       console.log("username: ", username, "password: ", [password]);
-      
+
       const loginObj = {
         username,
         password,
       };
-      
+
       console.log("This is login object: ", loginObj);
       //check with backend
       const verifyLogin = await axios.post("user/login", loginObj);
-      localStorage.setItem("token", verifyLogin.data.token)
+      localStorage.setItem("token", verifyLogin.data.token);
       //change this to 3 later on for favourite page
       setStep(3);
       setLogin(loginObj);
@@ -40,10 +38,10 @@ const LoginForm = (props) => {
       setPassword("");
       event.preventDefault();
 
-      swal("Welcome!", "Login successful")
+      swal("Welcome!", "Login successful");
 
-      if(!verifyLogin.data.token){
-        swal("Wrong username/password, try again!")
+      if (!verifyLogin.data.token) {
+        swal("Wrong username/password, try again!");
         setStep(1);
       }
     } else {
@@ -66,9 +64,9 @@ const LoginForm = (props) => {
 
   return (
     <>
-      <div className="ui container main-container">
-        <div className="ui placeholder segment">
-          <div className="ui two column very relaxed stackable padded grid">
+      <div className="main-container">
+        <div className="ui stackable grid">
+          <div className="two column row">
             <div className="column">
               <div
                 className="ui form"
@@ -105,11 +103,11 @@ const LoginForm = (props) => {
                 </div>
               </div>
             </div>
-            <div className="middle aligned column">
+            <div className="column">
               <div className="to-signup-div">
                 <img
                   className="weather-logo"
-                  src={Snowflake}
+                  src={Transparent}
                   alt="weather-gif"
                 />
               </div>
@@ -119,25 +117,28 @@ const LoginForm = (props) => {
               </div>
             </div>
           </div>
-        </div>
-
-        <div className="ui three steps">
-          <div className="step">
-            <i className="sign-in icon"></i>
-            <div className="content">
-              <div className="title">Login</div>
-            </div>
-          </div>
-          <div className="active step">
-            <i className="star icon"></i>
-            <div className="content">
-              <div className="title">'Favourite' Your Location</div>
-            </div>
-          </div>
-          <div className="active step">
-            <i className="comment alternate icon"></i>
-            <div className="content">
-              <div className="title">Start Chatting</div>
+          <div className="row steps-container">
+            <div className="column">
+              <div className="ui three steps">
+                <div className="step">
+                  <i className="sign-in icon"></i>
+                  <div className="content">
+                    <div className="title">Login</div>
+                  </div>
+                </div>
+                <div className="active step">
+                  <i className="star icon"></i>
+                  <div className="content">
+                    <div className="title">'Favourite' Your Location</div>
+                  </div>
+                </div>
+                <div className="active step">
+                  <i className="comment alternate icon"></i>
+                  <div className="content">
+                    <div className="title">Start Chatting</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
