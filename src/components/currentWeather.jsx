@@ -5,7 +5,7 @@ import {
 
 // sign up form component
 function CurrentWeather(props) {
-  const { data } = props;
+  const { data, u } = props;
 
   const [WEATHER_CODES, setWEATHER_CODES] = useState({
     0: 'Clear Sky',
@@ -42,7 +42,7 @@ function CurrentWeather(props) {
     <div>
       Current Weather:
       <p>
-        { data && data.temperature }
+        { data && data.temperature }{u}
       <br />
         { data && WEATHER_CODES[data.weathercode] }
       </p>

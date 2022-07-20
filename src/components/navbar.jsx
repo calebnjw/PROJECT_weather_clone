@@ -4,7 +4,7 @@ import { Button } from 'semantic-ui-react';
 // sign up form component
 function Navbar(props) {
   const {
-    setStep, city, lat, long,
+    setStep, city,
   } = props;
 
   const previousPage = () => setStep(3);

@@ -5,7 +5,7 @@ const router = express.Router();
 class UserRouter {
   constructor(controller, authMiddleware) {
     this.controller = controller;
-    this.authMiddleware = authMiddleware
+    this.authMiddleware = authMiddleware;
   }
 
   router() {
@@ -13,10 +13,11 @@ class UserRouter {
     // have to .bind(this.controller) at the end of each route
     router.post('/login', this.controller.userLogin.bind(this.controller));
     router.post('/signup', this.controller.userSignup.bind(this.controller));
-    //middleware 
-    router.use(this.authMiddleware)
-    //rest of routes after middleware
+    // middleware
+    router.use(this.authMiddleware);
+    // rest of routes after middleware
     router.get('/favourites', this.controller.getFavourites.bind(this.controller));
+    router.post('/favourites', this.controller.newFavourite.bind(this.controller));
     return router;
   }
 }

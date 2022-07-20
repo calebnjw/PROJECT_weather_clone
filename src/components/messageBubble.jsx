@@ -1,13 +1,15 @@
 import React from 'react';
+import { Label } from 'semantic-ui-react';
 
 // sign up form component
 function MessageBubble(props) {
-  const { message, classes } = props;
+  const { username, message } = props;
 
   return (
-    <p className={`message-bubble ${classes}`} >
-      { message }
-    </p>
+    <div className={'message-bubble'} >
+      <Label content={username} />
+      <div>{message}</div>
+    </div>
   );
 }
 
