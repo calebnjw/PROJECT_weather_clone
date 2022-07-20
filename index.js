@@ -12,7 +12,8 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackConfig = require('./webpack_conf/webpack.dev.js');
 
 // import custom middleware
-// const checkUserLogin = require('./middleware/checkUserLogin.js');
+const authMiddleware = require('./middleware/checkUserLogin.js');
+console.log(authMiddleware);
 
 // import models
 const db = require('./models/index.js');
@@ -32,9 +33,9 @@ const messageController = new MessageController(db.Message, db);
 const UserRouter = require('./routers/userRouter.js');
 const MessageRouter = require('./routers/messageRouter.js');
 
-// initialise routers
+// initialise routers & middleware
 // const modelRouter = new ModelRouter(modelController).router();
-const userRouter = new UserRouter(userController).router();
+const userRouter = new UserRouter(userController, authMiddleware).router();
 const messageRouter = new MessageRouter(messageController).router();
 
 // express app

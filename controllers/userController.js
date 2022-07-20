@@ -1,8 +1,8 @@
+const { default: axios } = require('axios');
 const bcrypt = require('bcrypt');
-
+const { startFailed } = require('init');
 const BaseController = require('./baseController.js');
-
-const SALT_ROUNDS = Number(process.env.SALT_ROUNDS);
+const jwt =require("jsonwebtoken");
 
 class UserController extends BaseController {
   constructor(model, db) {
@@ -10,45 +10,44 @@ class UserController extends BaseController {
     this.Location = db.Location;
   }
 
-  async userSignup(request, response) {
-    const { username, password } = request.body;
-
+  async userSignup(req, res) {
+    const { firstName, lastName, username, email, password } = req.body;
     try {
-      // use bcrypt to hash passwords
-      const hash = await bcrypt.hash(password, SALT_ROUNDS);
-      const user = await this.model.create({
-        username,
-        password: hash,
-      });
-
-      if (user) {
-        // tell frontend that signup was successful
-        response.status(200).send({ signedUp: true });
+      const checkEmail = await this.model.findOne({where: { email }})
+      console.log('Email:', checkEmail)
+      if(checkEmail){
+        return res.json({success: false, message: 'Email in use, try again or login'})
+        // return res.status(400).json({success: false, message: 'Email in use, try again or login'})
       }
-    } catch (error) {
-      console.log(error);
-      response.status(400).send({ error });
+      const hashedPassword = await bcrypt.hash(password, Number(process.env.SALT_ROUND))
+      const newUser = await this.model.create({firstName, lastName, username, email, password: hashedPassword})
+      const payload = { id: newUser.id, username: newUser.username}
+      console.log('This is my payload', payload)
+      const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXP})
+      console.log('This is backend token', token)
+      return res.json({newUser, token})
+    } catch(err){
+      console.log(err)
     }
+    console.log("This is our userSignup route")
   }
 
-  async userLogin(request, response) {
-    const { username, password } = request.body;
-
+  async userLogin(req, res) {
+    const { username, password } = req.body;
     try {
-      const user = await this.model.findOne({ where: { username } });
-
-      // use bcrypt to compare hashed passwords
-      const result = await bcrypt.compare(password, user.password);
-      if (result) {
-        response.cookie('loggedIn', true);
-        response.cookie('userID', user.id);
-        response.status(200).send({ loggedIn: true });
-      } else {
-        response.status(401).send({ loggedIn: false });
+      const user = await this.model.findOne({where: { username }})
+      if(!user){
+        return res.json({success: startFailed, message:'User does not exist'})
       }
-    } catch (error) {
-      console.log(error);
-      response.status(400).send({ error });
+      const compare = await bcrypt.compare(password, user.password)
+      if(!compare){
+        return res.json({success: startFailed, message:'Wrong password, try again!'})
+      }
+      const payload = {id: user.id, username: user.username}
+      const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXP})
+      return res.json({user, token})
+    } catch(err){
+      console.log(err)
     }
   }
 
@@ -65,6 +64,14 @@ class UserController extends BaseController {
     }
   }
 
+  async renderLogin(request, response){
+    console.log("I am render login")
+  }
+
+  async renderSignup(request, response){
+    console.log("I am render Signup")
+  }
+
   async newFavourite(request, response) {
     const { userId, locationId } = request.body;
 
@@ -79,15 +86,12 @@ class UserController extends BaseController {
     }
   }
 
-  userLogout(request, response) {
-    // delete login cookies on logout
-    if (request.loggedIn) {
-      response.clearCookie('loggedIn');
-      response.clearCookie('userID');
+  logout(request, response) {
+    try {
+      console.log("I have logged out")
+    } catch(err) {
+      console.log(err)
     }
-
-    // redirect to login page
-    response.redirect('/');
   }
 }
 
