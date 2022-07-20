@@ -4,6 +4,7 @@ import Fuse from "fuse.js";
 import cities from "../cities.json";
 import swal from "sweetalert";
 import Cloud from "../sun_cloud_icon.png";
+import StarLocation from "../components/favouriteChild.jsx";
 
 const FavouritePage = (props) => {
   const {
@@ -145,7 +146,8 @@ const FavouritePage = (props) => {
       </Grid.Row>
       <Grid.Row className="location-list">
         <h4>Favourites</h4>
-        {/* {favouriteCities} */}
+        <br />
+        <StarLocation />
       </Grid.Row>
     </>
   );

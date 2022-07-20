@@ -65,13 +65,6 @@ class UserController extends BaseController {
     }
   }
 
-  async renderLogin(request, response){
-    console.log("I am render login")
-  }
-
-  async renderSignup(request, response){
-    console.log("I am render Signup")
-  }
 
   async newFavourite(request, response) {
     const { userId, locationId } = request.body;
@@ -84,14 +77,6 @@ class UserController extends BaseController {
     } catch (error) {
       console.log(error);
       response.status(400).send({ error });
-    }
-  }
-
-  logout(request, response) {
-    try {
-      console.log("I have logged out")
-    } catch(err) {
-      console.log(err)
     }
   }
 }

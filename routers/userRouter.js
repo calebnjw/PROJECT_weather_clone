@@ -16,10 +16,7 @@ class UserRouter {
     //middleware 
     router.use(this.authMiddleware)
     //rest of routes after middleware
-    router.get('/login', this.controller.renderLogin.bind(this.controller));
-    router.get('/signup', this.controller.renderSignup.bind(this.controller));
     router.get('/favourites', this.controller.getFavourites.bind(this.controller));
-    router.get('/logout', this.controller.logout.bind(this.controller));
     return router;
   }
 }
