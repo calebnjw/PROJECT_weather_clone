@@ -114,7 +114,7 @@ const FavouritePage = (props) => {
         <div className="right menu">
           <div className="item">
             <div className="ui teal button" onClick={handleLogoutSubmit}>
-            <i class="sign-out icon"></i>
+            <i className="sign-out icon"></i>
               Logout
             </div>
           </div>

@@ -28,6 +28,7 @@ const LoginForm = (props) => {
       console.log("This is login object: ", loginObj);
       //check with backend
       const verifyLogin = await axios.post("user/login", loginObj);
+      console.log('Verify token:', verifyLogin)
       localStorage.setItem("token", verifyLogin.data.token);
       //change this to 3 later on for favourite page
       setStep(3);
