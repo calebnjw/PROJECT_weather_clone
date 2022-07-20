@@ -12,6 +12,10 @@ body {
     width: 100%;
 }
 
+.swal-button--confirm {
+    background: teal;
+}
+
 //===========================SIGN UP DESIGN============================//
 .to-sign-up {
   width: 700px;
@@ -33,20 +37,15 @@ body {
   padding: 10px;
 }
 
+.search-bar-input {
+    padding-top: 50px;
+}
 .search-bar-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-// .search-bar-input {
-//   display: flex;
-//   margin-top: 5rem;
-// }
-// .location-list {
-//   display: flex;
-//   margin-top: 10rem;
-// }
 
 //===========================MESSAGE DESIGN============================//
 .navbar {

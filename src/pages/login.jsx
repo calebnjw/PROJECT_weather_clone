@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button, Form, Segment, Grid, GridColumn } from "semantic-ui-react";
 import Snowflake from "../SnowFlake.gif";
+import swal from 'sweetalert';
+
 
 // if (!email || !password) {
 //   alert("Fill in the form!");
@@ -38,12 +40,14 @@ const LoginForm = (props) => {
       setPassword("");
       event.preventDefault();
 
+      swal("Welcome!", "Login successful")
+
       if(!verifyLogin.data.token){
-        alert("Wrong username/password, try again!")
+        swal("Wrong username/password, try again!")
         setStep(1);
       }
     } else {
-      alert("Username/Password entered incorrectly");
+      swal("Inputs not filled");
     }
   };
 
