@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Button, Form } from "semantic-ui-react";
+import swal from 'sweetalert';
+
 // import authenticateJWT from "../../middleware/checkUserLogin";
 
 // initialise regex
@@ -47,10 +49,20 @@ const SignUpForm = (props) => {
       setEmail("");
       setPassword("");
       event.preventDefault();
+
+      swal("Account created!", "Login NOW!", "success");
+
+      if (!userToken.data.token) {
+        swal("Email already in use!", "Try another email Or login NOW!");
+        return true;
+      }
     } else {
-      alert("Input fields were not filled. Please check");
+      swal("Inputs not filled");
+      setStep(2);
+      return false;
     }
   };
+
   // get input values
   const firstNameInput = (event) => {
     setFirstName(event.target.value);
