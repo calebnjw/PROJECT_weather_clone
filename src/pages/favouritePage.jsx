@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import {
-  Search, Grid, Step, Label,
-} from 'semantic-ui-react';
-import Fuse from 'fuse.js';
-import cities from '../cities.json';
+import React, { useState, useEffect } from "react";
+import { Search, Grid, Step, Label } from "semantic-ui-react";
+import Fuse from "fuse.js";
+import cities from "../cities.json";
 
 const FavouritePage = (props) => {
   const {
     setStep,
-    query, setQuery,
-    citiesList, setCitiesList,
-    setCity, setLat, setLong,
+    query,
+    setQuery,
+    citiesList,
+    setCitiesList,
+    setCity,
+    setLat,
+    setLong,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -21,9 +23,7 @@ const FavouritePage = (props) => {
     minMatchCharLength: 3,
     threshold: 0.1,
     distance: 3,
-    keys: [
-      'name',
-    ],
+    keys: ["name"],
   };
 
   const fuse = new Fuse(citiesAPI, options);
@@ -36,7 +36,7 @@ const FavouritePage = (props) => {
   const handleOnSearch = (event) => {
     setIsLoading(true);
     setQuery(event.target.value);
-    console.log('input:', query);
+    console.log("input:", query);
   };
 
   const showLocation = (city, lat, long) => {
@@ -52,29 +52,35 @@ const FavouritePage = (props) => {
     return (
       <p>
         {item.name}
-        {'\t'}
-        <Label content={<small>{item.lat.toFixed(2)}, {item.lng.toFixed(2)}</small>} />
-
+        {"\t"}
+        <Label
+          content={
+            <small>
+              {item.lat.toFixed(2)}, {item.lng.toFixed(2)}
+            </small>
+          }
+        />
       </p>
     );
+  };
+
+  const handleLogoutSubmit = () => {
+    localStorage.removeItem("token");
+    setStep(1);
   };
 
   useEffect(() => {
     let temp;
     if (citiesList.length > 0) {
-      console.log('full list', citiesList);
+      console.log("full list", citiesList);
       console.log(Object.keys(citiesList[0]));
       console.log(citiesList[0].item);
       temp = citiesList.map((city) => {
-        console.log('city:', city.item.name);
-        const {
-          country, name, lat, lng,
-        } = city.item;
+        console.log("city:", city.item.name);
+        const { country, name, lat, lng } = city.item;
         return (
-          <li key={name} className='location-list'>
-            <h2>
-              Name: {name}
-            </h2>
+          <li key={name} className="location-list">
+            <h2>Name: {name}</h2>
             <br></br>
             Country: {country}
             <br></br>
@@ -86,26 +92,19 @@ const FavouritePage = (props) => {
       });
     }
     setSearchResult(temp);
-    console.log('SEARCH RESULTS', temp);
+    console.log("SEARCH RESULTS", temp);
   }, [citiesList]);
 
-  // const handleResultSelect = () => {
-  //   setStep(4);
-  //   setCity();
-  //   setLat();
-  //   setLong();
-  // };
-
   return (
-  // <div className='search-bar-container'>
-      <>
-        <Grid.Row>
-          <div className='search-bar-input'>
-            <Search
-            type='text'
+    // <div className='search-bar-container'>
+    <>
+      <Grid.Row>
+        <div className="search-bar-input">
+          <Search
+            type="text"
             value={query}
             onSearchChange={handleOnSearch}
-            placeholder='Search location here'
+            placeholder="Search location here"
             fluid
             loading={isLoading}
             onResultSelect={(e, data) => {
@@ -117,15 +116,21 @@ const FavouritePage = (props) => {
             // })}
             resultRenderer={resultRenderer}
             results={citiesList}
-            />
-          </div>
-        </Grid.Row>
-        <Grid.Row className='location-list'>
-          <h4>Favourites</h4>
-          {/* {favouriteCities} */}
-        </Grid.Row>
-      </>
-  // </div>
+          />
+        </div>
+      </Grid.Row>
+      <Grid.Row className="location-list">
+        <h4>Favourites</h4>
+        {/* {favouriteCities} */}
+      </Grid.Row>
+      <div
+        className="ui teal big submit button front-page-button"
+        onClick={handleLogoutSubmit}
+      >
+        <i className="sign-out icon"></i>
+        Logout
+      </div>
+    </>
   );
 };
 

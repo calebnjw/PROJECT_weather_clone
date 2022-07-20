@@ -11,11 +11,18 @@ function WeatherPage(props) {
     setStep, city, lat, long,
   } = props;
 
+  const [userToken, setUserToken] = useState({});
+
+  useEffect(() => {
+    setUserToken(localStorage.getItem('token'));
+    console.log('userToken', userToken);
+  }, [userToken]);
+
   return (
     <div className='ui padded grid'>
-      <Navbar setStep={setStep} city={city} />
+      <Navbar setStep={setStep} city={city} userId={1}/>
       <Weather lat={lat} long={long} />
-      <Chat />
+      <Chat city={city} />
     </div>
   );
 }
