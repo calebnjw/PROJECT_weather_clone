@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Search, Grid, Step, Label } from "semantic-ui-react";
-import Fuse from "fuse.js";
-import cities from "../cities.json";
+import React, { useState, useEffect } from 'react';
+import {
+  Search, Grid, Step, Label,
+} from 'semantic-ui-react';
+import Fuse from 'fuse.js';
+import cities from '../cities.json';
 
 const FavouritePage = (props) => {
   const {
@@ -18,14 +20,14 @@ const FavouritePage = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [searchResults, setSearchResult] = useState([]);
 
+  // fuse search
   const citiesAPI = cities;
   const options = {
     minMatchCharLength: 3,
     threshold: 0.1,
     distance: 3,
-    keys: ["name"],
+    keys: ['name'],
   };
-
   const fuse = new Fuse(citiesAPI, options);
 
   useEffect(() => {
@@ -36,23 +38,22 @@ const FavouritePage = (props) => {
   const handleOnSearch = (event) => {
     setIsLoading(true);
     setQuery(event.target.value);
-    console.log("input:", query);
+    console.log('input:', query);
   };
-
+  // sending values via states and redirect to setStep(4)
   const showLocation = (city, lat, long) => {
     setStep(4);
     setCity(city);
     setLat(lat);
     setLong(long);
   };
-
+  // rending template for dropdown list
   const resultRenderer = ({ item }) => {
     console.log(item);
-
     return (
       <p>
         {item.name}
-        {"\t"}
+        {'\t'}
         <Label
           content={
             <small>
@@ -65,19 +66,21 @@ const FavouritePage = (props) => {
   };
 
   const handleLogoutSubmit = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem('token');
     setStep(1);
   };
 
   useEffect(() => {
     let temp;
     if (citiesList.length > 0) {
-      console.log("full list", citiesList);
+      console.log('full list', citiesList);
       console.log(Object.keys(citiesList[0]));
       console.log(citiesList[0].item);
       temp = citiesList.map((city) => {
-        console.log("city:", city.item.name);
-        const { country, name, lat, lng } = city.item;
+        console.log('city:', city.item.name);
+        const {
+          country, name, lat, lng,
+        } = city.item;
         return (
           <li key={name} className="location-list">
             <h2>Name: {name}</h2>
@@ -92,11 +95,10 @@ const FavouritePage = (props) => {
       });
     }
     setSearchResult(temp);
-    console.log("SEARCH RESULTS", temp);
+    console.log('SEARCH RESULTS', temp);
   }, [citiesList]);
 
   return (
-    // <div className='search-bar-container'>
     <>
       <Grid.Row>
         <div className="search-bar-input">

@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { Button, Form, Segment, Grid, GridColumn } from "semantic-ui-react";
-import Snowflake from "../SnowFlake.gif";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import {
+  Button, Form, Segment, Grid, GridColumn,
+} from 'semantic-ui-react';
+import Snowflake from '../SnowFlake.gif';
 
 // if (!email || !password) {
 //   alert("Fill in the form!");
@@ -9,41 +11,44 @@ import Snowflake from "../SnowFlake.gif";
 // }
 
 const LoginForm = (props) => {
-  const { step, setStep, login, setLogin } = props;
+  const {
+    step, setStep, login, setLogin,
+  } = props;
 
-  //initialize useState for login input
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  // initialize useState for login input
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleLoginSubmit = async (event) => {
-    //change this to 3 later on for favourite page
+    // change this to 3 later on for favourite page
     setStep(3);
 
     if ((username, password)) {
-      console.log("username ", username, "password: ", [password]);
+      console.log('username ', username, 'password: ', [password]);
 
       const loginObj = {
         username,
         password,
       };
 
-      console.log("This is login object: ", loginObj);
-      //check with backend
-      const verifyLogin = await axios.post("user/login", loginObj);
-      localStorage.setItem("token", verifyLogin.data.token)
+      console.log('This is login object: ', loginObj);
+      // check with backend
+      const verifyLogin = await axios.post('user/login', loginObj);
+      console.log('verify token:', verifyLogin);
+      localStorage.setItem('token', verifyLogin.data.token);
 
       setLogin(loginObj);
 
-      //input fields are reset
-      setUsername("");
-      setPassword("");
+      // input fields are reset
+      setUsername('');
+      setPassword('');
       event.preventDefault();
     } else {
-      alert("Username/Password entered incorrectly");
+      alert('Username/Password entered incorrectly');
     }
   };
 
-  //get login input values
+  // get login input values
   const usernameInput = (event) => {
     setUsername(event.target.value);
   };
@@ -64,7 +69,7 @@ const LoginForm = (props) => {
             <div className="column">
               <div
                 className="ui form"
-                style={{ marginTop: "130px", width: "100%" }}
+                style={{ marginTop: '130px', width: '100%' }}
               >
                 <div className="field">
                   <label>Username</label>
