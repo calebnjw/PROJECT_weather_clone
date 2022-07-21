@@ -40,17 +40,24 @@ export default function App() {
 
   useEffect(() => {
     console.log('WEATHER PAGE USE EFFECT');
-    console.log('USER TOKEN', userToken);
+    console.log('UPDATING USER TOKEN', userToken);
     if (localStorage.getItem('token') !== null) {
       setUserToken(localStorage.getItem('token'));
+    }
+  }, [step]);
+
+  useEffect(() => {
+    console.log('SETTING CONFIG FROM USER TOKEN', userToken);
+    if (userToken !== null) {
       setUserId(jwt(userToken).id);
+      setUsername(jwt(userToken).username);
       setConfig({
         headers: {
           Authorization: `Bearer ${userToken}`,
         },
       });
     }
-  }, []);
+  }, [userToken]);
 
   return (
     <Container>

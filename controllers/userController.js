@@ -91,27 +91,25 @@ class UserController extends BaseController {
   }
 
   async newFavourite(request, response) {
+    const { id } = request.user;
     const {
-      star, userId, city, lat, long,
+      star, city, lat, long,
     } = request.body;
-
-    console.log('user:', request.user);
 
     try {
       if (star) {
-        console.log('THIS SHOULD DELETE ENTRY IN DB');
-        console.log(star, userId, city, lat, long);
         await this.UserLocation.destroy({
           where: {
-            userId,
+            userId: id,
             city,
           },
         });
       } else {
-        console.log('THIS SHOULD MAKE A NEW ENTRY IN DB');
-        console.log(star, userId, city, lat, long);
         await this.UserLocation.create({
-          userId, city, lat, long,
+          userId: id,
+          city,
+          lat,
+          long,
         });
       }
 

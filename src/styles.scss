@@ -5,19 +5,19 @@ body {
 
 //===========================LOGIN DESIGN============================//
 .main-container {
-    margin-top: 50px;
+  margin-top: 50px;
 }
 
 .steps-container {
-    margin-top: 50px;
+  margin-top: 50px;
 }
 
 .weather-logo {
-    width: 100%;
+  width: 100%;
 }
 
 .swal-button--confirm {
-    background: teal;
+  background: teal;
 }
 
 //===========================SIGN UP DESIGN============================//
@@ -38,7 +38,7 @@ body {
 }
 
 .search-bar-input {
-    padding-top: 50px;
+  padding-top: 50px;
 }
 .search-bar-container {
   display: flex;
@@ -70,6 +70,7 @@ body {
   height: calc((100vh - 10rem) / 2);
   width: 100vw;
 
+  padding: 0.5rem;
   margin-bottom: 1vh;
   margin-top: auto;
 }
@@ -90,13 +91,13 @@ body {
   box-shadow: 1px 1px 1px 1px #b3e0f3;
 
   padding: 0.5rem;
-  padding-left: 0.7rem;
+  padding-right: 1rem;
   margin-bottom: 0.2rem;
 }
 
 .message-bubble > .label {
   align-self: start;
-  margin-right: 0.5rem;
+  margin-right: 0.7rem;
 }
 
 .weather-app {
