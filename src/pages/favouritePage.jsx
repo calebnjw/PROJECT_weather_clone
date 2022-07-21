@@ -19,6 +19,9 @@ const FavouritePage = (props) => {
     setLat,
     setLong,
     updateFav,
+    userId,
+    config,
+
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -42,7 +45,6 @@ const FavouritePage = (props) => {
   const handleOnSearch = (event) => {
     setIsLoading(true);
     setQuery(event.target.value);
-    console.log('input:', query);
   };
   // sending values via states and redirect to setStep(4)
   const showLocation = (city, lat, long) => {
@@ -52,9 +54,7 @@ const FavouritePage = (props) => {
     setLong(long);
   };
   // rending template for dropdown list
-  const resultRenderer = ({ item }) => {
-    console.log(item);
-    return (
+  const resultRenderer = ({ item }) => (
       <p>
         {item.name}
         {'\t'}
@@ -66,8 +66,7 @@ const FavouritePage = (props) => {
           }
         />
       </p>
-    );
-  };
+  );
 
   const handleLogoutSubmit = () => {
     localStorage.removeItem('token');
@@ -79,33 +78,28 @@ const FavouritePage = (props) => {
     setStep(3);
   };
 
-  useEffect(() => {
-    let temp;
-    if (citiesList.length > 0) {
-      console.log('full list', citiesList);
-      console.log(Object.keys(citiesList[0]));
-      console.log(citiesList[0].item);
-      temp = citiesList.map((city) => {
-        console.log('city:', city.item.name);
-        const {
-          country, name, lat, lng,
-        } = city.item;
-        return (
-          <li key={name} className="location-list">
-            <h2>Name: {name}</h2>
-            <br></br>
-            Country: {country}
-            <br></br>
-            Latitude: {lat}
-            <br></br>
-            Langitude: {lng}
-          </li>
-        );
-      });
-    }
-    setSearchResult(temp);
-    console.log('SEARCH RESULTS', temp);
-  }, [citiesList]);
+  // useEffect(() => {
+  //   let temp;
+  //   if (citiesList.length > 0) {
+  //     temp = citiesList.map((city) => {
+  //       const {
+  //         country, name, lat, lng,
+  //       } = city.item;
+  //       return (
+  //         <li key={name} className="location-list">
+  //           <h2>Name: {name}</h2>
+  //           <br></br>
+  //           Country: {country}
+  //           <br></br>
+  //           Latitude: {lat}
+  //           <br></br>
+  //           Langitude: {lng}
+  //         </li>
+  //       );
+  //     });
+  //   }
+  //   setSearchResult(temp);
+  // }, [citiesList]);
 
   return (
     <>
@@ -126,7 +120,7 @@ const FavouritePage = (props) => {
       </div>
 
       {/* Search bar */}
-      <Grid.Row>
+      <Grid.Column width={16}>
         <div className="search-bar-input">
           <Search
             type="text"
@@ -143,11 +137,16 @@ const FavouritePage = (props) => {
             results={citiesList}
           />
         </div>
-      </Grid.Row>
-      <Grid.Column>
         <h4>Favourites</h4>
         <br/>
-        <FavouritedDisplay updateFav={updateFav}/>
+        <FavouritedDisplay
+          setStep={setStep}
+          updateFav={updateFav}
+          setCity={setCity}
+          setLat={setLat}
+          setLong={setLong}
+          userId={userId}
+          config={config}/>
       </Grid.Column>
     </>
   );

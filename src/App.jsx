@@ -43,14 +43,21 @@ export default function App() {
     console.log('USER TOKEN', userToken);
     if (localStorage.getItem('token') !== null) {
       setUserToken(localStorage.getItem('token'));
+    }
+  }, [step]);
+
+  useEffect(() => {
+    if (userToken !== null) {
+      console.log('JWT USERID:', jwt(userToken).id);
       setUserId(jwt(userToken).id);
+      setUsername(jwt(userToken).username);
       setConfig({
         headers: {
           Authorization: `Bearer ${userToken}`,
         },
       });
     }
-  }, []);
+  }, [userToken]);
 
   return (
     <Container>

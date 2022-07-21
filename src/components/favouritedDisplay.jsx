@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { Card } from 'semantic-ui-react';
 import axios from 'axios';
+
+import FavouriteCity from './favouriteCity.jsx';
 
 // component for displaying favourited cities
 const DisplayFavourites = (props) => {
@@ -8,36 +11,43 @@ const DisplayFavourites = (props) => {
     citiesList,
     setCitiesList,
     setCity,
+    setLat,
+    setLong,
     updateFav,
     config,
-    userToken,
     userId,
+
   } = props;
   const [showFavourites, setShowFavourites] = useState([]);
 
-  useEffect(
-    async () => {
-      const getData = await axios.get('/user/favourites');
-      console.log('get data:', getData);
-      // { WEATHER_CODES[data.weathercode] }
-      const mapTest = getData.map((item) => (
-          <div key={item.city}>
-            {item.city}
-            <br/>
-            {item.lat}
-            <br/>
-            {item.long}
-            </div>));
-      setShowFavourites(mapTest);
-    },
-    [updateFav],
-  );
+  const getData = async () => {
+    const result = await axios.post(
+      '/user/get-favourites',
+      { userId },
+      config,
+    );
+    return result.data.locations;
+  };
+
+  useEffect(async () => {
+    if (userId > 0) {
+      const locations = await getData();
+      setShowFavourites(locations.map((item) => (
+        <FavouriteCity
+          setStep={setStep}
+          setCity={setCity}
+          setLat={setLat}
+          setLong={setLong}
+          data={item}
+          key={item.city} />
+      )));
+    }
+  }, [updateFav]);
 
   return (
-      <div className='favourite-item'>
-        {showFavourites}
-
-    </div>
+    <Card.Group>
+      {showFavourites}
+    </Card.Group>
   );
 };
 
