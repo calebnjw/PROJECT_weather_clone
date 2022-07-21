@@ -7,10 +7,7 @@ import LoginForm from './pages/login.jsx';
 import SignUpForm from './pages/signup.jsx';
 import FavouritePage from './pages/favouritePage.jsx';
 import WeatherPage from './pages/weatherPage.jsx';
-// import weather from './SnowFlake.gif';
 
-// import components
-// import component from './components/component.jsx';
 
 export default function App() {
   // controlling page that app is on

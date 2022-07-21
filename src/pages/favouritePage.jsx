@@ -74,6 +74,7 @@ const FavouritePage = (props) => {
     setStep(1);
   };
 
+<<<<<<< HEAD
   const handleHomePage = () => {
     setStep(3);
   };
@@ -100,6 +101,33 @@ const FavouritePage = (props) => {
   //   }
   //   setSearchResult(temp);
   // }, [citiesList]);
+=======
+  useEffect(() => {
+    let temp;
+    if (citiesList.length > 0) {
+      console.log("full list", citiesList);
+      console.log(Object.keys(citiesList[0]));
+      console.log(citiesList[0].item);
+      temp = citiesList.map((city) => {
+        console.log("city:", city.item.name);
+        const { country, name, lat, lng } = city.item;
+        return (
+          <li key={name} className="location-list">
+            <h2>Name: {name}</h2>
+            <br></br>
+            Country: {country}
+            <br></br>
+            Latitude: {lat}
+            <br></br>
+            Langitude: {lng}
+          </li>
+        );
+      });
+    }
+    setSearchResult(temp);
+    console.log("SEARCH RESULTS", temp);
+  }, [citiesList]);
+>>>>>>> 98a3ea59ae68a6c2d3e8b2aaad7bc2c9aec2c678
 
   return (
     <>
@@ -108,7 +136,6 @@ const FavouritePage = (props) => {
         <div className="item">
           <img src={Cloud} alt="cloud-logo" />
         </div>
-        <a className="item" onClick={handleHomePage}>Home</a>
         <div className="right menu">
           <div className="item">
             <div className="ui teal button" onClick={handleLogoutSubmit}>
@@ -138,6 +165,7 @@ const FavouritePage = (props) => {
           />
         </div>
         <h4>Favourites</h4>
+<<<<<<< HEAD
         <br/>
         <FavouritedDisplay
           setStep={setStep}
@@ -148,6 +176,9 @@ const FavouritePage = (props) => {
           userId={userId}
           config={config}/>
       </Grid.Column>
+=======
+      </Grid.Row>
+>>>>>>> 98a3ea59ae68a6c2d3e8b2aaad7bc2c9aec2c678
     </>
   );
 };

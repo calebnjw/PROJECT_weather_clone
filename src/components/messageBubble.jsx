@@ -8,7 +8,9 @@ function MessageBubble(props) {
   return (
     <div className={'message-bubble'} >
       <Label content={username} />
-      <div>{message}</div>
+      <div className="ui small teal message">
+        {message}
+      </div>
     </div>
   );
 }
