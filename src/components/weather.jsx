@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Button, Checkbox, Form, Step,
+  Button, Checkbox, Form, Step, setStep,
 } from 'semantic-ui-react';
 import axios from 'axios';
 
