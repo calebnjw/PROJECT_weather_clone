@@ -7,60 +7,73 @@ const BaseController = require('./baseController.js');
 class UserController extends BaseController {
   constructor(model, db) {
     super(model);
-    this.Location = db.Location;
+    this.UserLocation = db.UserLocation;
   }
 
   async userSignup(req, res) {
     const {
       firstName, lastName, username, email, password,
     } = req.body;
-    try {
-      const checkEmail = await this.model.findOne({ where: { email } });
-      console.log('Email:', checkEmail);
 
+    try {
+      // search for user on db using email address
+      const checkEmail = await this.model.findOne({ where: { email } });
+
+      // if there is an existing user, checkEmail will be truthy
       if (checkEmail) {
-        return res.json({ message: 'Email in use, try another email or login!' });
+        return res.status(401).json({ message: 'Email in use, try another email or login!' });
       }
 
+      // there is no user with same email, continue below
+      // hash password
       const hashedPassword = await bcrypt.hash(password, Number(process.env.SALT_ROUND));
+      // create new user on db
       const newUser = await this.model.create({
-        firstName, lastName, username, email, password: hashedPassword
+        firstName, lastName, username, email, password: hashedPassword,
       });
 
+      // not sure if this is necessary, because we never use this to login automatically
       const payload = { id: newUser.id, username: newUser.username };
-      console.log('This is my payload', payload);
       const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXP });
-      console.log('This is backend token', token);
-
-      return res.json({ newUser, token });
+      // pass token to front end
+      // (I removed user, because we don't need to pass
+      // sensitive data that we are not using to front end)
+      return res.status(200).json({ token });
     } catch (err) {
-      res.json({ err: err.message });
+      res.status(401).json({ err: err.message });
     }
   }
 
   async userLogin(req, res) {
-    console.log('I am userLogin route');
     const { username, password } = req.body;
+
     try {
+      // search for user on db
       const user = await this.model.findOne({ where: { username } });
-      console.log('This is the user', user);
 
+      // if there is no user user will be falsy (NULL)
       if (!user) {
-        return res.json({ message: 'User does not exist' });
+        return res.status(401).json({ message: 'User does not exist' });
       }
 
-      console.log('This is the password', password);
+      // there's a user, so continue below
+      // compare passwords
       const compare = await bcrypt.compare(password, user.password);
+      // if passwords do not match (compare = false):
       if (!compare) {
-        return res.json({ message: 'Wrong password, try again!' });
+        return res.status(401).json({ message: 'Wrong password, try again!' });
       }
 
+      // passwords match, continue below
+      // create jwt payload with user id and username
       const payload = { id: user.id, username: user.username };
+      // create token
       const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXP });
-
-      return res.json({ user, token });
+      // pass token to front end
+      // (Same as above, removed user data)
+      return res.status(200).json({ token });
     } catch (err) {
-      res.send({ message: 'No user found. Sign up!' });
+      res.status(401).json({ message: 'No user found. Sign up!' });
     }
   }
 
@@ -68,26 +81,44 @@ class UserController extends BaseController {
     const { userId } = request.body;
 
     try {
-      const locations = await this.Location.findAll({ where: { userId } });
+      const locations = await this.UserLocation.findAll({ where: { userId } });
 
-      response.status(200).send(locations);
+      response.status(200).json({ success: true, locations });
     } catch (error) {
       console.log(error);
-      response.status(400).send({ error });
+      response.status(400).json({ success: false, message: error.message });
     }
   }
 
   async newFavourite(request, response) {
-    const { userId, locationId } = request.body;
+    const {
+      star, userId, city, lat, long,
+    } = request.body;
+
+    console.log('user:', request.user);
 
     try {
-      await this.Location.create({ userId, locationId });
-      const locations = await this.Location.findAll({ where: { userId } });
+      if (star) {
+        console.log('THIS SHOULD DELETE ENTRY IN DB');
+        console.log(star, userId, city, lat, long);
+        await this.UserLocation.destroy({
+          where: {
+            userId,
+            city,
+          },
+        });
+      } else {
+        console.log('THIS SHOULD MAKE A NEW ENTRY IN DB');
+        console.log(star, userId, city, lat, long);
+        await this.UserLocation.create({
+          userId, city, lat, long,
+        });
+      }
 
-      response.status(200).send(locations);
+      response.status(200).json({ success: true });
     } catch (error) {
       console.log(error);
-      response.status(400).send({ error });
+      response.status(400).json({ success: false, message: error.message });
     }
   }
 }

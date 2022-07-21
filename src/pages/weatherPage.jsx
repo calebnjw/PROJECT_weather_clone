@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, GridRow } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 
 import Chat from '../components/chat.jsx';
 import Navbar from '../components/navbar.jsx';
@@ -8,22 +8,36 @@ import Weather from '../components/weather.jsx';
 // sign up form component
 function WeatherPage(props) {
   const {
-    setStep, city, lat, long,
+    setStep, updateFav, setUpdateFav, city, lat, long,
   } = props;
 
-  const [userToken, setUserToken] = useState({});
+  const [userToken, setUserToken] = useState(localStorage.getItem('token'));
 
   useEffect(() => {
-    setUserToken(localStorage.getItem('token'));
-    console.log('userToken', userToken);
-  }, [userToken]);
+    console.log('WEATHER PAGE USE EFFECT');
+    console.log('USER TOKEN', userToken);
+    if (localStorage.getItem('token') !== null) {
+      setUserToken(localStorage.getItem('token'));
+    }
+  }, []);
 
   return (
-    <div className='ui padded grid'>
-      <Navbar setStep={setStep} city={city} userId={1}/>
-      <Weather lat={lat} long={long} />
-      <Chat city={city} />
-    </div>
+    <Grid padded={true} >
+      <Navbar
+        setStep={setStep}
+        userToken={userToken}
+        updateFav={updateFav}
+        setUpdateFav={setUpdateFav}
+        city={city}
+        lat={lat}
+        long={long} />
+      <Weather
+        lat={lat}
+        long={long} />
+      <Chat
+        city={city}
+        userToken={userToken} />
+    </Grid>
   );
 }
 
