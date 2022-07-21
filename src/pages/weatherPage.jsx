@@ -8,24 +8,15 @@ import Weather from '../components/weather.jsx';
 // sign up form component
 function WeatherPage(props) {
   const {
-    setStep, updateFav, setUpdateFav, city, lat, long,
+    setStep, config, userId, username, updateFav, setUpdateFav, city, lat, long,
   } = props;
-
-  const [userToken, setUserToken] = useState(localStorage.getItem('token'));
-
-  useEffect(() => {
-    console.log('WEATHER PAGE USE EFFECT');
-    console.log('USER TOKEN', userToken);
-    if (localStorage.getItem('token') !== null) {
-      setUserToken(localStorage.getItem('token'));
-    }
-  }, []);
 
   return (
     <Grid padded={true} >
       <Navbar
         setStep={setStep}
-        userToken={userToken}
+        config={config}
+        userId={userId}
         updateFav={updateFav}
         setUpdateFav={setUpdateFav}
         city={city}
@@ -35,8 +26,10 @@ function WeatherPage(props) {
         lat={lat}
         long={long} />
       <Chat
-        city={city}
-        userToken={userToken} />
+        config={config}
+        userId={userId}
+        username={username}
+        city={city} />
     </Grid>
   );
 }
