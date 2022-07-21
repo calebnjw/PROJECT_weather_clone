@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { Search, Grid, Step, Label } from "semantic-ui-react";
-import Fuse from "fuse.js";
-import cities from "../cities.json";
-import swal from "sweetalert";
-import Cloud from "../sun_cloud_icon.png";
+import React, { useState, useEffect } from 'react';
+import {
+  Search, Grid, Step, Label,
+} from 'semantic-ui-react';
+import Fuse from 'fuse.js';
+import swal from 'sweetalert';
+import FavouritedDisplay from '../components/favouritedDisplay.jsx';
+import cities from '../cities.json';
+import Cloud from '../sun_cloud_icon.png';
 
 const FavouritePage = (props) => {
   const {
@@ -15,19 +18,23 @@ const FavouritePage = (props) => {
     setCity,
     setLat,
     setLong,
+    updateFav,
+    userId,
+    config,
+
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
   const [searchResults, setSearchResult] = useState([]);
 
+  // fuse search
   const citiesAPI = cities;
   const options = {
     minMatchCharLength: 3,
     threshold: 0.1,
     distance: 3,
-    keys: ["name"],
+    keys: ['name'],
   };
-
   const fuse = new Fuse(citiesAPI, options);
 
   useEffect(() => {
@@ -38,23 +45,19 @@ const FavouritePage = (props) => {
   const handleOnSearch = (event) => {
     setIsLoading(true);
     setQuery(event.target.value);
-    console.log("input:", query);
   };
-
+  // sending values via states and redirect to setStep(4)
   const showLocation = (city, lat, long) => {
     setStep(4);
     setCity(city);
     setLat(lat);
     setLong(long);
   };
-
-  const resultRenderer = ({ item }) => {
-    console.log(item);
-
-    return (
+  // rending template for dropdown list
+  const resultRenderer = ({ item }) => (
       <p>
         {item.name}
-        {"\t"}
+        {'\t'}
         <Label
           content={
             <small>
@@ -63,43 +66,42 @@ const FavouritePage = (props) => {
           }
         />
       </p>
-    );
-  };
+  );
 
   const handleLogoutSubmit = () => {
-    localStorage.removeItem("token");
-    swal("You are logged out!");
+    localStorage.removeItem('token');
+    swal('You are logged out!');
     setStep(1);
   };
 
-  useEffect(() => {
-    let temp;
-    if (citiesList.length > 0) {
-      console.log("full list", citiesList);
-      console.log(Object.keys(citiesList[0]));
-      console.log(citiesList[0].item);
-      temp = citiesList.map((city) => {
-        console.log("city:", city.item.name);
-        const { country, name, lat, lng } = city.item;
-        return (
-          <li key={name} className="location-list">
-            <h2>Name: {name}</h2>
-            <br></br>
-            Country: {country}
-            <br></br>
-            Latitude: {lat}
-            <br></br>
-            Langitude: {lng}
-          </li>
-        );
-      });
-    }
-    setSearchResult(temp);
-    console.log("SEARCH RESULTS", temp);
-  }, [citiesList]);
+  const handleHomePage = () => {
+    setStep(3);
+  };
+
+  // useEffect(() => {
+  //   let temp;
+  //   if (citiesList.length > 0) {
+  //     temp = citiesList.map((city) => {
+  //       const {
+  //         country, name, lat, lng,
+  //       } = city.item;
+  //       return (
+  //         <li key={name} className="location-list">
+  //           <h2>Name: {name}</h2>
+  //           <br></br>
+  //           Country: {country}
+  //           <br></br>
+  //           Latitude: {lat}
+  //           <br></br>
+  //           Langitude: {lng}
+  //         </li>
+  //       );
+  //     });
+  //   }
+  //   setSearchResult(temp);
+  // }, [citiesList]);
 
   return (
-    // <div className='search-bar-container'>
     <>
       {/* Menu bar */}
       <div className="ui huge top fixed text menu">
@@ -117,7 +119,7 @@ const FavouritePage = (props) => {
       </div>
 
       {/* Search bar */}
-      <Grid.Row>
+      <Grid.Column width={16}>
         <div className="search-bar-input">
           <Search
             type="text"
@@ -134,10 +136,17 @@ const FavouritePage = (props) => {
             results={citiesList}
           />
         </div>
-      </Grid.Row>
-      <Grid.Row className="location-list">
         <h4>Favourites</h4>
-      </Grid.Row>
+        <br/>
+        <FavouritedDisplay
+          setStep={setStep}
+          updateFav={updateFav}
+          setCity={setCity}
+          setLat={setLat}
+          setLong={setLong}
+          userId={userId}
+          config={config}/>
+      </Grid.Column>
     </>
   );
 };

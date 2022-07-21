@@ -25,7 +25,6 @@ function Navbar(props) {
 
   const favourite = async () => {
     let success;
-    console.log('posting to backend!');
     if (star) {
       success = await axios.post(
         '/user/new-favourite',

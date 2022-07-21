@@ -1,7 +1,6 @@
 const { default: axios } = require('axios');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
 const BaseController = require('./baseController.js');
 
 class UserController extends BaseController {
@@ -78,7 +77,9 @@ class UserController extends BaseController {
   }
 
   async getFavourites(request, response) {
+    console.log('req.body', request.body);
     const { userId } = request.body;
+    console.log('user id:', userId);
 
     try {
       const locations = await this.UserLocation.findAll({ where: { userId } });
