@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import {
-  Button, Form, Segment, Grid, GridColumn,
-} from 'semantic-ui-react';
 import swal from 'sweetalert';
+import axios from 'axios';
 import Transparent from '../transparentBackground.gif';
 
 // if (!email || !password) {
@@ -20,6 +17,20 @@ const LoginForm = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  // get login input values
+  const usernameInput = (event) => {
+    setUsername(event.target.value);
+  };
+
+  const passwordInput = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const clearInputs = () => {
+    setUsername('');
+    setPassword('');
+  };
+
   const handleLoginSubmit = async (event) => {
     if ((username, password)) {
       const loginObj = {
@@ -27,10 +38,6 @@ const LoginForm = (props) => {
         password,
       };
 
-      if (username === '' || password === '') {
-        swal('Inputs not filled');
-        setStep(1);
-      }
       // check with backend
       const verifyLogin = await axios.post('/user/login', loginObj);
 
@@ -49,23 +56,18 @@ const LoginForm = (props) => {
       }
 
       // input fields are reset
-      setUsername('');
-      setPassword('');
+      clearInputs();
+
       event.preventDefault();
+    } else {
+      console.log('Not filled');
+      swal('Inputs not filled');
     }
-  };
-
-  // get login input values
-  const usernameInput = (event) => {
-    setUsername(event.target.value);
-  };
-
-  const passwordInput = (event) => {
-    setPassword(event.target.value);
   };
 
   const handleSignUpSubmit = () => {
     setStep(2);
+    clearInputs();
   };
 
   return (
