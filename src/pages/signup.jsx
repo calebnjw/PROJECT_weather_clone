@@ -36,11 +36,6 @@ const SignUpForm = (props) => {
         email,
         password,
       };
-<<<<<<< HEAD
-      console.log('This is signUpObj: ', signUpObj);
-=======
-
->>>>>>> 30a3f26342e9f57a038fd3d3ffe275659b133093
       // post user data to backend
       const userToken = await axios.post('/user/signup', signUpObj);
       console.log('userToken', userToken);
