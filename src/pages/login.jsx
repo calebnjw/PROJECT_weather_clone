@@ -13,7 +13,7 @@ import Transparent from '../transparentBackground.gif';
 
 const LoginForm = (props) => {
   const {
-    step, setStep, login, setLogin,
+    setStep, setLogin,
   } = props;
 
   // initialize useState for login input
@@ -22,35 +22,36 @@ const LoginForm = (props) => {
 
   const handleLoginSubmit = async (event) => {
     if ((username, password)) {
-      console.log('username: ', username, 'password: ', [password]);
-
       const loginObj = {
         username,
         password,
       };
 
-      console.log('This is login object: ', loginObj);
+      if (username === '' || password === '') {
+        swal('Inputs not filled');
+        setStep(1);
+      }
       // check with backend
-      const verifyLogin = await axios.post('user/login', loginObj);
-      console.log('Verify token:', verifyLogin);
-      localStorage.setItem('token', verifyLogin.data.token);
-      // change this to 3 later on for favourite page
-      setStep(3);
-      setLogin(loginObj);
+      const verifyLogin = await axios.post('/user/login', loginObj);
+
+      if (!verifyLogin.data.token) {
+        localStorage.setItem('token', 'NOT SET');
+        swal('Wrong username/password, try again!');
+        setStep(1);
+      } else {
+        localStorage.setItem('token', verifyLogin.data.token);
+
+        // change this to 3 later on for favourite page
+        setStep(3);
+        setLogin(loginObj);
+
+        swal('Welcome!', 'Login successful');
+      }
 
       // input fields are reset
       setUsername('');
       setPassword('');
       event.preventDefault();
-
-      swal('Welcome!', 'Login successful');
-
-      if (!verifyLogin.data.token) {
-        swal('Wrong username/password, try again!');
-        setStep(1);
-      }
-    } else {
-      swal('Inputs not filled');
     }
   };
 

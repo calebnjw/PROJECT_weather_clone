@@ -15,9 +15,9 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackConfig = require('./webpack_conf/webpack.dev.js');
 
 // import custom middleware
-const authMiddleware = require('./middleware/checkUserLogin.js');
+const authMiddleware = require('./middleware/checkUserLogin.js')();
 
-console.log(authMiddleware);
+console.log('TESTTESTTESTTESTTESTTESTTESTTESTTEST', authMiddleware);
 
 // import models
 const db = require('./models/index.js');
@@ -25,22 +25,22 @@ const db = require('./models/index.js');
 // import controllers
 // const ModelController = require('./controllers/modelController.js');
 const UserController = require('./controllers/userController.js');
-const MessageController = require('./controllers/messageController.js');
+// const MessageController = require('./controllers/messageController.js');
 
 // initialise controllers
 // const modelController = new ModelController(db.Model, db);
 const userController = new UserController(db.User, db);
-const messageController = new MessageController(db.Message, db);
+// const messageController = new MessageController(db.Message, db);
 
 // import routers
 // const ModelRouter = require('./routers/modelRouter.js');
 const UserRouter = require('./routers/userRouter.js');
-const MessageRouter = require('./routers/messageRouter.js');
+// const MessageRouter = require('./routers/messageRouter.js');
 
 // initialise routers & middleware
 // const modelRouter = new ModelRouter(modelController).router();
 const userRouter = new UserRouter(userController, authMiddleware).router();
-const messageRouter = new MessageRouter(messageController).router();
+// const messageRouter = new MessageRouter(messageController).router();
 
 // express app with socket
 const app = express();
@@ -86,8 +86,12 @@ app.get('/', (request, response) => {
 // express routing through routers
 // app.use('/model', modelRouter);
 app.use('/user', userRouter);
-app.use('/message', messageRouter);
+// app.use('/message', messageRouter);
 
+/// ////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
+// how to get username from jwt here?
 const username = 'calebnjw';
 
 io.on('connection', (socket) => {

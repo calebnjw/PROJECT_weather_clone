@@ -14,10 +14,11 @@ class UserRouter {
     router.post('/login', this.controller.userLogin.bind(this.controller));
     router.post('/signup', this.controller.userSignup.bind(this.controller));
     // middleware
+    // somehow the routes don't work if there's this middleware there...
     router.use(this.authMiddleware);
     // rest of routes after middleware
-    router.get('/favourites', this.controller.getFavourites.bind(this.controller));
-    router.post('/favourites', this.controller.newFavourite.bind(this.controller));
+    router.post('/get-favourites', this.controller.getFavourites.bind(this.controller));
+    router.post('/new-favourite', this.controller.newFavourite.bind(this.controller));
     return router;
   }
 }

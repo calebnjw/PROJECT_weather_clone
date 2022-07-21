@@ -5,6 +5,8 @@ import {
 
 // input + send component
 function MessageInput(props) {
+  const { username } = props;
+
   const [messageContent, setMessageContent] = useState('');
 
   const handleInput = (event) => {
@@ -14,7 +16,7 @@ function MessageInput(props) {
   const sendMessage = () => {
     // ! username to be replaced with username from JWT
     // to send out chat message from input box
-    socket.emit('chat message', { username: 'calebnjw', content: messageContent });
+    socket.emit('chat message', { username, content: messageContent });
     setMessageContent('');
   };
 

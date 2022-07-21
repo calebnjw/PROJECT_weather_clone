@@ -44,6 +44,8 @@ export default function App() {
           />}
         {step === 4 && <WeatherPage
           setStep={setStep}
+          updateFav={updateFav}
+          setUpdateFav={setUpdateFav}
           city={city}
           lat={lat}
           long={long}
