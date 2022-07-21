@@ -9,45 +9,17 @@ const DisplayFavourites = (props) => {
     setCitiesList,
     setCity,
     updateFav,
-    // WEATHER_CODES,
-    // data,
-    // u,
-
+    config,
+    userToken,
+    userId,
   } = props;
   const [showFavourites, setShowFavourites] = useState([]);
-  const [userId, setUserId] = useState(localStorage.getItem('token').userId);
 
   useEffect(
     async () => {
       const getData = await axios.get('/user/favourites');
       console.log('get data:', getData);
-      //       // const test = [
-      //       //   {
-      //       //     user_id: 1,
-      //       //     city: 'Singapore',
-      //       //     lat: '1.28967',
-      //       //     long: '103.85007',
-      //       //   },
-      //       //   {
-      //       //     user_id: 1,
-      //       //     city: 'Singapore',
-      //       //     lat: '1.28967',
-      //       //     long: '103.85007',
-      //       //   },
-      //       //   {
-      //       //     user_id: 1,
-      //       //     city: 'Singapore',
-      //       //     lat: '1.28967',
-      //       //     long: '103.85007',
-      //       //   },
-      //       //   {
-      //       //     user_id: 1,
-      //       //     city: 'Singapore',
-      //       //     lat: '1.28967',
-      //       //     long: '103.85007',
-      //       //   },
-      //       // ];
-      //       // { WEATHER_CODES[data.weathercode] }
+      // { WEATHER_CODES[data.weathercode] }
       const mapTest = getData.map((item) => (
           <div key={item.city}>
             {item.city}

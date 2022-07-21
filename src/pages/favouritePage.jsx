@@ -139,9 +139,6 @@ const FavouritePage = (props) => {
               const { name, lat, lng } = data.result.item;
               showLocation(name, lat, lng);
             }}
-            // onSearchChange={_.debounce(this.handleSearchChange, 500, {
-            //   leading: true,
-            // })}
             resultRenderer={resultRenderer}
             results={citiesList}
           />

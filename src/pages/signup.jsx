@@ -5,12 +5,6 @@ import swal from 'sweetalert';
 
 // import authenticateJWT from '../../middleware/checkUserLogin';
 
-// initialise regex
-// const FIRSTNAME_REGEX = "/^[a-zA-Z-]+$/";
-// const LASTNAME_REGEX = "/^[a-zA-Z-]+$/";
-// const PASSWORD_REGEX =
-//   "/^(?=.*[A-Za-z])(?=.*d)(?=.*[@$!%*#?&])[A-Za-zd@$!%*#?&]{8,}$/gm";
-
 // sign up form component
 const SignUpForm = (props) => {
   // import props from App component
