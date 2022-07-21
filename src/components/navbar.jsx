@@ -1,45 +1,48 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'semantic-ui-react';
-import jwt from 'jwt-decode';
 import axios from 'axios';
 
 // sign up form component
 function Navbar(props) {
   const {
-    setStep, userToken, updateFav, setUpdateFav, city, lat, long,
+    setStep, config, userId, updateFav, setUpdateFav, city, lat, long,
   } = props;
 
   const [star, setStar] = useState(false);
-  const [userId, setUserId] = useState('');
-  const [config, setConfig] = useState({});
+  // const [userId, setUserId] = useState(0);
+  // const [config, setConfig] = useState('');
 
   const previousPage = () => setStep(3);
 
-  useEffect(() => {
-    if (userToken === null) {
-      setUserId(0);
-    } else {
-      setUserId(jwt(userToken).id);
-      setConfig({
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-        },
-      });
-    }
-  }, [userToken]);
+  // useEffect(() => {
+  //   if (userToken === null) {
+  //     setUserId(0);
+  //   } else {
+  //     // jwt is from jwt-decode
+
+  //   }
+  // }, [userToken]);
 
   const favourite = async () => {
     let success;
     console.log('posting to backend!');
     if (star) {
-      success = await axios.post('/user/new-favourite', {
-        star, userId, city, lat, long,
-      }, config);
+      success = await axios.post(
+        '/user/new-favourite',
+        {
+          star, userId, city, lat, long,
+        },
+        config,
+      );
       setStar(false);
     } else {
-      success = await axios.post('/user/new-favourite', {
-        star, userId, city, lat, long,
-      }, config);
+      success = await axios.post(
+        '/user/new-favourite',
+        {
+          star, userId, city, lat, long,
+        },
+        config,
+      );
       setStar(true);
     }
     if (success.data.success) {

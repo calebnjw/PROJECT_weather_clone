@@ -6,29 +6,35 @@ import MessageInput from './messageInput.jsx';
 
 // chat component
 function Chat(props) {
-  const { city, userToken } = props;
+  const { city, username } = props;
 
   const [chatMessages, setChatMessages] = useState([]);
-  const [username, setUsername] = useState('');
-  const [output, setOutput] = useState([]);
+  // const [username, setUsername] = useState('');
+  // const [output, setOutput] = useState([]);
 
+  // // to set user token and username
+  // useEffect(() => {
+  //   if (userToken === null) {
+  //     setUsername('');
+  //   } else {
+  //     setUsername(jwt(userToken).username);
+  //   }
+  // }, [userToken]);
+
+  // to join the socket room
   useEffect(() => {
-    if (userToken === null) {
-      setUsername('');
-    } else {
-      setUsername(jwt(userToken).username);
-    }
-  }, [userToken]);
+    socket.emit('join', city);
+  }, []);
 
   // to receive connection message
   // when someone joins or leaves
   socket.on('connection message', (message) => {
-    const connectionMessage = <div>— {message.message} —</div>;
-    setChatMessages([...chatMessages, connectionMessage]);
+    const newMessage = <div>— {message.content} —</div>;
+    setChatMessages([...chatMessages, newMessage]);
   });
 
-  // to receive message from input box
-  socket.on('chat message', (message) => {
+  // to receive messages
+  socket.on('from backend message', (message) => {
     const newMessage = <MessageBubble username={message.username} message={message.content} />;
     setChatMessages([...chatMessages, newMessage]);
   });
@@ -38,7 +44,9 @@ function Chat(props) {
       <div className='chat-box'>
         { chatMessages }
       </div>
-      <MessageInput username={username} />
+      <MessageInput
+        username={username}
+        city={city} />
     </div>
   );
 }
