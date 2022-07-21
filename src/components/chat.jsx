@@ -9,21 +9,10 @@ function Chat(props) {
   const { city, username } = props;
 
   const [chatMessages, setChatMessages] = useState([]);
-  // const [username, setUsername] = useState('');
-  // const [output, setOutput] = useState([]);
-
-  // // to set user token and username
-  // useEffect(() => {
-  //   if (userToken === null) {
-  //     setUsername('');
-  //   } else {
-  //     setUsername(jwt(userToken).username);
-  //   }
-  // }, [userToken]);
 
   // to join the socket room
   useEffect(() => {
-    socket.emit('join', city);
+    socket.emit('join', { city, username });
   }, []);
 
   // to receive connection message

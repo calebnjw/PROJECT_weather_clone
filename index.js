@@ -6,7 +6,7 @@ const socketio = require('socket.io');
 const cookieParser = require('cookie-parser');
 const methodOverride = require('method-override');
 
-const { resolve } = require('path');
+const { resolve, join } = require('path');
 
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
@@ -106,16 +106,18 @@ io.on('connect', (socket) => {
   //   // socket.emit('connection message', { message: 'someone has disconnected' });
   // });
 
-  socket.on('join', (room) => {
+  socket.on('join', (joinData) => {
     // sends out a connect message
+    const { city: room, username: name } = joinData;
+    console.log(room, name);
     socket.join(room);
-    socket.to(room).emit('connection message', { content: 'someone has joined' });
+    socket.to(room).emit('connection message', { content: `${name} has joined the room` });
   });
 
   // this is to receive chat message from emitter
   socket.on('from frontend message', (message) => {
     console.log('message:', message);
     // distributes chat messages to all connected users
-    socket.in(message.city).emit('from backend message', message);
+    io.sockets.in(message.city).emit('from backend message', message);
   });
 });

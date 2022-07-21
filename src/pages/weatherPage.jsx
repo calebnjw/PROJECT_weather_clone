@@ -16,7 +16,6 @@ function WeatherPage(props) {
       <Navbar
         setStep={setStep}
         config={config}
-        userId={userId}
         updateFav={updateFav}
         setUpdateFav={setUpdateFav}
         city={city}
@@ -27,7 +26,6 @@ function WeatherPage(props) {
         long={long} />
       <Chat
         config={config}
-        userId={userId}
         username={username}
         city={city} />
     </Grid>

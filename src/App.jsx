@@ -8,7 +8,6 @@ import SignUpForm from './pages/signup.jsx';
 import FavouritePage from './pages/favouritePage.jsx';
 import WeatherPage from './pages/weatherPage.jsx';
 
-
 export default function App() {
   // controlling page that app is on
   const [step, setStep] = useState(1);
@@ -37,15 +36,15 @@ export default function App() {
 
   useEffect(() => {
     console.log('WEATHER PAGE USE EFFECT');
-    console.log('USER TOKEN', userToken);
+    console.log('UPDATING USER TOKEN', userToken);
     if (localStorage.getItem('token') !== null) {
       setUserToken(localStorage.getItem('token'));
     }
   }, [step]);
 
   useEffect(() => {
+    console.log('SETTING CONFIG FROM USER TOKEN', userToken);
     if (userToken !== null) {
-      console.log('JWT USERID:', jwt(userToken).id);
       setUserId(jwt(userToken).id);
       setUsername(jwt(userToken).username);
       setConfig({
