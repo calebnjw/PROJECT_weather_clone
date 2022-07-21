@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { Button, Form, Segment, Grid, GridColumn } from "semantic-ui-react";
-import Transparent from "../transparentBackground.gif"
-import swal from "sweetalert";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import {
+  Button, Form, Segment, Grid, GridColumn,
+} from 'semantic-ui-react';
+import swal from 'sweetalert';
+import Transparent from '../transparentBackground.gif';
 
 // if (!email || !password) {
 //   alert("Fill in the form!");
@@ -10,47 +12,50 @@ import swal from "sweetalert";
 // }
 
 const LoginForm = (props) => {
-  const { step, setStep, login, setLogin } = props;
+  const {
+    setStep, setLogin,
+  } = props;
 
-  //initialize useState for login input
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  // initialize useState for login input
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleLoginSubmit = async (event) => {
     if ((username, password)) {
-      console.log("username: ", username, "password: ", [password]);
-
       const loginObj = {
         username,
         password,
       };
 
-      console.log("This is login object: ", loginObj);
-      //check with backend
-      const verifyLogin = await axios.post("user/login", loginObj);
-      console.log('Verify token:', verifyLogin)
-      localStorage.setItem("token", verifyLogin.data.token);
-      //change this to 3 later on for favourite page
-      setStep(3);
-      setLogin(loginObj);
-
-      //input fields are reset
-      setUsername("");
-      setPassword("");
-      event.preventDefault();
-
-      swal("Welcome!", "Login successful");
-
-      if (!verifyLogin.data.token) {
-        swal("Wrong username/password, try again!");
+      if (username === '' || password === '') {
+        swal('Inputs not filled');
         setStep(1);
       }
-    } else {
-      swal("Inputs not filled");
+      // check with backend
+      const verifyLogin = await axios.post('/user/login', loginObj);
+
+      if (!verifyLogin.data.token) {
+        localStorage.setItem('token', 'NOT SET');
+        swal('Wrong username/password, try again!');
+        setStep(1);
+      } else {
+        localStorage.setItem('token', verifyLogin.data.token);
+
+        // change this to 3 later on for favourite page
+        setStep(3);
+        setLogin(loginObj);
+
+        swal('Welcome!', 'Login successful');
+      }
+
+      // input fields are reset
+      setUsername('');
+      setPassword('');
+      event.preventDefault();
     }
   };
 
-  //get login input values
+  // get login input values
   const usernameInput = (event) => {
     setUsername(event.target.value);
   };
@@ -71,7 +76,7 @@ const LoginForm = (props) => {
             <div className="column">
               <div
                 className="ui form"
-                style={{ marginTop: "130px", width: "100%" }}
+                style={{ marginTop: '130px', width: '100%' }}
               >
                 <div className="field">
                   <label>Username</label>

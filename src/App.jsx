@@ -17,6 +17,7 @@ export default function App() {
   const [city, setCity] = useState('Singapore');
   const [lat, setLat] = useState('1.28967');
   const [long, setLong] = useState('103.85007');
+  const [updateFav, setUpdateFav] = useState(1);
 
   return (
     <Container>
@@ -38,6 +39,8 @@ export default function App() {
           setLong={setLong} />}
         {step === 4 && <WeatherPage
           setStep={setStep}
+          updateFav={updateFav}
+          setUpdateFav={setUpdateFav}
           city={city}
           lat={lat}
           long={long} />}
