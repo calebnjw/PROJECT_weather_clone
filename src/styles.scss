@@ -87,6 +87,7 @@ hr {
   height: calc((100vh - 10rem) / 2);
   width: 100vw;
 
+  padding: 0.5rem;
   margin-bottom: 1vh;
   margin-top: auto;
 }
@@ -101,7 +102,7 @@ hr {
   text-align: left;
 
   padding: 0.5rem;
-  padding-left: 0.7rem;
+  padding-right: 1rem;
   margin-bottom: 0.2rem;
 }
 
@@ -112,7 +113,7 @@ hr {
 
 .message-bubble > .label {
   align-self: start;
-  margin-right: 0.5rem;
+  margin-right: 0.7rem;
 }
 
 .weather-app {

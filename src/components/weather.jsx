@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Button, Checkbox, Form, Step,
-} from 'semantic-ui-react';
 import axios from 'axios';
 
 import CurrentWeather from './currentWeather.jsx';
