@@ -7,7 +7,7 @@ const BaseController = require('./baseController.js');
 class UserController extends BaseController {
   constructor(model, db) {
     super(model);
-    this.Location = db.Location;
+    this.UserLocation = db.UserLocation
   }
 
   async userSignup(req, res) {
