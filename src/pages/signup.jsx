@@ -3,13 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, Form } from 'semantic-ui-react';
 import swal from 'sweetalert';
 
-// import authenticateJWT from "../../middleware/checkUserLogin";
-
-// initialise regex
-// const FIRSTNAME_REGEX = "/^[a-zA-Z-]+$/";
-// const LASTNAME_REGEX = "/^[a-zA-Z-]+$/";
-// const PASSWORD_REGEX =
-//   "/^(?=.*[A-Za-z])(?=.*d)(?=.*[@$!%*#?&])[A-Za-zd@$!%*#?&]{8,}$/gm";
+// import authenticateJWT from '../../middleware/checkUserLogin';
 
 // sign up form component
 const SignUpForm = (props) => {
@@ -36,7 +30,6 @@ const SignUpForm = (props) => {
         email,
         password,
       };
-
       // post user data to backend
       const userToken = await axios.post('/user/signup', signUpObj);
       console.log('userToken', userToken);

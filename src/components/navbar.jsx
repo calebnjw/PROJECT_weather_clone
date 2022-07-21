@@ -36,11 +36,11 @@ function Navbar(props) {
 
   return (
     <div className='navbar'>
-      <Button type='button' icon onClick={previousPage}>
+      <Button className="ui grey button" type='button' icon onClick={previousPage}>
         <i className="fa-solid fa-arrow-left"></i>
       </Button>
-      <h1>{city}</h1>
-      <Button type='button' icon onClick={favourite}>
+      <h1 style={{ fontSize: '3rem' }}>{city}</h1>
+      <Button className="ui grey button" type='button' icon onClick={favourite}>
         {!star
           ? <i className="fa-regular fa-star"></i>
           : <i className="fa-solid fa-star"></i>}
