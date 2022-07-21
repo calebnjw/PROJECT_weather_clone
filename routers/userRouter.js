@@ -17,6 +17,7 @@ class UserRouter {
     router.use(this.authMiddleware);
     // rest of routes after middleware
     router.get('/favourites', this.controller.getFavourites.bind(this.controller));
+    router.post('/favourites', this.controller.newFavourite.bind(this.controller));
     return router;
   }
 }

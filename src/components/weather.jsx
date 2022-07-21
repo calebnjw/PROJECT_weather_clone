@@ -10,7 +10,7 @@ import WeeklyWeather from './weeklyWeather.jsx';
 // sign up form component
 function Weather(props) {
   const {
-    setStep, city, lat, long,
+    lat, long,
   } = props;
 
   const [weatherData, setWeatherData] = useState();
@@ -44,8 +44,8 @@ function Weather(props) {
 
   return (
     <div className='weather-app'>
-      { weatherData && <CurrentWeather data={weatherData.current_weather} /> }
-      { weatherData && <WeeklyWeather data={weatherData.daily} /> }
+      { weatherData && <CurrentWeather data={weatherData.current_weather} u={u} /> }
+      { weatherData && <WeeklyWeather data={weatherData.daily} u={u} /> }
     </div>
   );
 }

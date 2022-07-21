@@ -1,9 +1,9 @@
-import axios from "axios";
-import React, { useState, useEffect } from "react";
-import { Button, Form } from "semantic-ui-react";
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { Button, Form } from 'semantic-ui-react';
 import swal from 'sweetalert';
 
-// import authenticateJWT from "../../middleware/checkUserLogin";
+// import authenticateJWT from '../../middleware/checkUserLogin';
 
 // initialise regex
 // const FIRSTNAME_REGEX = "/^[a-zA-Z-]+$/";
@@ -14,13 +14,15 @@ import swal from 'sweetalert';
 // sign up form component
 const SignUpForm = (props) => {
   // import props from App component
-  const { step, setStep, signUp, setSignUp } = props;
+  const {
+    step, setStep, signUp, setSignUp,
+  } = props;
   // initialise useState for sign up input
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleInputSubmit = async (event) => {
     setStep(1);
@@ -34,30 +36,30 @@ const SignUpForm = (props) => {
         email,
         password,
       };
-      console.log("This is signUpObj: ", signUpObj);
-      //post user data to backend
-      const userToken = await axios.post("/user/signup", signUpObj);
-      console.log(`userToken`, userToken);
-      //set token
-      localStorage.setItem("token", userToken.data.token);
+      console.log('This is signUpObj: ', signUpObj);
+      // post user data to backend
+      const userToken = await axios.post('/user/signup', signUpObj);
+      console.log('userToken', userToken);
+      // set token
+      localStorage.setItem('token', userToken.data.token);
 
       setSignUp(signUpObj);
       // input fields are reset
-      setFirstName("");
-      setLastName("");
-      setUsername("");
-      setEmail("");
-      setPassword("");
+      setFirstName('');
+      setLastName('');
+      setUsername('');
+      setEmail('');
+      setPassword('');
       event.preventDefault();
 
-      swal("Account created!", "Login NOW!", "success");
+      swal('Account created!', 'Login NOW!', 'success');
 
       if (!userToken.data.token) {
-        swal("Email already in use!", "Try another email Or login NOW!");
+        swal('Email already in use!', 'Try another email Or login NOW!');
         return true;
       }
     } else {
-      swal("Inputs not filled");
+      swal('Inputs not filled');
       setStep(2);
       return false;
     }
@@ -128,7 +130,7 @@ const SignUpForm = (props) => {
             <div
               className="ui teal big submit button centered"
               onClick={handleInputSubmit}
-              style={{ display: "table", margin: "auto" }}
+              style={{ display: 'table', margin: 'auto' }}
             >
               <i className="sign-in icon"></i>
               Submit

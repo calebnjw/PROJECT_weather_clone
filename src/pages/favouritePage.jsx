@@ -4,6 +4,7 @@ import {
 } from 'semantic-ui-react';
 import Fuse from 'fuse.js';
 import swal from 'sweetalert';
+import FavouritedDisplay from '../components/favouritedDisplay.jsx';
 import cities from '../cities.json';
 import Cloud from '../sun_cloud_icon.png';
 
@@ -17,6 +18,7 @@ const FavouritePage = (props) => {
     setCity,
     setLat,
     setLong,
+    updateFav,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -145,10 +147,11 @@ const FavouritePage = (props) => {
           />
         </div>
       </Grid.Row>
-      <Grid.Row className="location-list">
+      <Grid.Column>
         <h4>Favourites</h4>
-        {/* {favouriteCities} */}
-      </Grid.Row>
+        <br/>
+        <FavouritedDisplay updateFav={updateFav}/>
+      </Grid.Column>
     </>
   );
 };

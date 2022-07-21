@@ -1,6 +1,9 @@
 require('dotenv').config();
 
 const express = require('express');
+const http = require('http');
+const { Server } = require('socket.io');
+
 const cookieParser = require('cookie-parser');
 const methodOverride = require('method-override');
 
@@ -39,8 +42,11 @@ const MessageRouter = require('./routers/messageRouter.js');
 const userRouter = new UserRouter(userController, authMiddleware).router();
 const messageRouter = new MessageRouter(messageController).router();
 
-// express app
+// express app with socket
 const app = express();
+const server = http.createServer(app);
+const io = new Server(server);
+
 app.set('view engine', 'ejs');
 
 // express middleware
@@ -82,5 +88,28 @@ app.get('/', (request, response) => {
 app.use('/user', userRouter);
 app.use('/message', messageRouter);
 
+const username = 'calebnjw';
+
+io.on('connection', (socket) => {
+  console.log('a user has connected');
+  // sends out a connect message
+  io.emit('connection message', { message: `${username} has connected` });
+
+  socket.on('disconnect', () => {
+    console.log('a user has disconnected');
+    // sends out a disconnect message
+    io.emit('connection message', { message: `${username} has disconnected` });
+  });
+
+  // this is to receive chat message from emitter
+  socket.on('chat message', (message) => {
+    console.log('message:', message);
+    // distributes chat messages to all connected users
+    io.emit('chat message', message);
+  });
+});
+
 const { PORT } = process.env;
-app.listen(PORT);
+server.listen(PORT, () => {
+  console.log(`app is listening on port ${PORT} using HTTP`);
+});

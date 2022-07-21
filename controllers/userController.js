@@ -6,7 +6,7 @@ const BaseController = require('./baseController.js');
 class UserController extends BaseController {
   constructor(model, db) {
     super(model);
-    this.Location = db.Location;
+    this.UserLocation = db.UserLocation;
   }
 
   async userSignup(req, res) {
@@ -16,14 +16,16 @@ class UserController extends BaseController {
     try {
       const checkEmail = await this.model.findOne({ where: { email } });
       console.log('Email:', checkEmail);
+
       if (checkEmail) {
         return res.json({ message: 'Email in use, try another email or login!' });
-        // return res.status(400).json({success: false, message: 'Email in use, try again or login'})
       }
+
       const hashedPassword = await bcrypt.hash(password, Number(process.env.SALT_ROUND));
       const newUser = await this.model.create({
         firstName, lastName, username, email, password: hashedPassword,
       });
+
       const payload = { id: newUser.id, username: newUser.username };
       console.log('This is my payload', payload);
       const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXP });
@@ -40,16 +42,21 @@ class UserController extends BaseController {
     try {
       const user = await this.model.findOne({ where: { username } });
       console.log('This is the user', user);
+
       if (!user) {
         return res.json({ message: 'User does not exist' });
       }
-      const compare = await bcrypt.compare(password, user.password);
+
       console.log('This is the password', password);
+      const compare = await bcrypt.compare(password, user.password);
+      console.log(compare);
       if (!compare) {
         return res.json({ message: 'Wrong password, try again!' });
       }
+
       const payload = { id: user.id, username: user.username };
       const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXP });
+
       return res.json({ user, token });
     } catch (err) {
       res.send({ message: 'No user found. Sign up!' });
@@ -60,7 +67,7 @@ class UserController extends BaseController {
     const { userId } = request.body;
 
     try {
-      const locations = await this.Location.findAll({ where: { userId } });
+      const locations = await this.UserLocation.findAll({ where: { userId } });
 
       response.status(200).send(locations);
     } catch (error) {
@@ -71,23 +78,14 @@ class UserController extends BaseController {
 
   async newFavourite(request, response) {
     const { userId, locationId } = request.body;
-
     try {
-      await this.Location.create({ userId, locationId });
+      await this.UserLocation.create({ userId, locationId });
       const locations = await this.Location.findAll({ where: { userId } });
 
       response.status(200).send(locations);
     } catch (error) {
       console.log(error);
       response.status(400).send({ error });
-    }
-  }
-
-  logout(request, response) {
-    try {
-      console.log('I have logged out');
-    } catch (err) {
-      console.log(err);
     }
   }
 }
