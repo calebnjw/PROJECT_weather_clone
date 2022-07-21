@@ -9,7 +9,7 @@ import WeatherPage from './pages/weatherPage.jsx';
 
 
 export default function App() {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(4);
   const [signUp, setSignUp] = useState('');
   const [login, setLogin] = useState('');
   const [query, setQuery] = useState('');

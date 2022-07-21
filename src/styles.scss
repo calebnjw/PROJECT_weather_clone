@@ -5,19 +5,19 @@ body {
 
 //===========================LOGIN DESIGN============================//
 .main-container {
-    margin-top: 50px;
+  margin-top: 50px;
 }
 
 .steps-container {
-    margin-top: 50px;
+  margin-top: 50px;
 }
 
 .weather-logo {
-    width: 100%;
+  width: 100%;
 }
 
 .swal-button--confirm {
-    background: teal;
+  background: teal;
 }
 
 //===========================SIGN UP DESIGN============================//
@@ -30,7 +30,11 @@ body {
   left: 0;
   right: 0;
   margin: auto;
-  background-image: linear-gradient(to right, rgba(197, 239, 247), rgb(255, 255, 255));
+  background-image: linear-gradient(
+    to right,
+    rgba(197, 239, 247),
+    rgb(255, 255, 255)
+  );
 }
 
 .sign-up-form {
@@ -38,7 +42,7 @@ body {
 }
 
 .search-bar-input {
-    padding-top: 50px;
+  padding-top: 50px;
 }
 .search-bar-container {
   display: flex;
@@ -53,13 +57,26 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-
+  padding-top: 80px;
   box-sizing: border-box;
-
   height: 5vh;
   width: 100vw;
+  margin-bottom: 1vh;
+}
 
-  margin-bottom: 3vh;
+h1 {
+  font-style: ui-monospace;
+}
+
+hr {
+  background: teal;
+  color: teal;
+  border-color: teal;
+  height: "3px";
+}
+
+.ui.grid > * {
+  padding-left: 3.5rem;
 }
 
 .chat-box {
@@ -107,4 +124,10 @@ body {
 .weekly-weather {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+}
+
+//============================================CURRENT WEATHER DESIGN=======================================//
+.current-weather {
+  padding-top: 10px;
 }

@@ -72,10 +72,6 @@ const FavouritePage = (props) => {
     setStep(1);
   };
 
-  const handleHomePage = () => {
-    setStep(3);
-  }
-
   useEffect(() => {
     let temp;
     if (citiesList.length > 0) {
@@ -110,7 +106,6 @@ const FavouritePage = (props) => {
         <div className="item">
           <img src={Cloud} alt="cloud-logo" />
         </div>
-        <a className="item" onClick={handleHomePage}>Home</a>
         <div className="right menu">
           <div className="item">
             <div className="ui teal button" onClick={handleLogoutSubmit}>
