@@ -18,46 +18,6 @@ const SignUpForm = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleInputSubmit = async (event) => {
-    setStep(1);
-    // condition: text box have value
-    if ((firstName, lastName, username, email, password)) {
-      // store items value in an Obj
-      const signUpObj = {
-        firstName,
-        lastName,
-        username,
-        email,
-        password,
-      };
-      // post user data to backend
-      const userToken = await axios.post('/user/signup', signUpObj);
-      console.log('userToken', userToken);
-      // set token
-      localStorage.setItem('token', userToken.data.token);
-
-      setSignUp(signUpObj);
-      // input fields are reset
-      setFirstName('');
-      setLastName('');
-      setUsername('');
-      setEmail('');
-      setPassword('');
-      event.preventDefault();
-
-      swal('Account created!', 'Login NOW!', 'success');
-
-      if (!userToken.data.token) {
-        swal('Email already in use!', 'Try another email Or login NOW!');
-        return true;
-      }
-    } else {
-      swal('Inputs not filled');
-      setStep(2);
-      return false;
-    }
-  };
-
   // get input values
   const firstNameInput = (event) => {
     setFirstName(event.target.value);
@@ -75,11 +35,56 @@ const SignUpForm = (props) => {
     setPassword(event.target.value);
   };
 
+  const clearInputs = () => {
+    setFirstName('');
+    setLastName('');
+    setUsername('');
+    setEmail('');
+    setPassword('');
+  };
+
+  const handleInputSubmit = async (event) => {
+    setStep(1);
+    // condition: text box have value
+    if ((firstName, lastName, username, email, password)) {
+      // store items value in an Obj
+      const signUpObj = {
+        firstName,
+        lastName,
+        username,
+        email,
+        password,
+      };
+
+      // post user data to backend
+      const userToken = await axios.post('/user/signup', signUpObj);
+      console.log('userToken', userToken);
+      // set token
+      localStorage.setItem('token', userToken.data.token);
+
+      setSignUp(signUpObj);
+      // input fields are reset
+      clearInputs();
+      event.preventDefault();
+
+      swal('Account created!', 'Login NOW!', 'success');
+
+      if (!userToken.data.token) {
+        swal('Email already in use!', 'Try another email or login NOW!');
+        return true;
+      }
+    } else {
+      swal('Inputs not filled');
+      setStep(2);
+      return false;
+    }
+  };
+
   return (
     <>
       <div className="to-sign-up">
-        {/* signup form */}
 
+        {/* signup form */}
         <div className="sign-up-form">
           <Form>
             <Form.Group widths="equal">
@@ -120,13 +125,27 @@ const SignUpForm = (props) => {
                 onChange={passwordInput}
               />
             </Form.Field>
-            <div
-              className="ui teal big submit button centered"
-              onClick={handleInputSubmit}
-              style={{ display: 'table', margin: 'auto' }}
-            >
-              <i className="sign-in icon"></i>
-              Submit
+
+            {/* ui big submit */}
+            <div style={{ display: 'flex' }} >
+              <div
+                className="ui big button"
+                onClick={() => {
+                  setStep(1);
+                  clearInputs();
+                }}
+                style={{ display: 'table', margin: 'auto' }}
+              >
+                Back
+              </div>
+              <div
+                className="ui teal big button"
+                onClick={handleInputSubmit}
+                style={{ display: 'table', margin: 'auto' }}
+              >
+                <i className="sign-in icon"></i>
+                Submit
+              </div>
             </div>
           </Form>
         </div>
