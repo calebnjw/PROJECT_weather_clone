@@ -14,8 +14,11 @@ function WeatherPage(props) {
   const [userToken, setUserToken] = useState(localStorage.getItem('token'));
 
   useEffect(() => {
-    setUserToken(localStorage.getItem('token'));
-    console.log('userToken', userToken);
+    console.log('WEATHER PAGE USE EFFECT');
+    console.log('USER TOKEN', userToken);
+    if (localStorage.getItem('token') !== null) {
+      setUserToken(localStorage.getItem('token'));
+    }
   }, []);
 
   return (

@@ -97,22 +97,22 @@ class UserController extends BaseController {
 
     console.log('user:', request.user);
 
-    console.log(star, userId, city, lat, long)
-
     try {
       if (star) {
-        console.log(star, userId, city, lat, long)
-        // await this.UserLocation.create({
-        //   userId, city, lat, long,
-        // });
+        console.log('THIS SHOULD DELETE ENTRY IN DB');
+        console.log(star, userId, city, lat, long);
+        await this.UserLocation.destroy({
+          where: {
+            userId,
+            city,
+          },
+        });
       } else {
-        console.log(star, userId, city, lat, long)
-        // await this.UserLocation.destroy({
-        //   where: {
-        //     userId,
-        //     city,
-        //   },
-        // });
+        console.log('THIS SHOULD MAKE A NEW ENTRY IN DB');
+        console.log(star, userId, city, lat, long);
+        await this.UserLocation.create({
+          userId, city, lat, long,
+        });
       }
 
       response.status(200).json({ success: true });

@@ -13,21 +13,22 @@ function Chat(props) {
   const [output, setOutput] = useState([]);
 
   useEffect(() => {
-    if (Object.keys(userToken).length > 0) {
+    if (userToken === null) {
+      setUsername('');
+    } else {
       setUsername(jwt(userToken).username);
-      console.log(username);
     }
   }, [userToken]);
 
   // to receive connection message
   // when someone joins or leaves
-  socket.on(`connection message ${city}`, (message) => {
+  socket.on('connection message', (message) => {
     const connectionMessage = <div>— {message.message} —</div>;
     setChatMessages([...chatMessages, connectionMessage]);
   });
 
   // to receive message from input box
-  socket.on(`chat message ${city}`, (message) => {
+  socket.on('chat message', (message) => {
     const newMessage = <MessageBubble username={message.username} message={message.content} />;
     setChatMessages([...chatMessages, newMessage]);
   });

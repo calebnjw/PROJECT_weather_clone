@@ -11,31 +11,40 @@ function Navbar(props) {
 
   const [star, setStar] = useState(false);
   const [userId, setUserId] = useState('');
+  const [config, setConfig] = useState({});
 
   const previousPage = () => setStep(3);
 
   useEffect(() => {
-    if (Object.keys(userToken).length > 0) {
+    if (userToken === null) {
+      setUserId(0);
+    } else {
       setUserId(jwt(userToken).id);
-      console.log(userId);
+      setConfig({
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      });
     }
   }, [userToken]);
 
   const favourite = async () => {
+    let success;
+    console.log('posting to backend!');
     if (star) {
+      success = await axios.post('/user/new-favourite', {
+        star, userId, city, lat, long,
+      }, config);
       setStar(false);
-      console.log('posting to backend!');
-      await axios.post('/user/new-favourite', {
-        star, userId, city, lat, long,
-      });
     } else {
-      setStar(true);
-      console.log('posting to backend!');
-      await axios.post('/user/new-favourite', {
+      success = await axios.post('/user/new-favourite', {
         star, userId, city, lat, long,
-      });
+      }, config);
+      setStar(true);
     }
-    setUpdateFav(updateFav + 1);
+    if (success.data.success) {
+      setUpdateFav(updateFav + 1);
+    }
   };
 
   return (

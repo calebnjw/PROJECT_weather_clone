@@ -15,7 +15,7 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackConfig = require('./webpack_conf/webpack.dev.js');
 
 // import custom middleware
-const authMiddleware = require('./middleware/checkUserLogin.js');
+const authMiddleware = require('./middleware/checkUserLogin.js')();
 
 console.log('TESTTESTTESTTESTTESTTESTTESTTESTTEST', authMiddleware);
 
@@ -88,6 +88,10 @@ app.get('/', (request, response) => {
 app.use('/user', userRouter);
 // app.use('/message', messageRouter);
 
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+// how to get username from jwt here?
 const username = 'calebnjw';
 
 io.on('connection', (socket) => {
