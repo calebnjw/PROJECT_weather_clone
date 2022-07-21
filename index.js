@@ -118,6 +118,6 @@ io.on('connect', (socket) => {
   socket.on('from frontend message', (message) => {
     console.log('message:', message);
     // distributes chat messages to all connected users
-    socket.in(message.city).emit('from backend message', message);
+    io.sockets.in(message.city).emit('from backend message', message);
   });
 });
