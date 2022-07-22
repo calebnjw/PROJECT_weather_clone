@@ -10,7 +10,7 @@ import WeatherPage from './pages/weatherPage.jsx';
 
 export default function App() {
   // controlling page that app is on
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(4);
 
   // user information that is shared across the app
   const [userToken, setUserToken] = useState(localStorage.getItem('token'));
@@ -88,9 +88,7 @@ export default function App() {
           setUpdateFav={setUpdateFav}
           city={city}
           lat={lat}
-          long={long}
-          updateFav={updateFav}
-          setUpdateFav={setUpdateFav} />}
+          long={long} />}
       </Grid>
     </Container>
   );
