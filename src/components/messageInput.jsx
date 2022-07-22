@@ -22,7 +22,7 @@ function MessageInput(props) {
   return (
     <Form>
       <Input
-        className="ui input focus"
+        className="ui input fluid focus"
         // style={{ }}
         fluid
         type= 'text'

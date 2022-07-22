@@ -26,7 +26,10 @@ const DisplayFavourites = (props) => {
       { userId },
       config,
     );
-    return result.data.locations;
+    if (result.data.locations) {
+      return result.data.locations;
+    }
+    return [];
   };
 
   useEffect(async () => {

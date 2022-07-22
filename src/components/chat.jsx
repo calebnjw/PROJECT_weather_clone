@@ -1,6 +1,4 @@
-
 import React, { useEffect, useState } from 'react';
-import jwt from 'jwt-decode';
 
 import MessageBubble from './messageBubble.jsx';
 import MessageInput from './messageInput.jsx';
@@ -14,7 +12,7 @@ function Chat(props) {
   // to join the socket room
   useEffect(() => {
     socket.emit('join', { city, username });
-  }, []);
+  }, [city]);
 
   // to receive connection message
   // when someone joins or leaves

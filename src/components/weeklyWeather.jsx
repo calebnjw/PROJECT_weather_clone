@@ -9,14 +9,14 @@ function WeeklyWeather(props) {
     const dt = DateTime.fromISO(date);
     return (
       <div key={date} className="daily-weather-item">
-        <div className="row">
+        <div>
+          <h2>
+          {dt.toFormat('ccc')}
+          </h2>
           <div>
             <i className="yellow huge sun outline icon"></i>
           </div>
-          <div className="row">
-          {dt.toFormat('cccc')}
-          </div>
-          <div className="row" style={{ paddingTop: '20px', paddingRight: '5px' }}>
+          <div className='high-low-temp'>
             <div>
               H:
               {data.temperature_2m_max[i].toFixed(0)}
@@ -27,7 +27,6 @@ function WeeklyWeather(props) {
               {data.temperature_2m_min[i].toFixed(0)}
               {u}
             </div>
-            <hr />
           </div>
         </div>
       </div>

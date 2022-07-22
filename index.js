@@ -111,7 +111,7 @@ io.on('connect', (socket) => {
     const { city: room, username: name } = joinData;
     console.log(room, name);
     socket.join(room);
-    socket.to(room).emit('connection message', { content: `${name} has joined the room` });
+    io.sockets.to(room).emit('connection message', { content: `${name} has joined the room` });
   });
 
   // this is to receive chat message from emitter

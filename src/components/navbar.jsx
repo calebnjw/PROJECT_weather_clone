@@ -22,6 +22,7 @@ function Navbar(props) {
     );
 
     const { success } = response.data;
+    console.log(success);
 
     if (star) {
       setStar(false);
@@ -39,7 +40,7 @@ function Navbar(props) {
       <Button className="ui grey button" type='button' icon onClick={previousPage}>
         <i className="fa-solid fa-arrow-left"></i>
       </Button>
-      <h1 style={{ fontSize: '3rem' }}>{city}</h1>
+      <h2>{city}</h2>
       <Button className="ui grey button" type='button' icon onClick={favourite}>
         {!star
           ? <i className="fa-regular fa-star"></i>
