@@ -40,24 +40,12 @@ body {
 .search-bar-input {
   padding-top: 50px;
 }
+
 .search-bar-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-//===========================MESSAGE DESIGN============================//
-.navbar {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 80px;
-  box-sizing: border-box;
-  height: 5vh;
-  width: 100vw;
-  margin-bottom: 1vh;
 }
 
 h1 {
@@ -76,17 +64,92 @@ hr {
   margin-top: 1.5rem;
 }
 
+//============================================CURRENT WEATHER DESIGN=======================================//
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  box-sizing: border-box;
+  height: 5vh;
+  width: 100%;
+  margin-bottom: 1vh;
+}
+
+.navbar > h2 {
+  font-size: 2rem;
+  margin-top: 1rem;
+}
+
+.weather-app {
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 2rem;
+}
+
+.current-weather {
+  text-align: center;
+}
+
+.current-weather > h1 {
+  font-size: 4rem;
+  margin-bottom: 0rem;
+}
+
+.current-weather > h3 {
+  font-size: 3rem;
+  margin-top: 0rem;
+}
+
+.weekly-weather {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  max-width: 100vw;
+  overflow-x: scroll;
+}
+
+.daily-weather-item {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  text-align: center;
+
+  background-color: #f0ffff;
+  border: 1px solid teal;
+  border-radius: 5px;
+
+  min-width: 10rem;
+  width: 10rem;
+
+  margin-top: 2rem;
+  margin-right: 1rem;
+
+  padding: 1rem;
+}
+
+.high-low-temp {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+  margin-top: 1rem;
+}
+
+//===========================MESSAGE DESIGN============================//
 .chat-box {
   display: flex;
   flex-direction: column;
-  overflow: scroll;
+  overflow-y: scroll;
 
-  height: calc((100vh - 10rem) / 2);
-  width: 100vw;
+  height: calc((100vh - 20rem) / 2);
+  width: 100%;
 
-  padding: 0.5rem;
+  margin-top: 2rem;
   margin-bottom: 1vh;
-  margin-top: auto;
 }
 
 .message-bubble {
@@ -94,21 +157,19 @@ hr {
   flex-direction: row;
   align-items: center;
   align-self: flex-start;
+
+  background-color: #f0ffff;
+  border: 1px solid teal;
+  border-radius: 5px;
+
   word-break: normal;
   text-align: left;
-  padding: 0.5rem;
+
+  max-width: 70vw;
+
+  padding: 0.2rem;
   padding-right: 1rem;
   margin-bottom: 0.2rem;
-}
-
-<<<<<<< HEAD
-.ui.message{
-    padding: 7px;
-    border-color: teal;
-=======
-.ui.message {
-  padding: 7px;
->>>>>>> 738da4b9f92079c17b9e80bf08c632cb47ca178a
 }
 
 .message-bubble > .label {
@@ -116,27 +177,7 @@ hr {
   margin-right: 0.7rem;
 }
 
-.weather-app {
-  display: flex;
-  flex-direction: column;
-}
-
-.weekly-weather {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.ui.input {
-    width: 550px;
-    height: 40px;
-}
-
-.daily-weather-item {
-  margin-top: 2rem;
-}
-
-//============================================CURRENT WEATHER DESIGN=======================================//
-.current-weather {
-  padding-top: 20px;
-}
+// .ui.input {
+//   width: 550px;
+//   height: 40px;
+// }

@@ -6,7 +6,7 @@ function MessageBubble(props) {
   const { username, message } = props;
 
   return (
-    <div className={'ui small message message-bubble'} >
+    <div className={'message-bubble'} >
       <Label content={username} />
       <div>
         {message}

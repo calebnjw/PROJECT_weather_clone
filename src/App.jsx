@@ -2,11 +2,14 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Grid } from 'semantic-ui-react';
 import jwt from 'jwt-decode';
+import swal from 'sweetalert';
 
 import LoginForm from './pages/login.jsx';
 import SignUpForm from './pages/signup.jsx';
 import FavouritePage from './pages/favouritePage.jsx';
 import WeatherPage from './pages/weatherPage.jsx';
+
+import Cloud from './sun_cloud_icon.png';
 
 export default function App() {
   // controlling page that app is on
@@ -34,6 +37,12 @@ export default function App() {
   // value changes when setting favourites
   const [updateFav, setUpdateFav] = useState(1);
 
+  const handleLogoutSubmit = () => {
+    localStorage.removeItem('token');
+    swal('You are logged out!');
+    setStep(1);
+  };
+
   useEffect(() => {
     console.log('WEATHER PAGE USE EFFECT');
     console.log('UPDATING USER TOKEN', userToken);
@@ -57,39 +66,55 @@ export default function App() {
 
   return (
     <Container>
-      <Grid padded={true} centered={true} >
-        {step === 1 && <LoginForm
-          setStep={setStep}
-          setLogin={setLogin} />}
+      { step >= 3
+      && <>
+        {/* Menu bar */}
+        <div className="ui huge text menu">
+          <div className="item">
+            <img src={Cloud} alt="cloud-logo" />
+          </div>
+          <div className="right menu">
+            <div className="item">
+              <div className="ui teal button" onClick={handleLogoutSubmit}>
+                <i className="sign-out icon"></i>
+                Logout
+              </div>
+            </div>
+          </div>
+        </div>
+      </> }
 
-        {step === 2 && <SignUpForm
-          setStep={setStep}
-          setSignUp={setSignUp} />}
+      {step === 1 && <LoginForm
+        setStep={setStep}
+        setLogin={setLogin} />}
 
-        {step === 3 && <FavouritePage
-          setStep={setStep}
-          config={config}
-          userId={userId}
-          username={username}
-          setQuery={setQuery}
-          query={query}
-          citiesList={citiesList}
-          setCitiesList={setCitiesList}
-          setCity={setCity}
-          setLat={setLat}
-          setLong={setLong} />}
+      {step === 2 && <SignUpForm
+        setStep={setStep}
+        setSignUp={setSignUp} />}
 
-        {step === 4 && <WeatherPage
-          setStep={setStep}
-          config={config}
-          userId={userId}
-          username={username}
-          updateFav={updateFav}
-          setUpdateFav={setUpdateFav}
-          city={city}
-          lat={lat}
-          long={long} />}
-      </Grid>
+      {step === 3 && <FavouritePage
+        setStep={setStep}
+        config={config}
+        userId={userId}
+        username={username}
+        setQuery={setQuery}
+        query={query}
+        citiesList={citiesList}
+        setCitiesList={setCitiesList}
+        setCity={setCity}
+        setLat={setLat}
+        setLong={setLong} />}
+
+      {step === 4 && <WeatherPage
+        setStep={setStep}
+        config={config}
+        userId={userId}
+        username={username}
+        updateFav={updateFav}
+        setUpdateFav={setUpdateFav}
+        city={city}
+        lat={lat}
+        long={long} />}
     </Container>
   );
 }
