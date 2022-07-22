@@ -30,11 +30,7 @@ body {
   left: 0;
   right: 0;
   margin: auto;
-  background-image: linear-gradient(
-    to right,
-    rgba(197, 239, 247),
-    rgb(255, 255, 255)
-  );
+  background-image: linear-gradient(to right, rgba(197, 239, 247), rgb(255, 255, 255));
 }
 
 .sign-up-form {
@@ -105,11 +101,15 @@ hr {
   margin-bottom: 0.2rem;
 }
 
+<<<<<<< HEAD
 .ui.message{
     padding: 7px;
     border-color: teal;
+=======
+.ui.message {
+  padding: 7px;
+>>>>>>> 738da4b9f92079c17b9e80bf08c632cb47ca178a
 }
-
 
 .message-bubble > .label {
   align-self: start;
@@ -130,6 +130,10 @@ hr {
 .ui.input {
     width: 550px;
     height: 40px;
+}
+
+.daily-weather-item {
+  margin-top: 2rem;
 }
 
 //============================================CURRENT WEATHER DESIGN=======================================//

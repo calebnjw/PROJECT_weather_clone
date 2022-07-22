@@ -4,7 +4,7 @@ import {
 } from 'semantic-ui-react';
 import Fuse from 'fuse.js';
 import swal from 'sweetalert';
-import FavouritedDisplay from '../components/favouritedDisplay.jsx';
+import FavouriteDisplay from '../components/favouriteDisplay.jsx';
 import cities from '../cities.json';
 import Cloud from '../sun_cloud_icon.png';
 
@@ -78,35 +78,12 @@ const FavouritePage = (props) => {
     setStep(3);
   };
 
-  // useEffect(() => {
-  //   let temp;
-  //   if (citiesList.length > 0) {
-  //     temp = citiesList.map((city) => {
-  //       const {
-  //         country, name, lat, lng,
-  //       } = city.item;
-  //       return (
-  //         <li key={name} className="location-list">
-  //           <h2>Name: {name}</h2>
-  //           <br></br>
-  //           Country: {country}
-  //           <br></br>
-  //           Latitude: {lat}
-  //           <br></br>
-  //           Langitude: {lng}
-  //         </li>
-  //       );
-  //     });
-  //   }
-  //   setSearchResult(temp);
-  // }, [citiesList]);
-
   return (
     <>
       {/* Menu bar */}
       <div className="ui huge top fixed text menu">
         <div className="item">
-          <img src={Cloud} alt="cloud-logo" />
+          <img src={Cloud} alt="cloud-logo" onClick={handleHomePage}/>
         </div>
         <div className="right menu">
           <div className="item">
@@ -138,7 +115,7 @@ const FavouritePage = (props) => {
         </div>
         <h4>Favourites</h4>
         <br/>
-        <FavouritedDisplay
+        <FavouriteDisplay
           setStep={setStep}
           updateFav={updateFav}
           setCity={setCity}
