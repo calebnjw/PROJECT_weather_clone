@@ -6,7 +6,7 @@ const socketio = require('socket.io');
 const cookieParser = require('cookie-parser');
 const methodOverride = require('method-override');
 
-const { resolve, join } = require('path');
+const { resolve } = require('path');
 
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
@@ -15,8 +15,6 @@ const webpackConfig = require('./webpack_conf/webpack.dev.js');
 
 // import custom middleware
 const authMiddleware = require('./middleware/checkUserLogin.js')();
-
-console.log('TESTTESTTESTTESTTESTTESTTESTTESTTEST', authMiddleware);
 
 // import models
 const db = require('./models/index.js');
@@ -85,12 +83,6 @@ app.get('/', (request, response) => {
 app.use('/user', userRouter);
 // app.use('/message', messageRouter);
 
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
-// how to get username from jwt here?
-const username = 'calebnjw';
-
 const { PORT } = process.env;
 const server = app.listen(PORT, () => {
   console.log(`app is listening on port ${PORT} using HTTP`);
@@ -99,25 +91,17 @@ const server = app.listen(PORT, () => {
 const io = socketio(server);
 
 io.on('connect', (socket) => {
-  // socket.on('disconnect', () => {
-  //   // console.log('EVENT', event);
-  //   // console.log('a user has disconnected');
-  //   // sends out a disconnect message
-  //   // socket.emit('connection message', { message: 'someone has disconnected' });
-  // });
-
   socket.on('join', (joinData) => {
     // sends out a connect message
     const { city: room, username: name } = joinData;
-    console.log(room, name);
     socket.join(room);
+    // distributes join message to all connected users
     io.sockets.to(room).emit('connection message', { content: `${name} has joined the room` });
   });
 
   // this is to receive chat message from emitter
   socket.on('from frontend message', (message) => {
-    console.log('message:', message);
-    // distributes chat messages to all connected users
+    // distributes chat message to all connected users
     io.sockets.in(message.city).emit('from backend message', message);
   });
 });

@@ -1,4 +1,4 @@
-const BaseController = require('./baseController.js');
+const BaseController = require('../baseController.js');
 
 class MessageController extends BaseController {
   // eslint-disable-next-line no-useless-constructor

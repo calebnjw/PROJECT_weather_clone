@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from 'semantic-ui-react';
 import axios from 'axios';
 
@@ -8,11 +8,36 @@ function Navbar(props) {
     setStep, config, updateFav, setUpdateFav, city, lat, long,
   } = props;
 
+  // star is the state of the star on location page
   const [star, setStar] = useState(false);
 
+  /**
+   * Returns user to search / favourites page
+   */
   const previousPage = () => setStep(3);
 
+  /**
+   * Gets favourited cities from backend
+   * @returns list of locations, or empty array if there are none
+   */
+  const getData = async () => {
+    console.log('GET DATA IN NAVBAR');
+    const result = await axios.get(
+      '/user/get-favourites',
+      config,
+    );
+    if (result.data.locations) {
+      return result.data.locations;
+    }
+    return [];
+  };
+
+  /**
+   * Changes whether a city favourite by sending city data
+   * to backend and changing state of star
+   */
   const favourite = async () => {
+    // post city data and star state to backend
     const response = await axios.post(
       '/user/new-favourite',
       {
@@ -22,8 +47,8 @@ function Navbar(props) {
     );
 
     const { success } = response.data;
-    console.log(success);
 
+    // toggle between state of star
     if (star) {
       setStar(false);
     } else {
@@ -34,6 +59,23 @@ function Navbar(props) {
       setUpdateFav(updateFav + 1);
     }
   };
+
+  // to check if city is favourited already
+  useEffect(async () => {
+    if (config !== '') {
+      const locations = await getData();
+      const favouriteCities = [];
+
+      locations.forEach((location) => {
+        favouriteCities.push(location.city);
+      });
+
+      // if city is in favourites, star should be true
+      if (favouriteCities.includes(city)) {
+        setStar(true);
+      }
+    }
+  }, [config, updateFav]);
 
   return (
     <div className='navbar'>

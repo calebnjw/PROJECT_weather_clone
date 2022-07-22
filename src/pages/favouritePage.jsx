@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Search, Grid, Label,
-} from 'semantic-ui-react';
+import { Search, Label } from 'semantic-ui-react';
 import Fuse from 'fuse.js';
 import FavouriteDisplay from '../components/favouriteDisplay.jsx';
 import cities from '../cities.json';
@@ -17,22 +15,20 @@ const FavouritePage = (props) => {
     setLat,
     setLong,
     updateFav,
-    userId,
     config,
-
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
 
   // fuse search
-  const citiesAPI = cities;
   const options = {
     minMatchCharLength: 3,
-    threshold: 0.1,
-    distance: 3,
+    threshold: 0.3,
+    distance: 2,
     keys: ['name'],
   };
-  const fuse = new Fuse(citiesAPI, options);
+
+  const fuse = new Fuse(cities, options);
 
   useEffect(() => {
     setCitiesList(fuse.search(query));
@@ -43,6 +39,7 @@ const FavouritePage = (props) => {
     setIsLoading(true);
     setQuery(event.target.value);
   };
+
   // sending values via states and redirect to setStep(4)
   const showLocation = (city, lat, long) => {
     setStep(4);
@@ -50,11 +47,12 @@ const FavouritePage = (props) => {
     setLat(lat);
     setLong(long);
   };
+
   // rending template for dropdown list
   const resultRenderer = ({ item }) => (
     <div>
       {item.name}
-      {'\t'}
+      {' '}
       <Label
         content={
           <small>
@@ -90,7 +88,6 @@ const FavouritePage = (props) => {
         setCity={setCity}
         setLat={setLat}
         setLong={setLong}
-        userId={userId}
         config={config}/>
     </>
   );

@@ -7,6 +7,7 @@ import MessageInput from './messageInput.jsx';
 function Chat(props) {
   const { city, username } = props;
 
+  // state to store messages that are sent / received
   const [chatMessages, setChatMessages] = useState([]);
 
   // to join the socket room
@@ -23,7 +24,10 @@ function Chat(props) {
 
   // to receive messages
   socket.on('from backend message', (message) => {
-    const newMessage = <MessageBubble username={message.username} message={message.content} />;
+    const newMessage = <MessageBubble
+      key={message.content}
+      username={message.username}
+      message={message.content} />;
     setChatMessages([...chatMessages, newMessage]);
   });
 

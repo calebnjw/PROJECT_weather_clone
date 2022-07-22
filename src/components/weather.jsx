@@ -25,24 +25,18 @@ function Weather(props) {
     setWeatherData(tempData);
   }, [lat, long]);
 
-  // map data into different divs and stuff here.
-  // watch for changes to weather data.
-  // then map stuff if weatherdata is updated and not undefined.
   useEffect(() => {
     if (weatherData) {
       setU(weatherData.daily_units.temperature_2m_min);
-
-      // console.log('all weather data', weatherData);
-      console.log('current weather', weatherData.current_weather);
-      console.log('daily weather', weatherData.daily);
-      // console.log('units', weatherData.daily_units.temperature_2m_min);
     }
   }, [weatherData]);
 
   return (
     <div className='weather-app'>
-      { weatherData && <CurrentWeather data={weatherData.current_weather} setStep={setStep} u={u} /> }
-      { weatherData && <WeeklyWeather data={weatherData.daily} u={u} /> }
+      { weatherData
+        && <CurrentWeather data={weatherData.current_weather} setStep={setStep} u={u} /> }
+      { weatherData
+        && <WeeklyWeather data={weatherData.daily} u={u} /> }
     </div>
   );
 }

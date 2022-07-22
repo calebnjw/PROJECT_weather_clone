@@ -4,7 +4,6 @@ const allConfig = require('../config/config.js');
 // import models
 // const initModel = require(./model.js);
 const initUserModel = require('./user.js');
-const initLocationMessageModel = require('./locationMessage.js');
 const initUserLocationModel = require('./userLocation.js');
 
 const env = process.env.NODE_ENV || 'development';
@@ -23,7 +22,6 @@ const sequelize = new Sequelize(
 // add model definitions to db
 // db.Model = initModel(sequelize, Sequelize.DataTypes);
 db.User = initUserModel(sequelize, Sequelize.DataTypes);
-db.Message = initLocationMessageModel(sequelize, Sequelize.DataTypes);
 db.UserLocation = initUserLocationModel(sequelize, Sequelize.DataTypes);
 
 // associations between models
@@ -32,6 +30,8 @@ db.UserLocation = initUserLocationModel(sequelize, Sequelize.DataTypes);
 // db.Model.hasMany(db.Model);
 // many to many:
 // db.Model.belongsToMany(db.Model);
+db.User.hasMany(db.UserLocation);
+db.UserLocation.belongsTo(db.User);
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Card, Grid, GridColumn, GridRow, Label,
-} from 'semantic-ui-react';
+import { Card } from 'semantic-ui-react';
 
 // sign up form component
 function FavouriteCity(props) {
@@ -62,7 +60,6 @@ function FavouriteCity(props) {
     setLong(long);
   };
 
-  // onClick={showLocation(city, lat, long)}
   return (
     <Card
       fluid
