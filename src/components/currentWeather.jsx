@@ -1,7 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import {
-  Button, Checkbox, Form, Step,
-} from 'semantic-ui-react';
+import React, { useState } from 'react';
 
 // sign up form component
 function CurrentWeather(props) {

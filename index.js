@@ -16,8 +16,6 @@ const webpackConfig = require('./webpack_conf/webpack.dev.js');
 // import custom middleware
 const authMiddleware = require('./middleware/checkUserLogin.js')();
 
-console.log('TESTTESTTESTTESTTESTTESTTESTTESTTEST', authMiddleware);
-
 // import models
 const db = require('./models/index.js');
 
@@ -96,15 +94,14 @@ io.on('connect', (socket) => {
   socket.on('join', (joinData) => {
     // sends out a connect message
     const { city: room, username: name } = joinData;
-    console.log(room, name);
     socket.join(room);
+    // distributes join message to all connected users
     io.sockets.to(room).emit('connection message', { content: `${name} has joined the room` });
   });
 
   // this is to receive chat message from emitter
   socket.on('from frontend message', (message) => {
-    console.log('message:', message);
-    // distributes chat messages to all connected users
+    // distributes chat message to all connected users
     io.sockets.in(message.city).emit('from backend message', message);
   });
 });

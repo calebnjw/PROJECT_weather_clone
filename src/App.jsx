@@ -21,10 +21,6 @@ export default function App() {
   const [userId, setUserId] = useState(0);
   const [username, setUsername] = useState('');
 
-  // signup and login information
-  const [signUp, setSignUp] = useState('');
-  const [login, setLogin] = useState('');
-
   // search query and search results
   const [query, setQuery] = useState('');
   const [citiesList, setCitiesList] = useState([]);
@@ -44,8 +40,6 @@ export default function App() {
   };
 
   useEffect(() => {
-    console.log('WEATHER PAGE USE EFFECT');
-    console.log('UPDATING USER TOKEN', userToken);
     if (localStorage.getItem('token') !== null) {
       setUserToken(localStorage.getItem('token'));
     }
@@ -85,12 +79,10 @@ export default function App() {
       </> }
 
       {step === 1 && <LoginForm
-        setStep={setStep}
-        setLogin={setLogin} />}
+        setStep={setStep} />}
 
       {step === 2 && <SignUpForm
-        setStep={setStep}
-        setSignUp={setSignUp} />}
+        setStep={setStep} />}
 
       {step === 3 && <FavouritePage
         setStep={setStep}

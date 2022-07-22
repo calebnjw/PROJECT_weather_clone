@@ -77,12 +77,11 @@ class UserController extends BaseController {
   }
 
   async getFavourites(request, response) {
-    console.log('req.body', request.body);
-    const { userId } = request.body;
-    console.log('user id:', userId);
+    // get userId from middleware
+    const { id } = request.user;
 
     try {
-      const locations = await this.UserLocation.findAll({ where: { userId } });
+      const locations = await this.UserLocation.findAll({ where: { userId: id } });
 
       response.status(200).json({ success: true, locations });
     } catch (error) {
@@ -92,6 +91,7 @@ class UserController extends BaseController {
   }
 
   async newFavourite(request, response) {
+    // get userId from middleware
     const { id } = request.user;
     const {
       star, city, lat, long,

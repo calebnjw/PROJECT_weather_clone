@@ -1,17 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import swal from 'sweetalert';
 import axios from 'axios';
 import Transparent from '../transparentBackground.gif';
 
-// if (!email || !password) {
-//   alert("Fill in the form!");
-//   return;
-// }
-
 const LoginForm = (props) => {
-  const {
-    setStep, setLogin,
-  } = props;
+  const { setStep } = props;
+
+  // login information
+  const [login, setLogin] = useState('');
 
   // initialize useState for login input
   const [username, setUsername] = useState('');
@@ -21,7 +17,6 @@ const LoginForm = (props) => {
   const usernameInput = (event) => {
     setUsername(event.target.value);
   };
-
   const passwordInput = (event) => {
     setPassword(event.target.value);
   };
@@ -137,7 +132,7 @@ const LoginForm = (props) => {
                 <div className="active step">
                   <i className="star icon"></i>
                   <div className="content">
-                    <div className="title">'Favourite' Your Location</div>
+                    <div className="title">Find A City</div>
                   </div>
                 </div>
                 <div className="active step">

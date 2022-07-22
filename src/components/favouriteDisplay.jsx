@@ -8,22 +8,18 @@ import FavouriteCity from './favouriteCity.jsx';
 const DisplayFavourites = (props) => {
   const {
     setStep,
-    citiesList,
-    setCitiesList,
+    updateFav,
     setCity,
     setLat,
     setLong,
-    updateFav,
     config,
-    userId,
-
   } = props;
   const [showFavourites, setShowFavourites] = useState([]);
 
   const getData = async () => {
-    const result = await axios.post(
+    console.log('GET DATA IN FAVOURITE DISPLAY');
+    const result = await axios.get(
       '/user/get-favourites',
-      { userId },
       config,
     );
     if (result.data.locations) {
@@ -33,7 +29,7 @@ const DisplayFavourites = (props) => {
   };
 
   useEffect(async () => {
-    if (userId > 0) {
+    if (config !== '') {
       const locations = await getData();
       setShowFavourites(locations.map((item) => (
         <FavouriteCity
@@ -45,7 +41,7 @@ const DisplayFavourites = (props) => {
           key={item.city} />
       )));
     }
-  }, [updateFav]);
+  }, [config, updateFav]);
 
   return (
     <Card.Group>

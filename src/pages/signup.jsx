@@ -1,17 +1,17 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
-import { Button, Form } from 'semantic-ui-react';
+import React, { useState } from 'react';
+import { Form } from 'semantic-ui-react';
 import swal from 'sweetalert';
-
-// import authenticateJWT from '../../middleware/checkUserLogin';
 
 // sign up form component
 const SignUpForm = (props) => {
   // import props from App component
-  const {
-    step, setStep, signUp, setSignUp,
-  } = props;
-  // initialise useState for sign up input
+  const { setStep } = props;
+
+  // signup information
+  const [signUp, setSignUp] = useState('');
+
+  // initialise useState for signup input
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [username, setUsername] = useState('');
@@ -83,7 +83,6 @@ const SignUpForm = (props) => {
   return (
     <>
       <div className="to-sign-up">
-
         {/* signup form */}
         <div className="sign-up-form">
           <Form>
