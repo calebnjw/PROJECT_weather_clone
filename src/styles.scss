@@ -73,6 +73,7 @@ hr {
 
 .ui.grid > * {
   padding-left: 3.5rem;
+  margin-top: 1.5rem;
 }
 
 .chat-box {
@@ -93,17 +94,21 @@ hr {
   flex-direction: row;
   align-items: center;
   align-self: flex-start;
-
   word-break: normal;
   text-align: left;
-
   padding: 0.5rem;
   padding-right: 1rem;
   margin-bottom: 0.2rem;
 }
 
+<<<<<<< HEAD
+.ui.message{
+    padding: 7px;
+    border-color: teal;
+=======
 .ui.message {
   padding: 7px;
+>>>>>>> 738da4b9f92079c17b9e80bf08c632cb47ca178a
 }
 
 .message-bubble > .label {
@@ -122,11 +127,16 @@ hr {
   justify-content: space-between;
 }
 
+.ui.input {
+    width: 550px;
+    height: 40px;
+}
+
 .daily-weather-item {
   margin-top: 2rem;
 }
 
 //============================================CURRENT WEATHER DESIGN=======================================//
 .current-weather {
-  padding-top: 10px;
+  padding-top: 20px;
 }

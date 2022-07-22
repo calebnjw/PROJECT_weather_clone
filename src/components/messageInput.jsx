@@ -22,6 +22,8 @@ function MessageInput(props) {
   return (
     <Form>
       <Input
+        className="ui input focus"
+        // style={{ }}
         fluid
         type= 'text'
         placeholder='Type your message here'
@@ -29,7 +31,7 @@ function MessageInput(props) {
         onChange={handleInput}
         action >
         <input></input>
-        <Button type='submit' icon onClick={sendMessage}>
+        <Button className="ui teal button" type='submit' icon onClick={sendMessage}>
           <i className="fa-solid fa-paper-plane"></i>
         </Button>
       </Input>
