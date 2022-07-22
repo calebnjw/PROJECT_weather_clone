@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import React, { useState, useEffect } from 'react';
-import { Container, Grid } from 'semantic-ui-react';
+import { Container } from 'semantic-ui-react';
 import jwt from 'jwt-decode';
 import swal from 'sweetalert';
 
@@ -13,7 +13,7 @@ import Cloud from './sun_cloud_icon.png';
 
 export default function App() {
   // controlling page that app is on
-  const [step, setStep] = useState(4);
+  const [step, setStep] = useState(1);
 
   // user information that is shared across the app
   const [userToken, setUserToken] = useState(localStorage.getItem('token'));

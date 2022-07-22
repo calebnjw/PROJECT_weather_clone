@@ -6,7 +6,7 @@ const socketio = require('socket.io');
 const cookieParser = require('cookie-parser');
 const methodOverride = require('method-override');
 
-const { resolve, join } = require('path');
+const { resolve } = require('path');
 
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
@@ -85,12 +85,6 @@ app.get('/', (request, response) => {
 app.use('/user', userRouter);
 // app.use('/message', messageRouter);
 
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
-// how to get username from jwt here?
-const username = 'calebnjw';
-
 const { PORT } = process.env;
 const server = app.listen(PORT, () => {
   console.log(`app is listening on port ${PORT} using HTTP`);
@@ -99,13 +93,6 @@ const server = app.listen(PORT, () => {
 const io = socketio(server);
 
 io.on('connect', (socket) => {
-  // socket.on('disconnect', () => {
-  //   // console.log('EVENT', event);
-  //   // console.log('a user has disconnected');
-  //   // sends out a disconnect message
-  //   // socket.emit('connection message', { message: 'someone has disconnected' });
-  // });
-
   socket.on('join', (joinData) => {
     // sends out a connect message
     const { city: room, username: name } = joinData;
