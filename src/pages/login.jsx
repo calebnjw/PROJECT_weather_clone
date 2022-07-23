@@ -114,7 +114,7 @@ const LoginForm = (props) => {
                   alt="weather-gif"
                 />
               </div>
-              <div className="ui teal big button" onClick={handleSignUpSubmit}>
+              <div className="ui teal big button front-page-button" onClick={handleSignUpSubmit}>
                 <i className="signup icon"></i>
                 Sign Up
               </div>
