@@ -16,7 +16,7 @@
 
 ## Deployed App + App Demo:
 
-You can clone the repository to your computer, and run the start the server using `node index.js`, then going to your browser and navigating to `localhost:[port number]`. You will have to specify your own port number in a `.env` file. Refer to `.env.example` for the environment variables you need to get the app working.
+You can clone the repository to your computer, and run the start the server using `node index.js`, then go to your browser and navigate to `localhost:[port number]`. You will have to specify your own port number in a `.env` file. Refer to `.env.example` for the environment variables you need to get the app working.
 
 - link to deployed app.
 - link to app demo.
