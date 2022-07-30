@@ -34,7 +34,7 @@ You can use the user details below to login.
 
 -->
 
-> Watch the app demo [here](http://youtube.com).
+<!-- > Watch the app demo [here](http://youtube.com). -->
 
 ---
 
