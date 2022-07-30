@@ -16,12 +16,15 @@
 
 ## Deployed App + App Demo:
 
+You can clone the repository to your computer, and run the start the server using `node index.js`, then going to your browser and navigating to `localhost:[port number]`. You will have to specify your own port number in a `.env` file. Refer to `.env.example` for the environment variables you need to get the app working.
+
 - link to deployed app.
 - link to app demo.
 
 > _Coming soon._
 
-<!-- View the deployed app [here]().
+<!--
+View the deployed app [here]().
 
 You can use the user details below to login.
 
@@ -49,7 +52,7 @@ You can use the user details below to login.
 
 - **React**
 - **Semantic UI / Semantic UI React** for layout and components.
-- **Fuse** for fuzzy searching.
+- **Fuse** for fuzzy search.
 - **Sweet Alert 2** for popup / alert modals.
 
 ### Backend
