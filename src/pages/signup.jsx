@@ -1,12 +1,14 @@
-import axios from 'axios';
 import React, { useState } from 'react';
+import {
+  useNavigate,
+} from 'react-router-dom';
 import { Form } from 'semantic-ui-react';
 import swal from 'sweetalert';
+import axios from 'axios';
 
 // sign up form component
 const SignUpForm = (props) => {
-  // import props from App component
-  const { setStep } = props;
+  const navigate = useNavigate();
 
   // signup information
   const [signUp, setSignUp] = useState('');
@@ -44,7 +46,6 @@ const SignUpForm = (props) => {
   };
 
   const handleInputSubmit = async (event) => {
-    setStep(1);
     // condition: text box have value
     if ((firstName, lastName, username, email, password)) {
       // store items value in an Obj
@@ -73,9 +74,10 @@ const SignUpForm = (props) => {
         swal('Email already in use!', 'Try another email or login NOW!');
         return true;
       }
+
+      navigate('/login');
     } else {
       swal('Inputs not filled');
-      setStep(2);
       return false;
     }
   };
@@ -130,7 +132,7 @@ const SignUpForm = (props) => {
               <div
                 className="ui big button"
                 onClick={() => {
-                  setStep(1);
+                  navigate('/login');
                   clearInputs();
                 }}
                 style={{ display: 'table', margin: 'auto' }}

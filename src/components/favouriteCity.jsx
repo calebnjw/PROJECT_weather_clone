@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import {
+  useNavigate,
+} from 'react-router-dom';
 import { Card } from 'semantic-ui-react';
 import WEATHER_CODES from '../data/weatherCodes.json';
 
 // sign up form component
 function FavouriteCity(props) {
+  const navigate = useNavigate();
+
   const {
     data,
-    setStep,
     setCity,
     setLat,
     setLong,
@@ -29,7 +33,7 @@ function FavouriteCity(props) {
   }, [data]);
 
   const showLocation = (city, lat, long) => {
-    setStep(4);
+    navigate(`/app/${city}`);
     setCity(city);
     setLat(lat);
     setLong(long);

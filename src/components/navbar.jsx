@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from 'semantic-ui-react';
 import axios from 'axios';
 
 // sign up form component
 function Navbar(props) {
+  const navigate = useNavigate();
+
   const {
-    setStep, config, updateFav, setUpdateFav, city, lat, long,
+    config, updateFav, setUpdateFav, city, lat, long,
   } = props;
 
   // star is the state of the star on location page
@@ -14,7 +17,7 @@ function Navbar(props) {
   /**
    * Returns user to search / favourites page
    */
-  const previousPage = () => setStep(3);
+  const previousPage = () => navigate('/app/favourites');
 
   /**
    * Gets favourited cities from backend

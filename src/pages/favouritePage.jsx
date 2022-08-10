@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import {
+  useNavigate,
+} from 'react-router-dom';
 import { Search, Label } from 'semantic-ui-react';
 import Fuse from 'fuse.js';
 import FavouriteDisplay from '../components/favouriteDisplay.jsx';
 import cities from '../data/cities.json';
 
 const FavouritePage = (props) => {
+  const navigate = useNavigate();
+
   const {
-    setStep,
     query,
     setQuery,
     citiesList,
@@ -42,7 +46,7 @@ const FavouritePage = (props) => {
 
   // sending values via states and redirect to setStep(4)
   const showLocation = (city, lat, long) => {
-    setStep(4);
+    navigate(`/app/${city}`);
     setCity(city);
     setLat(lat);
     setLong(long);
@@ -83,7 +87,6 @@ const FavouritePage = (props) => {
       </div>
       <h2>Favourites</h2>
       <FavouriteDisplay
-        setStep={setStep}
         updateFav={updateFav}
         setCity={setCity}
         setLat={setLat}

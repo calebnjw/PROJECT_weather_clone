@@ -7,7 +7,6 @@ import Weather from '../components/weather.jsx';
 // sign up form component
 function WeatherPage(props) {
   const {
-    setStep,
     config,
     username,
     updateFav,
@@ -20,7 +19,6 @@ function WeatherPage(props) {
   return (
     <>
       <Navbar
-        setStep={setStep}
         config={config}
         updateFav={updateFav}
         setUpdateFav={setUpdateFav}
@@ -28,7 +26,7 @@ function WeatherPage(props) {
         lat={lat}
         long={long}
       />
-      <Weather setStep={setStep} lat={lat} long={long} />
+      <Weather lat={lat} long={long} />
       <hr />
       <Chat config={config} username={username} city={city} />
     </>

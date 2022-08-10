@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import {
+  useNavigate,
+} from 'react-router-dom';
 import swal from 'sweetalert';
 import axios from 'axios';
 import Transparent from '../transparentBackground.gif';
 
 const LoginForm = (props) => {
-  const { setStep } = props;
+  const navigate = useNavigate();
 
   // login information
   const [login, setLogin] = useState('');
@@ -39,14 +42,12 @@ const LoginForm = (props) => {
       if (!verifyLogin.data.token) {
         localStorage.setItem('token', 'NOT SET');
         swal('Wrong username/password, try again!');
-        setStep(1);
       } else {
         localStorage.setItem('token', verifyLogin.data.token);
 
         // change this to 3 later on for favourite page
-        setStep(3);
         setLogin(loginObj);
-
+        navigate('/app/favourites');
         swal('Welcome!', 'Login successful');
       }
 
@@ -61,7 +62,7 @@ const LoginForm = (props) => {
   };
 
   const handleSignUpSubmit = () => {
-    setStep(2);
+    navigate('/signup');
     clearInputs();
   };
 
@@ -99,7 +100,7 @@ const LoginForm = (props) => {
                 </div>
                 <div
                   className="ui teal big submit button front-page-button"
-                  style={{ display: "block", width: "fit-content", margin: "auto"}}
+                  style={{ display: 'block', width: 'fit-content', margin: 'auto' }}
                   onClick={handleLoginSubmit}
                 >
                   <i className="sign-in icon"></i>
@@ -115,7 +116,7 @@ const LoginForm = (props) => {
                   alt="weather-gif"
                 />
               </div>
-              <div className="ui teal big button" style={{ display: "block", width: "fit-content", margin: "auto"}} onClick={handleSignUpSubmit}>
+              <div className="ui teal big button" style={{ display: 'block', width: 'fit-content', margin: 'auto' }} onClick={handleSignUpSubmit}>
                 <i className="signup icon"></i>
                 Sign Up
               </div>

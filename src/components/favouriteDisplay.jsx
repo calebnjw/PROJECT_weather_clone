@@ -7,7 +7,6 @@ import FavouriteCity from './favouriteCity.jsx';
 // component for displaying favourited cities
 const DisplayFavourites = (props) => {
   const {
-    setStep,
     updateFav,
     setCity,
     setLat,
@@ -38,7 +37,6 @@ const DisplayFavourites = (props) => {
     <Card.Group>
       {favourites.map((item) => (
         <FavouriteCity
-          setStep={setStep}
           setCity={setCity}
           setLat={setLat}
           setLong={setLong}
