@@ -46,7 +46,6 @@ export default function App() {
   }, [step]);
 
   useEffect(() => {
-    console.log('SETTING CONFIG FROM USER TOKEN', userToken);
     if (userToken !== null) {
       setUserId(jwt(userToken).id);
       setUsername(jwt(userToken).username);

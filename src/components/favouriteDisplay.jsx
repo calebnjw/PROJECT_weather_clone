@@ -14,24 +14,29 @@ const DisplayFavourites = (props) => {
     setLong,
     config,
   } = props;
-  const [showFavourites, setShowFavourites] = useState([]);
+  const [favourites, setFavourites] = useState([]);
 
   const getData = async () => {
-    console.log('GET DATA IN FAVOURITE DISPLAY');
-    const result = await axios.get(
+    const { data } = await axios.get(
       '/user/get-favourites',
       config,
     );
-    if (result.data.locations) {
-      return result.data.locations;
+    console.log('DADADDSDSDADADAD', data);
+    console.log('LOCATIONS', data.locations);
+    if (data.locations) {
+      setFavourites(data.locations);
     }
-    return [];
   };
 
-  useEffect(async () => {
+  useEffect(() => {
     if (config !== '') {
-      const locations = await getData();
-      setShowFavourites(locations.map((item) => (
+      getData();
+    }
+  }, [config, updateFav]);
+
+  return (
+    <Card.Group>
+      {favourites.map((item) => (
         <FavouriteCity
           setStep={setStep}
           setCity={setCity}
@@ -39,13 +44,7 @@ const DisplayFavourites = (props) => {
           setLong={setLong}
           data={item}
           key={item.city} />
-      )));
-    }
-  }, [config, updateFav]);
-
-  return (
-    <Card.Group>
-      {showFavourites}
+      ))}
     </Card.Group>
   );
 };

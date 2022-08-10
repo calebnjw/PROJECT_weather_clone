@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Search, Label } from 'semantic-ui-react';
 import Fuse from 'fuse.js';
 import FavouriteDisplay from '../components/favouriteDisplay.jsx';
-import cities from '../cities.json';
+import cities from '../data/cities.json';
 
 const FavouritePage = (props) => {
   const {

@@ -15,26 +15,24 @@ function Chat(props) {
     socket.emit('join', { city, username });
   }, [city]);
 
-  // to receive connection message
   // when someone joins or leaves
   socket.on('connection message', (message) => {
-    const newMessage = <div>— {message.content} —</div>;
-    setChatMessages([...chatMessages, newMessage]);
+    setChatMessages([...chatMessages, message]);
   });
 
-  // to receive messages
   socket.on('from backend message', (message) => {
-    const newMessage = <MessageBubble
-      key={message.content}
-      username={message.username}
-      message={message.content} />;
-    setChatMessages([...chatMessages, newMessage]);
+    setChatMessages([...chatMessages, message]);
   });
 
   return (
     <div>
       <div className='chat-box'>
-        { chatMessages }
+        {chatMessages.map((message, index) => (
+          <MessageBubble
+          key={index}
+          username={message.username}
+          message={message.content} />
+        ))}
       </div>
       <MessageInput
         username={username}
