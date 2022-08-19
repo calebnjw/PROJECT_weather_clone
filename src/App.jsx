@@ -32,6 +32,9 @@ export default function App() {
   // value changes when setting favourites
   const [updateFav, setUpdateFav] = useState(1);
 
+  // !!!!!!!!
+  // this used to update when page changed.
+  // need to find a way to update when user login.
   useEffect(() => {
     if (localStorage.getItem('token') !== null) {
       setUserToken(localStorage.getItem('token'));
